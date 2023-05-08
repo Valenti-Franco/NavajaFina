@@ -1,0 +1,31 @@
+.main{
+    color: blue;
+    background-color: brown;
+    height: 80vh;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.containerPeinados{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 300px ;
+    width: 100%;
+    background-color: rgb(163, 163, 152);
+    
+}
+.containerTurno{
+    background-color: rgb(163, 163, 152);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 300px ;
+    width: 100%;
+
+}
