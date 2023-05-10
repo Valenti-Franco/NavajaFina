@@ -1,6 +1,6 @@
 .main{
     color: blue;
-    background-color: brown;
+    background-color: rgb(241, 241, 241);
     height: 80vh;
     display: flex;
     justify-content: space-around;
@@ -14,9 +14,9 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    height: 300px ;
+    height: 600px ;
     width: 100%;
-    background-color: rgb(163, 163, 152);
+    background-color: rgb(189, 189, 189);
     
 }
 .containerTurno{
@@ -28,4 +28,19 @@
     height: 300px ;
     width: 100%;
 
+}
+.mySwiper{
+    height: 100%;
+    width: 100%;
+}
+.swiperSlide{
+    min-width: 300px;
+    text-align: center;
+  font-size: 18px;
+  background: #ffffff60;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

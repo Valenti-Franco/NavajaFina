@@ -1,0 +1,9 @@
+.image{
+   
+    height: 100%;
+}
+.containerProduct{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
