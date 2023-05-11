@@ -91,28 +91,42 @@ const Main = () => {
         <div className={style.containerPeinados}>
 
             <h1 className={style.title}>PRODCUTOS</h1>
-        <Swiper
-        slidesPerView={4}
-        spaceBetween={170}
-        centeredSlides={true}
-        className={style.mySwiper}
-        modules={[Autoplay, Pagination, Navigation]} // Agrega el módulo Pagination
-        pagination={{ clickable: true }} // Configura la paginación
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
-      >
-        {products.map((product) => (
-          
-             <SwiperSlide className={style.swiperSlide + (selectedSlide === product._id ? ' ' + style.selectedSlide : '')}
+            <Swiper
+  slidesPerView={1}
+  spaceBetween={170}
+  centeredSlides={true}
+  className={style.mySwiper}
+  modules={[Autoplay, Pagination, Navigation]}
+  pagination={{ clickable: true }}
+  autoplay={{
+    delay: 3500,
+    disableOnInteraction: false,
+  }}
+>
+  {products.reduce((acc, product, index) => {
+    if (index % 3 === 0) {
+      acc.push([]);
+    }
+    acc[acc.length - 1].push(product);
+    return acc;
+  }, []).map((group, index) => (
+    <SwiperSlide key={index}>
+      <div className={style.sliderGroup}>
+        {group.map((product) => (
+          <div
+            className={style.productContainer}
             onMouseEnter={() => handleSlideClick(product._id)}
             onMouseLeave={handleSlideBlur}
             tabIndex={0}
-             key={product._id}> <ProductCard name={product.name} price={product.price} image={product.images} /></SwiperSlide>
-            ))}
-       
-      </Swiper>
+            key={product._id}
+          >
+            <ProductCard name={product.name} price={product.price} image={product.images} />
+          </div>
+        ))}
+      </div>
+    </SwiperSlide>
+  ))}
+</Swiper>
             
 
         </div>
