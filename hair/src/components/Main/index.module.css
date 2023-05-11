@@ -1,7 +1,7 @@
 .main{
-    color: blue;
+    color: rgb(0, 0, 0);
     background-color: rgb(241, 241, 241);
-    height: 80vh;
+    height: auto;
     display: flex;
     justify-content: space-around;
     flex-direction: column;
@@ -14,33 +14,56 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    height: 600px ;
+  
     width: 100%;
-    background-color: rgb(189, 189, 189);
+    contain: content;
+    background-color: rgba(47, 0, 92, 0.295);
+    
+    
     
 }
 .containerTurno{
-    background-color: rgb(163, 163, 152);
+    background-color: rgb(156, 152, 163);
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    height: 300px ;
+    height: 100px ;
     width: 100%;
+    margin: 30px;
+    
 
 }
 .mySwiper{
-    height: 100%;
+    height: 580px;
     width: 100%;
+    
+    
+    
 }
 .swiperSlide{
-    min-width: 300px;
-    text-align: center;
-  font-size: 18px;
-  background: #ffffff60;
-
-  /* Center slide text vertically */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    
+  text-align: center;
+  font-size: 22px;
+  background: rgb(255, 255, 255);
+  width: 350px !important;
+  height: 500px !important;
+  margin:  20px 0px 0 0px;
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.274);
+    
+  
 }
+.title{
+    background-color: #25004e;
+    width: 100%;
+    font-size: 42px;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    margin: 0;
+}
+
+.selectedSlide {
+    transform: scale(1.05) !important; /* Aumenta el tamaño del swiperSlide */
+    transition: transform 0.2s ease; /* Agrega una transición suave */
+  }
