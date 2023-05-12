@@ -1,7 +1,7 @@
 .main{
-    color: blue;
-    background-color: brown;
-    height: 80vh;
+    color: rgb(0, 0, 0);
+    background-color: rgb(241, 241, 241);
+    height: auto;
     display: flex;
     justify-content: space-around;
     flex-direction: column;
@@ -14,18 +14,72 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    height: 300px ;
+  
     width: 100%;
-    background-color: rgb(163, 163, 152);
+    contain: content;
+    background-color: #553875;
+
+    
+    
     
 }
 .containerTurno{
-    background-color: rgb(163, 163, 152);
+    background-color: rgb(156, 152, 163);
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    height: 300px ;
+    height: 100px ;
     width: 100%;
+    margin: 30px;
+    
 
 }
+.mySwiper{
+    height: 580px;
+    width: 100%;
+    text-align: center;
+    background-color: #553875;
+    
+    
+    
+}
+.sliderGroup {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px; /* Espacio entre los productos */
+    /* background-color: rgb(156, 152, 163); */
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.274);
+
+  }
+.swiperSlide{
+    
+  text-align: center;
+  font-size: 22px;
+  background: rgb(255, 255, 255);
+  /* width: 350px !important;
+  height: 500px !important; */
+  /* width: 100%;
+  height: 100%; */
+  margin:  20px 0px 0 0px;
+  
+    
+  
+}
+.title{
+    background-color: #501a8d;
+
+    width: 100%;
+    font-size: 42px;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    margin: 0;
+}
+
+.selectedSlide {
+    transform: scale(1.05) !important; /* Aumenta el tamaño del swiperSlide */
+    transition: transform 0.2s ease; /* Agrega una transición suave */
+  }
+
+
