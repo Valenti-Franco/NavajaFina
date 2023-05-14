@@ -7,30 +7,33 @@
     flex-direction: column;
     height: 100%;
     justify-content: space-between;
-    background-color: #fff;
-    
-    
+    /* background-color: #d3d2d2; */
+
 }
 .productName{
     padding: 0px 15px;
-    background-color: red;
+  
     
 }
 .mySwiper{
-    height: 450px;
-    width: 500px;
-    
+    height: 400px;
+    width: 400px;
+    background-color: #fff;
+  
     
   
     
 }
-/* .swiperSlide{
-    background-color: red;
+/*
+modo oscuro
+.swiperSlide{
+    background-color: #000;
     padding: ;
     width: 100% !important;
     height: 500px;
 } */
 .slideBackground{
+    
     width: 100%;
     margin: 20px 0;
     height: 330px;
@@ -57,13 +60,13 @@
 .ContainertextProduct{
     margin: 0;
     display: flex;
-    
-    justify-content:space-around
+    justify-content:space-around;
+    margin-bottom: 25px;
     
 }
 .icontextProduct{
     width: 50%;
-    background-color: #977db6;
+    background-color: #501a8d;
 
     color: #fff;
     border: solid 1px #a2a6bda9;
@@ -89,3 +92,23 @@
     
 
 }
+
+
+@media screen and (max-width: 480px) {
+    /* Estilos para dispositivos móviles */
+    .mySwiper{
+        height: 320px;
+        width: 320px;
+       
+    }
+    .slideBackground{
+      
+        height: 300px;
+
+    }
+    .textProduct{
+        width: 280px;
+        
+        
+        }
+  }
