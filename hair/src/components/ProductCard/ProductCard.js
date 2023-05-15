@@ -26,7 +26,7 @@ const ProductCard = (product) => {
           <SwiperSlide className={style.swiperSlide} key={index}> <div style={{ backgroundImage: `url(${imagesrc})` }} className={style.slideBackground}> </div> </SwiperSlide>
          ))}
       </Swiper>
-      {product.price}
+      <p className={style.textProduct} >{product.price}</p> 
      <div className={style.ContainertextProduct}>
 
       <button className={style.icontextProduct}>
