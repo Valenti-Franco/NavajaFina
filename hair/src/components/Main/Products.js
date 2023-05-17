@@ -6,66 +6,153 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import ProductCard from '../ProductCard/ProductCard';
 import EffectCardProduct from '../EffectCardProduct/EffectCardProduct';
 import { FaRegEye } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 
 const Products = () => {
 
     const products = [
         {
-            _id: '123163',
-            name: 'B-Way Five',
-            images: ['https://http2.mlstatic.com/D_NQ_NP_665122-MLA50969950919_082022-O.webp', 'https://http2.mlstatic.com/D_NQ_NP_722620-MLA50970122347_082022-O.webp'],
-            price: '$32.900',
+          _id: 12345,
+          category: "Machines",
+          subcategory: "Clippers",
+          name: "Wahl Rinseable",
+          price: 200,
+          stock: 10,
+          images: ["https://www.barbershop.com.ar/product_images/u/975/515789__68760_zoom.jpg","https://www.barbershop.com.ar/product_images/g/618/515789-1__69130_zoom.jpg","https://www.barbershop.com.ar/product_images/l/545/515789-4__43369_zoom.jpg"]
         },
         {
-            _id: '12314',
-            name: 'Cortadora Pelo Profesional Babyliss Big Shot',
-            images: ['https://http2.mlstatic.com/D_NQ_NP_665683-MLA31429871436_072019-O.webp', 'https://http2.mlstatic.com/D_NQ_NP_795993-MLA31429890111_072019-O.webp'],
-            price: '$32.900',
-        },
-
-        {
-            _id: '1236515',
-            name: 'Set de herramientas Profesionales',
-            images: ['https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg', 'https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg'],
-            price: '$32.900',
-        },
-
-        {
-            _id: '123165465',
-            name: 'Kit Tijeras',
-            images: ['https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg', 'https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg'],
-            price: '$32.900',
-        },
-
-        {
-            _id: '1236464615',
-            name: 'Tijera Corte y Pulir Navakin',
-            images: ['https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg', 'https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg'],
-            price: '$32.900',
-        },
-
-        {
-            _id: '12365464645fsdf515',
-            name: 'Set Herraminetas Tijera de Corte',
-            images: ['https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg', 'https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg'],
-            price: '$32.900',
+          _id: 23456,
+          category: "Machines",
+          subcategory: "Clippers",
+          name: "MAQ REC 870 GOLD FX BOOST",
+          price: 250,
+          stock: 20,
+          images: ["https://www.barbershop.com.ar/product_images/u/764/15357__31275_zoom.jpg","https://www.barbershop.com.ar/product_images/q/187/15357-2__81838_zoom.jpg"]
         },
         {
-            _id: '123654646sdasd45515',
-            name: 'Set Herraminetas Tijera de Corte',
-            images: ['https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg', 'https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg'],
-            price: '$32.900',
+          _id: 34567,
+          category: "Scissors_Knives",
+          subcategory: "Knives",
+          name: "Navaja con Mango de Madera Yasaka",
+          price: 20,
+          stock: 15,
+          images: ["https://www.barbershop.com.ar/product_images/q/915/5009-1__22016_zoom.JPG","https://www.barbershop.com.ar/product_images/j/779/5009__02689_zoom.JPG"]
         },
         {
-            _id: '12365464645423423515',
-            name: 'Set Herraminetas Tijera de Corte',
-            images: ['https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg', 'https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg'],
-            price: '$32.900',
+          _id: 45678,
+          category: "Tools",
+          subcategory: "Peines",
+          name: "CARBON ANTIST 4011 LUCYDAN",
+          price: 5,
+          stock: 150,
+          images: ["https://www.barbershop.com.ar/product_images/d/065/534492__97769_zoom.jpg","https://www.barbershop.com.ar/product_images/m/237/534492-3__10656_zoom.jpg"]
         },
-
-
-    ];
+        {
+          _id: 56789,
+          category: "Machines",
+          subcategory: "Recortadoras",
+          name: "BABYLISS PRO FOIL FX02 GOLD",
+          price: 70,
+          stock: 8,
+          images: ["https://www.barbershop.com.ar/product_images/w/666/14333__08351_zoom.jpg","https://www.barbershop.com.ar/product_images/m/415/14333-6__77434_zoom.jpg"]
+        },
+        {
+          _id: 67890,
+          category: "Hair_Care",
+          subcategory: "Champús para barba y cabello",
+          name: "AC X100 HUILE NUTRITIVE MYTHIC OIL",
+          price: 15,
+          stock: 30,
+          images: ["https://www.barbershop.com.ar/product_images/l/674/2056__68568_zoom.jpg"]
+        },
+        {
+          _id: 78901,
+          category: "Hair_Care",
+          subcategory: "Acondicionadores para barba y cabello",
+          name: "AC X100 OIL MIRACLE BARBARY BONACURE",
+          price: 20,
+          stock: 25,
+          images: ["https://www.barbershop.com.ar/product_images/q/727/2835__46442_zoom.jpg"]
+        },
+        {
+          _id: 89012,
+          category: "Hair_Care",
+          subcategory: "Aceites y bálsamos para barba",
+          name: "Aceite Esencial de Kendi x100ml Teknia Lakme",
+          price: 25,
+          stock: 18,
+          images: ["https://www.barbershop.com.ar/product_images/z/391/5608__02909_zoom.jpg"]
+        },
+      //   {
+      //     _id: 90123,
+      //     category: "Productos para el cuidado del cabello",
+      //     subcategory: "Ceras y pomadas para peinar",
+      //     name: "Cera para peinar con acabado mate",
+      //     price: 12,
+      //     stock: 40,
+      //     images: []
+      //   },
+      //   {
+      //     _id: 11234,
+      //     category: "Productos para el cuidado del cabello",
+      //     subcategory: "Productos para el cuidado del cuero cabelludo",
+      //     name: "Loción anticaspa para cuero cabelludo sensible",
+      //     price: 18,
+      //     stock: 20,
+      //     images: []
+      //   },
+      
+      // {
+      //   _id: 98765,
+      //   category: "Productos para el afeitado",
+      //   subcategory: "Cuchillas de afeitar",
+      //   name: "Paquete de cuchillas de afeitar premium",
+      //   price: 10,
+      //   stock: 50,
+      //   images: []
+      //   },
+      //   {
+      //   _id: 87654,
+      //   category: "Productos para el afeitado",
+      //   subcategory: "Espumas y geles de afeitado",
+      //   name: "Espuma de afeitar hidratante",
+      //   price: 8,
+      //   stock: 40,
+      //   images: []
+      //   },
+      //   {
+      //   _id: 76543,
+      //   category: "Productos para el afeitado",
+      //   subcategory: "Brochas de afeitar",
+      //   name: "Brocha de afeitar de cerdas naturales",
+      //   price: 15,
+      //   stock: 30,
+      //   images: []
+      //   },
+      //   {
+      //   _id: 65432,
+      //   category: "Productos para el afeitado",
+      //   subcategory: "Aftershaves y lociones para después del afeitado",
+      //   name: "Loción para después del afeitado con aroma refrescante",
+      //   price: 12,
+      //   stock: 25,
+      //   images: []
+      //   },
+      //   {
+      //   _id: 54321,
+      //   category: "Productos para el afeitado",
+      //   subcategory: "Productos para el cuidado de la piel",
+      //   name: "Crema hidratante facial para hombres",
+      //   price: 20,
+      //   stock: 20,
+      //   images: ["https://www.barbershop.com.ar/product_images/u/975/515789__68760_zoom.jpg","https://www.barbershop.com.ar/product_images/g/618/515789-1__69130_zoom.jpg","https://www.barbershop.com.ar/product_images/l/545/515789-4__43369_zoom.jpg"]
+    
+      //   }
+        ];
+    const handleLinkClick = () => {
+        window.scrollTo(0, 0);
+    }
     return (
         <div className={style.containerPeinados}>
 
@@ -77,7 +164,11 @@ const Products = () => {
                     <p className={style.textProduct}>
                         Bienvenidos a la sección de productos de barbería, donde encontrarás una amplia gama de artículos para el cuidado de la barba, el cabello y el afeitado. Nuestra selección incluye productos de alta calidad y herramientas profesionales para ayudarte a lograr un estilo impecable. Explora nuestra variedad y descubre cómo nuestros productos pueden mejorar tu rutina de cuidado personal.
                     </p>
-                    <button className={style.icontextProduct}>Ver Productos <FaRegEye/></button>
+                   
+                        <Link onClick={handleLinkClick} className={style.icontextProduct} to='/products'>
+                        Ver Productos <FaRegEye/>
+                        </Link>
+                   
                 </div>
                 
 

@@ -105,7 +105,6 @@
 .icontextProduct{
     width: 50%;
     background-color: #501a8d;
-
     color: #fff;
     border: solid 1px #a2a6bda9;
     border-top: 0px;
@@ -119,6 +118,8 @@
     transition: all ease .2s;
     font-weight: 600;
     margin: 20px;
+    text-decoration: none;
+    
    
 
 }

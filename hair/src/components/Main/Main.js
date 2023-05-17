@@ -25,11 +25,11 @@ const Main = () => {
       <SlideBarber />
       <Products />
 
-      <div className={style.containerTurno}>
+      {/* <div className={style.containerTurno}>
 
         <p>PEDI TU TURNO</p>
 
-      </div>
+      </div> */}
 
     </div>
   )

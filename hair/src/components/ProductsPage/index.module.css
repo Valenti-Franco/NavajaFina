@@ -1,0 +1,24 @@
+.main{
+    color: rgb(0, 0, 0);
+    background-color: rgb(241, 241, 241);
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: space-around;
+    min-height: 100vh;
+
+}
+.sliderGroup {
+    display: flex;
+    width: 75%;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 0 0 30px;
+    height: 100vh;
+    overflow-y: auto;
+    /* background-color: rgb(156, 152, 163); */
+    /* box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.274); */
+
+  }
