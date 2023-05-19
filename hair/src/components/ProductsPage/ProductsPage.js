@@ -1,15 +1,9 @@
-
-import { Route, Routes, Link} from 'react-router-dom';
-import './App.css';
-import Footer from './components/Footer/Footer';
-import Header from './components/Header/Header';
-import Main from './components/Main/Main';
-import ProductsPage from './components/ProductsPage/ProductsPage';
-import Signin from './components/Signin/Signin';
-import ProductDetail from './components/ProductDetail/ProductDetail';
-
-
-function App() {
+import React, { useState } from 'react'
+import  style  from './index.module.css';
+import ProductCard from '../ProductCard/ProductCard';
+import Filters from '../Filters/Filters';
+const ProductsPage = () => {
+  
   const products = [
     {
       _id: 12345,
@@ -149,26 +143,50 @@ function App() {
 
   //   }
     ];
+  const [filters, setFilter] = useState({
+    category: 'all',
+    price: 0
+  })
+  const filterProducts = () => {
+
+    return products.filter(product => {
+      return ( 
+        product.price >= filters.price &&
+        (
+          filters.category === 'all' ||
+          product.category === filters.category
+        )
+      )
+    })
+  }
+
+  const filteredProducts = filterProducts(products)
   return (
-    <>
+    <div className={style.main}>
+    < Filters setFilter={setFilter}/>
+        <div className={style.sliderGroup}>
+            {filteredProducts.length > 0 ? (
 
-    <Header/>
-     
-    <Routes> 
-      
-      <Route path='/' element={<Main products={products} />} />
-      <Route path='/products' element={<ProductsPage />} />
-      <Route path='/signin' element={<Signin />} />
-      <Route path='/products/:id' element={<ProductDetail products={products} />} />
-     
+            
+            filteredProducts.map((product) => (
+                <div
+                    className={style.productContainer}
 
+                    tabIndex={0}
+                    key={product._id}
+                >
+                    <ProductCard id={product._id} name={product.name} price={product.price} image={product.images} />
+                </div>
+            ))
+            ):(  
+              <p>No hay productos disponibles</p>
+            )}
 
-    </Routes>
+        </div>
+    
 
-    <Footer/>
-
-    </>
-  );
+    </div>
+  )
 }
 
-export default App;
+export default ProductsPage

@@ -8,7 +8,9 @@ import { FaCartPlus } from 'react-icons/fa';
 import { FaRegEye } from 'react-icons/fa';
 
 
+
 import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
+import { Link } from 'react-router-dom';
 const ProductCard = (product) => {
     
     return (
@@ -26,12 +28,14 @@ const ProductCard = (product) => {
           <SwiperSlide className={style.swiperSlide} key={index}> <div style={{ backgroundImage: `url(${imagesrc})` }} className={style.slideBackground}> </div> </SwiperSlide>
          ))}
       </Swiper>
-      <p className={style.textProduct} >{product.price}</p> 
+      <p className={style.textProduct} >${product.price}</p> 
      <div className={style.ContainertextProduct}>
 
-      <button className={style.icontextProduct}>
-        Ver Prodcuto <FaRegEye/>
-      </button>
+     
+      <Link className={style.icontextProduct} to={`/products/${product.id}`}>
+        Ver Producto <FaRegEye/>
+      </Link>
+     
       <button className={style.icontextProduct}>
         Añadir al Carrito <FaCartPlus/>
       </button>

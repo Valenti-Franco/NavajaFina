@@ -6,66 +6,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import ProductCard from '../ProductCard/ProductCard';
 import EffectCardProduct from '../EffectCardProduct/EffectCardProduct';
 import { FaRegEye } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 
-const Products = () => {
+const Products = ({products}) => {
 
-    const products = [
-        {
-            _id: '123163',
-            name: 'B-Way Five',
-            images: ['https://http2.mlstatic.com/D_NQ_NP_665122-MLA50969950919_082022-O.webp', 'https://http2.mlstatic.com/D_NQ_NP_722620-MLA50970122347_082022-O.webp'],
-            price: '$32.900',
-        },
-        {
-            _id: '12314',
-            name: 'Cortadora Pelo Profesional Babyliss Big Shot',
-            images: ['https://http2.mlstatic.com/D_NQ_NP_665683-MLA31429871436_072019-O.webp', 'https://http2.mlstatic.com/D_NQ_NP_795993-MLA31429890111_072019-O.webp'],
-            price: '$32.900',
-        },
-
-        {
-            _id: '1236515',
-            name: 'Set de herramientas Profesionales',
-            images: ['https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg', 'https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg'],
-            price: '$32.900',
-        },
-
-        {
-            _id: '123165465',
-            name: 'Kit Tijeras',
-            images: ['https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg', 'https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg'],
-            price: '$32.900',
-        },
-
-        {
-            _id: '1236464615',
-            name: 'Tijera Corte y Pulir Navakin',
-            images: ['https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg', 'https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg'],
-            price: '$32.900',
-        },
-
-        {
-            _id: '12365464645fsdf515',
-            name: 'Set Herraminetas Tijera de Corte',
-            images: ['https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg', 'https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg'],
-            price: '$32.900',
-        },
-        {
-            _id: '123654646sdasd45515',
-            name: 'Set Herraminetas Tijera de Corte',
-            images: ['https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg', 'https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg'],
-            price: '$32.900',
-        },
-        {
-            _id: '12365464645423423515',
-            name: 'Set Herraminetas Tijera de Corte',
-            images: ['https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg', 'https://www.barbershop.com.ar/product_images/z/745/528186__74084_std.jpg'],
-            price: '$32.900',
-        },
-
-
-    ];
+    
+    
+    const handleLinkClick = () => {
+        window.scrollTo(0, 0);
+    }
     return (
         <div className={style.containerPeinados}>
 
@@ -77,7 +27,11 @@ const Products = () => {
                     <p className={style.textProduct}>
                         Bienvenidos a la sección de productos de barbería, donde encontrarás una amplia gama de artículos para el cuidado de la barba, el cabello y el afeitado. Nuestra selección incluye productos de alta calidad y herramientas profesionales para ayudarte a lograr un estilo impecable. Explora nuestra variedad y descubre cómo nuestros productos pueden mejorar tu rutina de cuidado personal.
                     </p>
-                    <button className={style.icontextProduct}>Ver Productos <FaRegEye/></button>
+                   
+                        <Link onClick={handleLinkClick} className={style.icontextProduct} to='/products'>
+                        Ver Productos <FaRegEye/>
+                        </Link>
+                   
                 </div>
                 
 
@@ -110,7 +64,7 @@ const Products = () => {
                                     tabIndex={0}
                                     key={product._id}
                                 >
-                                    <ProductCard name={product.name} price={product.price} image={product.images} />
+                                    <ProductCard id={product._id} name={product.name} price={product.price} image={product.images} />
                                 </div>
                             ))}
                         </div>
