@@ -175,7 +175,7 @@ const ProductsPage = () => {
                     tabIndex={0}
                     key={product._id}
                 >
-                    <ProductCard name={product.name} price={product.price} image={product.images} />
+                    <ProductCard id={product._id} name={product.name} price={product.price} image={product.images} />
                 </div>
             ))
             ):(  

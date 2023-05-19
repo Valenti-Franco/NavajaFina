@@ -18,12 +18,15 @@ import SlideBarber from '../SlideBarber/SlideBarber';
 import Products from './Products';
 
 
-const Main = () => {
+const Main = ({products}) => {
 
   return (
+    
     <div className={style.main}>
+      
+       <Products products={products} />
       <SlideBarber />
-      <Products />
+     
 
       {/* <div className={style.containerTurno}>
 

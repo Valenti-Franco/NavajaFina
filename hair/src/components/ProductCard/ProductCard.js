@@ -31,12 +31,11 @@ const ProductCard = (product) => {
       <p className={style.textProduct} >${product.price}</p> 
      <div className={style.ContainertextProduct}>
 
-      <button className={style.icontextProduct}>
-        
-          Ver Prodcuto <FaRegEye/>
-        
-        
-      </button>
+     
+      <Link className={style.icontextProduct} to={`/products/${product.id}`}>
+        Ver Producto <FaRegEye/>
+      </Link>
+     
       <button className={style.icontextProduct}>
         Añadir al Carrito <FaCartPlus/>
       </button>
