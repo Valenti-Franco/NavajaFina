@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const Header = () => {
  
   return (
-    <div className={style.header}>NAVAJAFINA
+    <div className={style.header}>NAVAJAFINAs
     <nav>
         <ul>
             <li><Link to='/'>Home</Link> </li>
