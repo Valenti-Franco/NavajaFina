@@ -4,14 +4,20 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import  style  from './index.module.css';
 import "swiper/css";
 import "swiper/css/navigation";
-import { FaCartPlus } from 'react-icons/fa';
+
 import { FaRegEye } from 'react-icons/fa';
 
 
-
+import BtnCart from './BtnCart';
 import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
 import { Link } from 'react-router-dom';
+
+
 const ProductCard = (product) => {
+
+  
+ console.log(product);
+
     
     return (
     <div className={style.containerProduct}>
@@ -23,7 +29,7 @@ const ProductCard = (product) => {
         mousewheel={true}
         keyboard={true}
         modules={[Navigation, Pagination, Mousewheel, Keyboard]} className={style.mySwiper}>
-        {product.image.map((imagesrc, index) => (
+        {product.images.map((imagesrc, index) => (
           
           <SwiperSlide className={style.swiperSlide} key={index}> <div style={{ backgroundImage: `url(${imagesrc})` }} className={style.slideBackground}> </div> </SwiperSlide>
          ))}
@@ -32,13 +38,11 @@ const ProductCard = (product) => {
      <div className={style.ContainertextProduct}>
 
      
-      <Link className={style.icontextProduct} to={`/products/${product.id}`}>
+      <Link className={style.icontextProduct} to={`/products/${product._id}`}>
         Ver Producto <FaRegEye/>
       </Link>
      
-      <button className={style.icontextProduct}>
-        Añadir al Carrito <FaCartPlus/>
-      </button>
+      <BtnCart product={product}/> 
 
      </div>
     
