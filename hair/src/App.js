@@ -152,10 +152,24 @@ function App() {
     //   }
   ];
   return (
+<<<<<<< HEAD
     <CartProvider>
       <Header />
       <Cart />
       <Routes>
+=======
+    <>
+
+    <Header/>
+     
+    <Routes> 
+      
+      <Route path='/' element={<Main products={products} />} />
+      <Route path='/products' element={<ProductsPage />} />
+      <Route path='/signin' element={<Signin />} />
+      <Route path='/products/:id' element={<ProductDetail products={products} />} />
+     
+>>>>>>> 359255a6e65399570b1cbefe2fe017b3b3910d78
 
         <Route path='/' element={<Main products={products} />} />
         <Route path='/products' element={<ProductsPage />} />
@@ -164,8 +178,14 @@ function App() {
 
       </Routes>
 
+<<<<<<< HEAD
       <Footer />
     </CartProvider>
+=======
+    <Footer/>
+
+    </>
+>>>>>>> 359255a6e65399570b1cbefe2fe017b3b3910d78
   );
 }
 

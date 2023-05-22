@@ -36,6 +36,7 @@
     margin-right: 30%;
 }
 .logos{
+
     display: flex;
     grid-template-columns: 1fr  1fr;
     margin-left: 12%;
@@ -58,4 +59,6 @@
 .instagram{
     color: rgb(212, 0, 255);
     font-size: 50px;
+
+   
 }
