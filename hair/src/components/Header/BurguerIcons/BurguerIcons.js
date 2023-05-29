@@ -7,9 +7,7 @@ const BurguerIcons = (props) => {
       className={`${style.navicon} ${props.clicked ? style.open : ""}`}
     >
   
-      <span></span>
-      <span></span>
-      <span></span>
+  
     </div>
   );
 };
