@@ -1,9 +1,9 @@
 import style from "./index.module.css";
 import Logo from "./logo/Logo.png";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faUser } from '@fortawesome/free-solid-svg-icons'
 import React, { useState } from 'react';
-import BurguerIcons from "./BurguerIcons/BurguerIcons";
+// import BurguerIcons from "./BurguerIcons/BurguerIcons";
 
 
 const Header = () => {
@@ -43,11 +43,11 @@ const Header = () => {
         <a href="/">Contacto</a>
         <a href="/">Productos</a>
         <a href="/">Iniciar sesión
-        <FontAwesomeIcon className={style.user} icon={faUser} />
+        {/* <FontAwesomeIcon className={style.user} icon={faUser} /> */}
         </a>
       </nav>
       <div className={style.burguer}>
-        <BurguerIcons clicked={clicked} handleClick={handleClick}/>
+        {/* <BurguerIcons clicked={clicked} handleClick={handleClick}/> */}
         </div>
     </header>
     </>
