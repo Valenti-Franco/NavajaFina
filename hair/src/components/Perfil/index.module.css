@@ -1,0 +1,45 @@
+.main{
+  height: 100vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.containerPerfil{
+  width: 80%;
+    background-color: #dadada;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+.title{
+  width: 100%;
+  padding: 20px 0px;
+}
+.User{
+  font-size: 150px;
+  margin: 80px;
+  padding: 8px;
+  background: #fff;
+  border-radius: 100%;
+  border: 5px solid #42b3ce;
+}
+.sectionUser{
+  font-size: 24px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+}
+.sectionUser label{
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+.divContainer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

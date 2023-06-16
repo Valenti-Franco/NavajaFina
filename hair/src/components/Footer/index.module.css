@@ -5,6 +5,7 @@
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     color: white;
+    contain: content;
 }
 /*---------------------------------------------------------------------------*/
 .horarios{

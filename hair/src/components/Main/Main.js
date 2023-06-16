@@ -1,30 +1,35 @@
-import React, { useState } from 'react'
+import React  from 'react'
 import style from './index.module.css';
-import ProductCard from '../ProductCard/ProductCard';
 
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 
 import "swiper/css/pagination";
 
 
 
-// import required modules
-import { Pagination, Autoplay, Navigation } from "swiper";
+
 import SlideBarber from '../SlideBarber/SlideBarber';
 import Products from './Products';
+import { motion } from 'framer-motion';
 
 
-const Main = ({products}) => {
-
+const Main = () => {
+  
   return (
     
-    <div className={style.main}>
+    <motion.div 
+    initial={{opacity:0}}
+    animate={{
+      opacity:1,
+        transition:{
+            dutaion:1
+        },
+    }}
+    exit={{opacity:0}}
+    
+    className={style.main}>
       
-       <Products products={products} />
+       <Products />
       <SlideBarber />
      
 
@@ -34,7 +39,7 @@ const Main = ({products}) => {
 
       </div> */}
 
-    </div>
+    </motion.div>
   )
 }
 

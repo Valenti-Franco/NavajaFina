@@ -1,4 +1,9 @@
-export const CartInitialState = [];
+export const CartInitialState = JSON.parse(window.localStorage.getItem('cart')) || [];
+
+export const updateLocalStorage = state => {
+    window.localStorage.setItem('cart', JSON.stringify(state));
+
+}
 export const cartReducer = (state, action) =>{
     const { type: actionType, payload: actionPayload } = action
     
@@ -10,18 +15,21 @@ export const cartReducer = (state, action) =>{
         if(productInCart >= 0) {
             const newState = structuredClone(state)
             newState[productInCart].quantity += 1
+            updateLocalStorage(newState)
             return newState
         }
         
 
         // no esta en el carrito
-        return[
+        const newState = [
             ...state,
             {
                 ...actionPayload, // product
                 quantity: 1
             }
         ]
+        updateLocalStorage(newState)
+        return newState
     }
     case 'REMOVE_TO_CART':{
         const { _id } = actionPayload
@@ -30,23 +38,30 @@ export const cartReducer = (state, action) =>{
         if(state[productInCart].quantity > 1) {
             const newState = structuredClone(state)
             newState[productInCart].quantity -= 1
+            updateLocalStorage(newState)
             return newState
         }
         
-
+        
         // no esta en el carrito
-        return state.filter(item => item._id !== _id)
+        const newState = state.filter(item => item._id !== _id)
+        updateLocalStorage(newState)
+        return newState
     
 
     }
     case 'REMOVE_FROM_CART':{
         const { _id } = actionPayload
-        return state.filter(item => item._id !== _id)
+        const newState =  state.filter(item => item._id !== _id)
+        updateLocalStorage(newState)
+        return newState
         
     }
     case 'CLEAR_CART':{
-        return CartInitialState
-
+        
+        const newState =  []
+        updateLocalStorage(newState)
+        return newState
     }
 
     return state

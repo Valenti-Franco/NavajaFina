@@ -5,26 +5,40 @@ import { SlideshowLightbox } from 'lightbox.js-react';
 import 'lightbox.js-react/dist/index.css';
 import { FaCartPlus } from 'react-icons/fa';
 import BtnCart from '../ProductCard/BtnCart';
+import { motion } from 'framer-motion';
+import axios from 'axios';
 
 const ProductDetail = ({ products }) => {
+
+  
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
+  const [lightboxKey, setLightboxKey] = useState(0); // Agregar clave única para el componente SlideshowLightbox
+// console.log(products)
 
-  useEffect(() => {
-    // Aquí debes obtener el objeto del producto correspondiente al ID
-    const foundProduct = products.find((product) => product._id === parseInt(id));
-    setProduct(foundProduct);
-  }, [products, id]);
+useEffect(() => {
+  const fetchProduct = async () => {
+    try {
+      const response = await axios.get(`http://localhost:4000/api/product/${id}`);
+      setProduct(response.data);
+      setSelectedImage('');
+      setLightboxKey((prevKey) => prevKey + 1); // Actualizar la clave del componente SlideshowLightbox
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
+  fetchProduct();
+}, [id]);
+  // console.log(product)
   if (!product) {
     return <div className={style.main}>Producto no encontrado</div>;
   }
 
+  const { name, price, description } = product;
 
-  const { name, price, description, images } = product;
-  
   const openLightbox = (image) => {
     setSelectedImage(image);
     setLightboxOpen(true);
@@ -34,27 +48,36 @@ const ProductDetail = ({ products }) => {
     setLightboxOpen(false);
   };
 
+  const images = product.images
+  .slice(1, -1) // Eliminar los caracteres de apertura y cierre ({})
+  .split(",") // Dividir la cadena en elementos individuales
+  .map((image) => image.trim());
+
   return (
-    <div className={style.main}>
+    <motion.div
+    animate={{ x: "0%" }}
+    initial={{  x: "100%" }}
+ 
+    className={style.main}>
       <div className={style.ProductDetail}>
-      <div className={style.imagesContainer}>
-        <SlideshowLightbox className={style.containerimages}>
-          {images.map((image, index) => (
-            <img
-              key={index}
-              className={style.images}
-              src={image}
-              alt={name}
-              onClick={() => openLightbox(image)}
-            />
-          ))}
-        </SlideshowLightbox>
-      </div>
+        <div className={style.imagesContainer}>
+          <SlideshowLightbox key={lightboxKey} className={style.containerimages}>
+            {images.map((image, index) => (
+              <img
+                key={index}
+                className={style.images}
+                src={image}
+                alt={name}
+                onClick={() => openLightbox(image)}
+              />
+            ))}
+          </SlideshowLightbox>
+        </div>
         <div className={style.detailsContainer}>
           <h2 className={style.name}>{name}</h2>
           <p className={style.price}>Precio: ${price}</p>
           <p className={style.description}>{description}</p>
-          <BtnCart product={product}/> 
+          <BtnCart product={product} />
         </div>
       </div>
 
@@ -65,7 +88,7 @@ const ProductDetail = ({ products }) => {
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 
