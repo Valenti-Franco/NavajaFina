@@ -1,50 +1,71 @@
-import React, { useState, useId } from 'react'
+import React, { useContext } from 'react';
 import style from './index.module.css';
-import { MdDelete } from "react-icons/md";
+import { MdDelete } from 'react-icons/md';
+import { FaTimes } from 'react-icons/fa';
+import FiltersItems from './FiltersItems';
+import { FilterContext } from '../../context/filters';
 
-const Filters = ({ setFilter }) => {
-  const [minPrice, setMinPrice] = useState(0)
-  const [category, setCategory] = useState('all')
 
-  const priceId = useId()
+const Filters = () => {
+  const {
+    filter,
+    setFilter,
+    minPrice,
+    setMinPrice,
+    priceId,
+    setPriceId,
+    category,
+    setCategory,
+  } = useContext(FilterContext);
+
   const handlePriceChange = (event) => {
+    setMinPrice(event.target.value);
+    setFilter((prevFilter) => ({
+      ...prevFilter,
+      price: event.target.value,
+    }));
+  };
 
-    setMinPrice(event.target.value)
-    setFilter(prevState => ({
-      ...prevState,
-      price: event.target.value
-    }))
-  }
   const handleCategoryChange = (event) => {
+    setCategory(event.target.value);
+    setFilter((prevFilter) => ({
+      ...prevFilter,
+      category: event.target.value,
+    }));
+  };
 
-    setCategory(event.target.value)
-    setFilter(prevState => ({
-      ...prevState,
-      category: event.target.value
-    }))
-  }
+  const handlerPriceClear = () => {
+    setFilter((prevFilter) => ({
+      ...prevFilter,
+      price: 0,
+    }));
+    setMinPrice(0);
+    document.getElementById(priceId).value = '0';
+  };
 
-  const deletefilters = (event) => {
-  
-    setFilter({
+  const handlerCategoryClear = () => {
+    setFilter((prevFilter) => ({
+      ...prevFilter,
       category: 'all',
-      price: 0
-    })
-    setMinPrice(0)
-    setCategory('all')
-    document.getElementById(priceId).value = '0'
-    document.getElementById('category').value = 'all'
+    }));
+    setCategory('all');
+    document.getElementById('category').value = 'all';
+  };
 
-  }
+  const deleteFilters = (event) => {
+    handlerPriceClear();
+    handlerCategoryClear();
+  };
+
   return (
-    <div className={style.ContainerFilters}>
-     
+    <main className={style.main}>
+      <div className={style.ContainerFilters}>
         <h2>FILTROS</h2>
         <div className={style.container}>
           <label htmlFor='price'>Precio Mínimo:</label>
           <div className={style.filtersItem}>
-
-            <input type='range'
+            <input
+              type='range'
               id={priceId}
               min='0'
               max='1000'
@@ -52,7 +73,6 @@ const Filters = ({ setFilter }) => {
             />
             <span>${minPrice}</span>
           </div>
-
         </div>
         <div className={style.container}>
           <label htmlFor='category'>Categoria:</label>
@@ -66,16 +86,17 @@ const Filters = ({ setFilter }) => {
             </select>
           </div>
         </div>
-        <div onClick={deletefilters} className={style.delete}>
-
-        <MdDelete />
+        <div onClick={deleteFilters} className={style.delete}>
+          <MdDelete />
         </div>
-      
+      </div>
+      {/* <FiltersItems
+        handlerPriceClear={handlerPriceClear}
+        handlerCategoryClear={handlerCategoryClear}
+        
+      /> */}
+    </main>
+  );
+};
 
-
-    </div>
-
-  )
-}
-
-export default Filters
+export default Filters;

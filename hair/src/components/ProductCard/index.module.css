@@ -3,12 +3,17 @@
     height: 100%;
 }
 .containerProduct{
-    display: flex;
-    flex-direction: column;
+    
+    
    width: 400px;
-    justify-content: space-between;
+    
+   
     /* background-color: #d3d2d2; */
+    box-shadow: 3px 3px 5px #22222265;
 
+}
+.containerProductList{
+    width: 100%;
 }
 .productName{
     padding: 0px 15px;
@@ -37,10 +42,35 @@ modo oscuro
     width: 100%;
     margin: 20px 0;
     height: 330px;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
+   
+    object-fit: contain;
+    object-position: center;
+   
     
+}
+.containerDescription{
+    position: absolute;
+    width: inherit;
+    margin-top: -150px;
+    z-index: 10;
+    height: 150px;
+    background: #27272796;
+    display: flex;
+    align-items: center;
+    color: #FFf;
+    text-shadow: 2px 2px 2px #000;
+}
+.info{
+    position: absolute;
+    background-color: #501a8d;
+    border: 1px solid #fff;
+    margin-left: 100px;
+    color: #fff;
+    border-radius: 20px;
+    padding: 0px 7px;
+    font-size: 16px;
+    /* border: none; */
+    cursor: pointer;
 }
 .unselectable {
     user-select: none;
@@ -52,7 +82,7 @@ modo oscuro
     color:#fff;
     border: none;
     padding: 10px 20px;
-    cursor: pointer;
+    
     font-weight: bold;
     text-align: center;
     width: auto;
@@ -132,4 +162,14 @@ modo oscuro
         
         
         }
+        .containerProduct{
+    
+    
+            width: auto;
+             
+            
+             /* background-color: #d3d2d2; */
+             box-shadow: 3px 3px 5px #22222265;
+         
+         }
   }
