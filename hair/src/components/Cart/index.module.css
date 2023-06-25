@@ -1,5 +1,5 @@
 .cart {
-    background: #000000e6;
+    background: #5a4555e6;
     display: none;
     padding: 32px;
     position: fixed;
@@ -48,10 +48,10 @@
   .cart footer button {
     padding: 8px;
   }
-  
+  /*Booton Carrito*/
   .cartButton {
     align-items: center;
-    background: #977db6;
+    background: #d6cae6;
     border-radius: 9999px;
     cursor: pointer;
     display: flex;
@@ -62,8 +62,8 @@
     top: 8px;
     transition: all .3s ease;
     width: 50px;
-    color: #fff;
-    border: 1px solid #fff;
+    color: #000000;
+    border: 3px solid #000000;
    
   }
   .label{
@@ -71,7 +71,7 @@
   }
   .cartClose{
     align-items: center;
-    background: rgb(255, 38, 0);
+    background: rgb(255, 0, 0);
     border-radius: 9999px;
     cursor: pointer;
     display: flex;
@@ -118,10 +118,10 @@
     color: white;
     left: 40px;
     bottom: 5px;
-    background: #977db6;
+    background: #000000;
     border-radius: 50%;
     padding: 0 5px;
-    border: 1px solid #fff;
+    border: 1px solid #000000;
     width: max-content;
 
   }
@@ -148,4 +148,9 @@
     height: 100%;
     margin-right: 20px;
     /* margin-bottom: 100px; */
+  }
+  .button{
+    color: rgb(0, 0, 0);
+    padding: 5px 5px;
+    border-radius: 5px;
   }
