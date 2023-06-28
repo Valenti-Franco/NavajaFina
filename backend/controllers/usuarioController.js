@@ -34,11 +34,11 @@ const existeUsuario = await Usuario.findOne({ usuario } );
     //   // token: usuario.token,
     // });
 
-    res.json({
+    return res.json({
       msg: "Usuario Creado Correctamente, Ya podes iniciar Sesión",
     });
   } catch (error) {
-    console.log(error);
+    return console.log(error);
   }
 };
 

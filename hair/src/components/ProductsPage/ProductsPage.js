@@ -8,11 +8,11 @@ import { FaList, FaTh, FaTimes } from 'react-icons/fa';
 import Filters from '../Filters/Filters';
 import { FilterContext } from '../../context/filters';
 import axios from 'axios';
-  
+import { AuthContext } from '../../context/Auth';
 const ProductsPage = () => {
   const [listView, setListView] = useState("grid")
   const [products, setProducts] = useState([]);
-
+  const {modoOscuro}= useContext(AuthContext) 
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth < 767) {
@@ -108,7 +108,7 @@ const ProductsPage = () => {
     <div className={style.main}>
       
     < Filters  />
-        <div className={style.containerFilterProduct}>
+        <div className={style.containerFilterProduct + (!modoOscuro ? ' ' + style.mainDark : '')}>
           
           <div className={style.filterItems}>
           {filter.price > 0 ? ( 
@@ -132,7 +132,7 @@ const ProductsPage = () => {
           </div>
           <Scrollbars style={{ height:'100vh' }}>
           
-              <div className={listView === 'grid' ? style.sliderGroup : style.sliderGroupList}>
+              <div className={(listView === 'grid' ? style.sliderGroup : style.sliderGroupList) + (!modoOscuro ? ' ' + style.mainDark : '')}>
                   {filteredProducts.length > 0 ? (
 
                   

@@ -1,4 +1,4 @@
-import React  from 'react'
+import React, { useContext }  from 'react'
 import style from './index.module.css';
 
 import "swiper/css";
@@ -11,10 +11,12 @@ import "swiper/css/pagination";
 import SlideBarber from '../SlideBarber/SlideBarber';
 import Products from './Products';
 import { motion } from 'framer-motion';
+import { AuthContext } from '../../context/Auth';
 
 
 const Main = () => {
-  
+  const {modoOscuro}= useContext(AuthContext) 
+
   return (
     
     <motion.div 
@@ -27,7 +29,7 @@ const Main = () => {
     }}
     exit={{opacity:0}}
     
-    className={style.main}>
+    className={style.main + (!modoOscuro ? ' ' + style.mainDark : '')}>
       
        <Products />
       <SlideBarber />

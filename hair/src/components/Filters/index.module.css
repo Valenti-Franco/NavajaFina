@@ -17,6 +17,10 @@
     display: flex;
   
 }
+.mainDark{
+    background: #331657;
+    display: flex;
+}
 .container{
     width: 100%;
 }

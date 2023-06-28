@@ -40,7 +40,7 @@ h1{
   
 }
 .filterItems{
-  background-color: #501a8d;
+  background-color: #331657;
   color: #Ffff;
  
   position: sticky;
@@ -97,7 +97,10 @@ h1{
 
     
 }
-
+.mainDark{
+  background-color: rgb(49, 49, 49);
+    color: #fff;
+}
 @media screen and  (max-width: 767px) {
   .ContainerlistProduct{
     display: none;
