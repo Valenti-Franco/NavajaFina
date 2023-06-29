@@ -12,16 +12,18 @@ import { CartProvider } from './context/cart';
 import Header from './components/Header/Header';
 import CartPage from './components/CartPage/CartPage';
 
+
 import { AnimatePresence } from 'framer-motion';
 import { FIlterProvider } from './context/filters';
 import { AuthProvider } from './context/Auth';
 import Perfil from './components/Perfil/Perfil';
-import { useThemeContext } from './components/Theme/Theme';
+import Login from './components/Login/login';
 
 
 
 
-function App() {  
+function App() {
+  
 
 
 
@@ -38,10 +40,12 @@ function App() {
               <ProductsPage  />
             </FIlterProvider>
           } />
+          <Route path='/login' element={<Login />} />
           <Route path='/signin' element={<Signin />} />
           <Route path='/products/:id' element={<ProductDetail  />} />
           <Route path='/cart' element={<CartPage />} />
           <Route path='/perfil' element={<Perfil />} />
+
         </Routes>
       </AnimatePresence>
       <Footer />

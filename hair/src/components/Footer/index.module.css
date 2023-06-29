@@ -1,7 +1,7 @@
 .footer{
-    background-color: #3d1e67;
+    background-color: black;
     height: 200px ;
-    width: auto; 
+    width: auto;
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     color: white;

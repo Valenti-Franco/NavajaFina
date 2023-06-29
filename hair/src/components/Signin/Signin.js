@@ -1,15 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import style from './index.module.css';
 import axios from 'axios';
-import Login from './login';
 import { motion } from 'framer-motion';
 import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from '../../context/Auth';
+import { Link } from 'react-router-dom';
+
 
 const Signin = () => {
-  
-
-
 
   const [ nombre, setNombre ] = useState('')
   const [usuario, setUsuario ] = useState('')
@@ -19,14 +18,17 @@ const Signin = () => {
     const [ repetirPassword, setRepetirPassword ] = useState('')
     const [ alerta, setAlerta ] = useState({})
 
+    const { modoOscuro } = useContext(AuthContext)
+
     const handleSubmitRegister = async e => {
         e.preventDefault();
 
         if([nombre,usuario, email, password, repetirPassword].includes('')) {
         
            toast.error('Todos los campos son obligatorios');
-
+           
            return
+                   
         }
 
         if(password !== repetirPassword ) {
@@ -39,6 +41,7 @@ const Signin = () => {
         if(password.length < 6 ) {
            
             toast.error('El Password es muy corto, agrega minimo 6 caracteres');
+
             return
         }
 
@@ -72,96 +75,80 @@ const Signin = () => {
             dutaion:1
         },
     }}
-    exit={{opacity:0}} className={style.main}>
+    exit={{opacity:0}} className={style.main + (modoOscuro ? ' ' + style.mainDark : '')}>
 
-    <Login/>
+   
+        
 
 
-
-
+    
        <form 
-            className="my-10 bg-white shadow rounded-lg p-10"
+            className={style.formreg}
             onSubmit={handleSubmitRegister}
         >
-           <h2>Register</h2>
-            <div className="my-5">
-                <label 
-                    className={style.label}
-                    htmlFor="nombre"
-                >Nombre</label>
+            <Link className={style.x} to="/login">X</Link>
+           <h2 className={style.tittle}>Registro</h2>
+            <div className={style.divcontainer}>
+
                 <input
                     id="nombre"
                     type="text"
-                    placeholder="Tu Nombre"
-                    className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
+                    placeholder="Nombre"
+                    className={style.inputcontainer}
                     value={nombre}
                     onChange={e => setNombre(e.target.value)}
                 />
             </div>
-            <div className="my-5">
-                <label 
-                    className={style.label}
-                    htmlFor="Usuario"
-                >Usuario</label>
+            <div className={style.divcontainer}>
                 <input
                     id="Usuario"
                     type="text"
-                    placeholder="Tu Usuario"
-                    className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
+                    placeholder="Apellido"
+                    className={style.inputcontainer}
                     value={usuario}
                     onChange={e => setUsuario(e.target.value)}
                 />
             </div>
 
-            <div >
-                <label 
-                    className={style.label}
-                    htmlFor="email"
-                >Email</label>
+            <div className={style.divcontainer}>
                 <input
                     id="email"
                     type="email"
-                    placeholder="Email de Registro"
-                    className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
+                    placeholder="Número de móvil o correo electrónico"
+                    className={style.inputcontainer}
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                 />
-            </div>
-            <div className="my-5">
-                <label 
-                    className={style.label}
-                    htmlFor="password"
-                >Password</label>
+            </div  >
+            <div className={style.divcontainer}>
                 <input
                     id="password"
                     type="password"
-                    placeholder="Password de Registro"
-                    className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
+                    placeholder="Contraseña nueva"
+                    className={style.inputcontainer}
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                 />
             </div>
 
-            <div className="my-5">
-                <label 
-                    className={style.label}
-                    htmlFor="password2"
-                >Repetir Password</label>
+            <div className={style.divcontainer}>
                 <input
                     id="password2"
                     type="password"
-                    placeholder="Repetir tu Password"
-                    className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
+                    placeholder="Repetir contraseña"
+                    className={style.inputcontainer}
                     value={repetirPassword}
                     onChange={e => setRepetirPassword(e.target.value)}
                 />
             </div>
 
+            <div className={style.divcontainer}>
             <input 
                 type="submit"
                 value="Crear Cuenta"
                 className={style.button}
             />
+            </div>
             <div >
           
             <ToastContainer />

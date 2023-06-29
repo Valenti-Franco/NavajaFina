@@ -99,8 +99,8 @@ const Cart = () => {
             </Scrollbars>
             <div className={style.total}>
                 <p>Total: ${total}</p>
-                <button onClick={clearCart} className={style.button}>Clear</button>
-                <button id="Botom" className={style.button}><Link to="/cart">
+                <button onClick={clearCart}>Clear</button>
+                <button><Link to="/cart">
                 VER CARRITO
                 </Link></button>
 

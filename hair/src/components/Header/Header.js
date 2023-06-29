@@ -119,7 +119,7 @@ const handlerSingOut = () => {
           ): (
             <> 
             <ToastContainer />
-            <Link to="/signin"><FaSignInAlt/> Iniciar sesión </Link>
+            <Link to="/login"><FaSignInAlt/> Iniciar sesión</Link>
             </> 
           )}
           <a onClick={handelModocuro} style={{color:"#fff"}}>
