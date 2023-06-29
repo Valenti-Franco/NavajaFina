@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Pagination, Autoplay, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FaRegEye } from 'react-icons/fa';
@@ -9,7 +9,7 @@ import ProductCard from '../ProductCard/ProductCard';
 import EffectCardProduct from '../EffectCardProduct/EffectCardProduct';
 import  useSWR  from 'swr';
 import ContentLoader from 'react-content-loader';
-
+import { AuthContext } from '../../context/Auth';
 const fetchProducts = async (url, limit) => {
   const response = await fetch(url, { params: { limit } });
   const data = await response.json();
@@ -17,7 +17,9 @@ const fetchProducts = async (url, limit) => {
 };
 
 const Products = () => {
-    
+  
+  const {modoOscuro}= useContext(AuthContext) 
+  console.log(modoOscuro)
   const { data: products, error } = useSWR(
     'http://localhost:4000/api/product?limit=9',
     fetchProducts
@@ -29,7 +31,7 @@ const Products = () => {
 
   if (!products) {
     return (
-      <div className={style.containerPeinados}>
+      <div className={style.containerPeinadosDark + (modoOscuro ? ' ' + style.containerPeinadosDark : '')}>
         <h1 className={style.title}>PRODUCTOS</h1>
         <div className={style.containerProduct}>
           <EffectCardProduct />
@@ -94,7 +96,7 @@ const Products = () => {
   }
 
   return (
-    <div className={style.containerPeinados}>
+    <div className={style.containerPeinados + (!modoOscuro ? ' ' + style.containerPeinadosDark : '')}>
       <h1 className={style.title}>PRODUCTOS</h1>
       <div className={style.containerProduct}>
         <EffectCardProduct />

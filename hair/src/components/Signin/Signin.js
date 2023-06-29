@@ -48,7 +48,7 @@ const Signin = () => {
         try {
          
             const { data } = await axios.post(`http://localhost:4000/api/usuarios`, {nombre,usuario, email, password} )
-            toast.susses(data.msg);
+            toast.success('Usurio registrado correctamente');
            
 
             setNombre('')
