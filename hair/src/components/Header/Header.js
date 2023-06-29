@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Cart from "../Cart/Cart";
 import { AnimatePresence, motion } from "framer-motion";
-import { FaBars, FaHome, FaTimes, FaUser, FaShopify, FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
+import { FaBars, FaHome, FaTimes, FaUser, FaShopify, FaSignInAlt, FaSignOutAlt, FaSun, FaMoon } from "react-icons/fa";
 import {AuthContext} from "../../context/Auth";
 import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,7 +12,9 @@ import 'react-toastify/dist/ReactToastify.css';
 const Header = () => {
   const { autenticarUsuario } = useContext(AuthContext);
   const Auth = useContext(AuthContext) 
-  const modoOscuro = useContext(AuthContext) 
+  const {modoOscuro,setModoOscuro}= useContext(AuthContext) 
+
+
   useEffect(() => {
     if(Auth.auth._id  !== undefined){
       toast.success('Session iniciada', { autoClose: 1500 });
@@ -20,11 +22,10 @@ const Header = () => {
     }
 
   }, [Auth.auth._id])
-  
-
+ 
   // console.log(modoOscuro)
 
- 
+
   const [isScrolled, setIsScrolled] = useState(false);
 
   // enlace para realizar un seguimiento de si el usuario se ha desplazado hacia abajo en la página o no
@@ -41,6 +42,11 @@ const Header = () => {
 
   const [clicked, setClicked] = useState(false)
 
+  const handelModocuro = () => {
+  
+    setModoOscuro(!modoOscuro)
+ 
+  }
   const handleClick = () => {
     //cuando esta true lo pasa al false y viceversa
     setClicked(!clicked);
@@ -113,12 +119,20 @@ const handlerSingOut = () => {
           ): (
             <> 
             <ToastContainer />
-            <Link to="/signin"><FaSignInAlt/> Iniciar sesión </Link>
+            <Link to="/login"><FaSignInAlt/> Iniciar sesión</Link>
             </> 
           )}
-          <a style={{color:"#fff"}}>
-             modoOscuro
-          <input type="checkbox" />
+          <a onClick={handelModocuro} style={{color:"#fff"}}>
+             
+          
+            {!modoOscuro ?
+           
+            <FaMoon/>
+            :
+            <FaSun/>
+          }
+            
+          
 
           </a>
           

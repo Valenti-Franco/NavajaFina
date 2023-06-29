@@ -26,7 +26,7 @@ const ProductCard = ({product, setListView, listView}) => {
   const handlerDescription = () => {
     setDescriptionOn(!descriptionOn);
   }
-
+  
   return (
     <div className={listView === 'grid' ? style.containerProduct : style.containerProductList}>
       <p className={style.textProduct + ' ' + style.unselectable}>{product.name}</p>
@@ -83,4 +83,4 @@ const ProductCard = ({product, setListView, listView}) => {
   )
 }
 
-export default ProductCard
+export default React.memo(ProductCard)

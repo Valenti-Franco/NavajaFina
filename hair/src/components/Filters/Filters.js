@@ -5,7 +5,7 @@ import { FaTimes } from 'react-icons/fa';
 import FiltersItems from './FiltersItems';
 import { FilterContext } from '../../context/filters';
 
-
+import { AuthContext } from '../../context/Auth';
 const Filters = () => {
   const {
     filter,
@@ -56,9 +56,9 @@ const Filters = () => {
     handlerPriceClear();
     handlerCategoryClear();
   };
-
+  const {modoOscuro}= useContext(AuthContext) 
   return (
-    <main className={style.main}>
+    <main className={style.main + (!modoOscuro ? ' ' + style.mainDark : '')}>
       <div className={style.ContainerFilters}>
         <h2>FILTROS</h2>
         <div className={style.container}>

@@ -10,6 +10,10 @@
     padding-top: 30px; */
 
 }
+.mainDark{
+    background-color: rgb(136, 136, 136);
+    color: #fff;
+}
 
 .containerPeinados{
     display: flex;
@@ -21,6 +25,10 @@
     contain: content;
     background-color: rgb(229, 229, 230); 
     
+}
+.containerPeinadosDark{
+    background-color: rgb(49, 49, 49);
+    color: #fff;
 }
 .containerTurno{
     background-color: rgb(229, 229, 230);

@@ -16,10 +16,19 @@
   height: 100vh;
   display: flex;
   
-  margin-top: 40px;
   
 }
+.itemsDark{
+  background-color: rgb(56, 56, 56) !important;
+}
 
+.cartDark{
+  color: #fff;
+  background-color: rgb(136, 136, 136);
+}
+.cartDark li{
+  background: #aaaaaaa6 !important;
+}
 .cart img {
   /* aspect-ratio: 0.5; */
   width: 100%;
@@ -40,7 +49,6 @@
   
 }
 .cart li div strong{
-  
   width: 100%;
   
 }
