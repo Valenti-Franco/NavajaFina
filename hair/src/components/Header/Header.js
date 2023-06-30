@@ -8,6 +8,8 @@ import { FaBars, FaHome, FaTimes, FaUser, FaShopify, FaSignInAlt, FaSignOutAlt, 
 import {AuthContext} from "../../context/Auth";
 import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ButtonAdmin from "./ButtonAdmin";
+
 
 const Header = () => {
   const { autenticarUsuario } = useContext(AuthContext);
@@ -18,7 +20,9 @@ const Header = () => {
   useEffect(() => {
     if(Auth.auth._id  !== undefined){
       toast.success('Session iniciada', { autoClose: 1500 });
-      console.log(Auth.auth._id)
+      
+      // console.log(Auth.auth.role)
+
     }
 
   }, [Auth.auth._id])
@@ -68,6 +72,7 @@ const handlerSingOut = () => {
     <>
     
       <header className={`${style.header} ${isScrolled ? style.scrolled : ""}`}>
+      {Auth.auth.role === "Admin" && Auth.auth.role !== undefined ? <ButtonAdmin /> : null}
       <div className={style.burguer}>
 
         {clicked ? (
