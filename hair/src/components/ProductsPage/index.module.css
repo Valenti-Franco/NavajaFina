@@ -53,6 +53,7 @@ h1{
   gap: 30px;
   padding: 0px 10px;
 }
+
 .cartClose{
   align-items: center;
   background: rgb(255, 38, 0);
@@ -101,6 +102,10 @@ h1{
 .mainDark{
   background-color: rgb(49, 49, 49);
     color: #fff;
+}
+
+.mainDark .filterItems {
+  background: #331657;
 }
 @media screen and  (max-width: 767px) {
   .ContainerlistProduct{

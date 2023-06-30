@@ -69,7 +69,6 @@ const Login = () => {
     }}
 
     exit={{opacity:0}} className={style.main + (!modoOscuro ? ' ' + style.mainDark : '')}> 
-
  
     
         <form

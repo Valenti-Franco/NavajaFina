@@ -132,9 +132,9 @@ const handlerSingOut = () => {
           
             {!modoOscuro ?
            
-            <FaMoon/>
+            <FaMoon className={style.oscuro}/>
             :
-            <FaSun/>
+            <FaSun className={style.oscuro}/>
           }
             
           

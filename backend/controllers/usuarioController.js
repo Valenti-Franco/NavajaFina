@@ -82,7 +82,7 @@ const perfil = async (req, res) => {
 
   try {
     const usuario = await Usuario.findById(userId).select(
-      "-password -createdAt -updatedAt -__v"
+      "-password -role -createdAt -updatedAt -__v"
     );
 
     if (!usuario) {
