@@ -17,6 +17,8 @@ import { AnimatePresence } from 'framer-motion';
 import { FIlterProvider } from './context/filters';
 import { AuthProvider } from './context/Auth';
 import Perfil from './components/Perfil/Perfil';
+import Login from './components/Login/login';
+import Admin from './components/admin/Admin';
 
 
 
@@ -39,10 +41,13 @@ function App() {
               <ProductsPage  />
             </FIlterProvider>
           } />
+          <Route path='/login' element={<Login />} />
           <Route path='/signin' element={<Signin />} />
           <Route path='/products/:id' element={<ProductDetail  />} />
           <Route path='/cart' element={<CartPage />} />
           <Route path='/perfil' element={<Perfil />} />
+          <Route path='/admin' element={<Admin />} />
+
 
         </Routes>
       </AnimatePresence>
