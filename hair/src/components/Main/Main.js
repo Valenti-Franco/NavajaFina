@@ -29,7 +29,7 @@ const Main = () => {
     }}
     exit={{opacity:0}}
     
-    className={style.main + (!modoOscuro ? ' ' + style.mainDark : '')}>
+    className={style.main + (modoOscuro ? ' ' + style.mainDark : '')}>
       
        <Products />
       <SlideBarber />

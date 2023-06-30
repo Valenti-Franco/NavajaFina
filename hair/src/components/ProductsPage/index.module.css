@@ -14,8 +14,10 @@
 }
 h1{
   padding: 20px;
-  background: #40b7d3;
-  color: #fff;
+    background: #331657;
+    text-shadow: 4px 1px 1px #40b7d3;
+    color: #fff;
+    border-bottom: solid 1px #977db6;
 
 }
 .containerFilterProduct{
@@ -40,9 +42,8 @@ h1{
   
 }
 .filterItems{
-  background-color: #331657;
+  background-color: #977db6;
   color: #Ffff;
- 
   position: sticky;
   top: 50px;
   z-index: 100;
@@ -52,6 +53,7 @@ h1{
   gap: 30px;
   padding: 0px 10px;
 }
+
 .cartClose{
   align-items: center;
   background: rgb(255, 38, 0);
@@ -100,6 +102,10 @@ h1{
 .mainDark{
   background-color: rgb(49, 49, 49);
     color: #fff;
+}
+
+.mainDark .filterItems {
+  background: #331657;
 }
 @media screen and  (max-width: 767px) {
   .ContainerlistProduct{

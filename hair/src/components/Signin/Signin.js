@@ -6,6 +6,7 @@ import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../../context/Auth';
 import { Link } from 'react-router-dom';
+import { FaTimes } from "react-icons/fa";
 
 
 const Signin = () => {
@@ -51,7 +52,7 @@ const Signin = () => {
         try {
          
             const { data } = await axios.post(`http://localhost:4000/api/usuarios`, {nombre,usuario, email, password} )
-            toast.susses(data.msg);
+            toast.success('Usurio registrado correctamente');
            
 
             setNombre('')
@@ -86,7 +87,7 @@ const Signin = () => {
             className={style.formreg}
             onSubmit={handleSubmitRegister}
         >
-            <Link className={style.x} to="/login">X</Link>
+            <Link className={style.x} to="/login"><FaTimes /></Link>
            <h2 className={style.tittle}>Registro</h2>
             <div className={style.divcontainer}>
 
