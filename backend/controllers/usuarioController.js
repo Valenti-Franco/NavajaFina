@@ -65,6 +65,7 @@ const autenticar = async (req, res) => {
       nombre: usuario.nombre,
       email: usuario.email,
       usuario: usuario.usuario,
+      role: usuario.role
 
       // token: generarJWT(usuario._id),
     });
@@ -81,7 +82,7 @@ const perfil = async (req, res) => {
 
   try {
     const usuario = await Usuario.findById(userId).select(
-      "-password -role -createdAt -updatedAt -__v"
+      "-password -createdAt -updatedAt -__v"
     );
 
     if (!usuario) {
