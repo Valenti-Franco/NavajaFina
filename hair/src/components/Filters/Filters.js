@@ -58,7 +58,7 @@ const Filters = () => {
   };
   const {modoOscuro}= useContext(AuthContext) 
   return (
-    <main className={style.main + (modoOscuro ? ' ' + style.mainDark : '')}>
+    <main className={style.main + (!modoOscuro ? ' ' + style.mainDark : '')}>
       <div className={style.ContainerFilters}>
         <h2>FILTROS</h2>
         <div className={style.container}>

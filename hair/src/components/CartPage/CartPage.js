@@ -21,7 +21,7 @@ const CartPage = () => {
             : <>
             <div>
             <Scrollbars style={{ width: 800, height:800 }}>
-            <ul className={style.containerItems + (modoOscuro ? ' ' + style.itemsDark : '')}>
+            <ul className={style.containerItems + (!modoOscuro ? ' ' + style.itemsDark : '')}>
             
             <h2>CARRITO DE COMPRAS</h2>
                     {cart.map(product => (

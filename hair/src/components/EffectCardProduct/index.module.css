@@ -9,14 +9,13 @@
   font-weight: bold;
   color: #fff;
   margin: auto;
-  border: solid 1px red;
+  border: solid 1px black;
   border-radius: 0%;
 
 }
 
 .swiperSlide:nth-child(1) {
   background-color: rgb(206, 17, 17);
-
 
 }
 

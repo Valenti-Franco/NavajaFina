@@ -19,15 +19,14 @@ const Header = () => {
 
   useEffect(() => {
     if(Auth.auth._id  !== undefined){
-      toast.success('Session iniciada', { autoClose: 1500 });
+      toast.success('Session iniciada', { autoClose: 1500 });   
       
-      // console.log(Auth.auth.role)
 
     }
 
   }, [Auth.auth._id])
  
-  // console.log(modoOscuro)
+  
 
 
   const [isScrolled, setIsScrolled] = useState(false);
@@ -81,7 +80,7 @@ const handlerSingOut = () => {
         whileHover={{ scale: 1.15 }}
          transition={{ type: "spring", stiffness: 400, damping: 10 }}
         >
-        <FaTimes className={`${style.navicon} }`} clicked={clicked} onClick={handleClick} />
+        <FaTimes className={`${style.navicon} }`} onClick={handleClick} />
         </motion.div>
 
         ):
@@ -90,7 +89,7 @@ const handlerSingOut = () => {
         whileHover={{ scale: 1.15 }}
          transition={{ type: "spring", stiffness: 400, damping: 10 }}
         >
-        <FaBars className={`${style.navicon} }`} clicked={clicked} onClick={handleClick} />
+        <FaBars className={`${style.navicon} }`} onClick={handleClick} />
         </motion.div>
         }
           </div>

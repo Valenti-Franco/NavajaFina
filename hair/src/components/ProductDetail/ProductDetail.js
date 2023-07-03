@@ -32,7 +32,6 @@ useEffect(() => {
 
   fetchProduct();
 }, [id]);
-  // console.log(product)
   if (!product) {
     return <div className={style.main}>Producto no encontrado</div>;
   }
