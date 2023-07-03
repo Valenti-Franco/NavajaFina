@@ -6,8 +6,7 @@
     padding: 20px;
     font-weight: 700;
     color: #fff;
-    width: 300px;
-    
+    width: 300px;    
     position: sticky;
     top: 50px;
     align-items: center;
@@ -43,6 +42,7 @@
 }
 
 .delete{
+
     margin: 10px;
     display: flex;
     align-self: center;
@@ -54,6 +54,7 @@
     border-radius:  5px;
 }
 .delete:hover{
+    
     margin: 10px;
     display: flex;
     align-self: center;

@@ -108,7 +108,7 @@ const ProductsPage = () => {
     <div className={style.main}>
       
     < Filters  />
-        <div className={style.containerFilterProduct + (modoOscuro ? ' ' + style.mainDark : '')}>
+        <div className={style.containerFilterProduct + (!modoOscuro ? ' ' + style.mainDark : '')}>
           
           <div className={style.filterItems}>
           {filter.price > 0 ? ( 

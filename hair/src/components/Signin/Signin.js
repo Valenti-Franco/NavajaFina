@@ -73,10 +73,10 @@ const Signin = () => {
     animate={{
       opacity:1,
         transition:{
-            dutaion:1
+            dutaion:10
         },
     }}
-    exit={{opacity:0}} className={style.main + (modoOscuro ? ' ' + style.mainDark : '')}>
+    exit={{opacity:0}} className={style.main + (!modoOscuro ? ' ' + style.mainDark : '')}>
 
    
         
