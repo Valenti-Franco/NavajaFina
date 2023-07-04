@@ -4,7 +4,7 @@ import style from './index.module.css';
 import { motion } from 'framer-motion';
 import { AuthContext } from '../../context/Auth';
 import { Link } from 'react-router-dom';
-import { FaTimes } from "react-icons/fa";
+import { FaCity, FaTimes } from "react-icons/fa";
 
 const BuyForm = () => {
 
@@ -12,13 +12,16 @@ const BuyForm = () => {
     const [ lastname, setLastName ] = useState ('');
     const [ card, setCard ] = useState ('');
     const [ address, setAddress ] = useState ('');
+    const [city,setCity]=useState('');
+    const [postalcode,setPostalcode]=useState('');
+    const [province,setProvince]=useState('');
     const { modoOscuro } = useContext(AuthContext);
     // const [ alert, setAlert ] = useState = ({})
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if([ name,lastname, card, address ].includes('')) {
+        if([ name,lastname, card,province,address,city,postalcode ].includes('')) {
         
            toast.error('Todos los campos son obligatorios');
            
@@ -56,7 +59,7 @@ const BuyForm = () => {
             onSubmit={handleSubmit}
         >
             <Link className={style.x} to="/cart"><FaTimes /></Link>
-           <h2 className={style.tittle}>Comprar</h2>
+           <h2 className={style.tittle}>Medio de Pago</h2>
 
             <div className={style.divcontainer}>
                 <input
@@ -91,6 +94,26 @@ const BuyForm = () => {
             </div  >
             <div className={style.divcontainer}>
                 <input
+                    id="province"
+                    type="text"
+                    placeholder="Provincia"
+                    className={style.inputcontainer}
+                    value={province}
+                    onChange={e => setProvince(e.target.value)}   
+                />
+            </div>
+            <div className={style.divcontainer}>
+                <input
+                    id="city"
+                    type="text"
+                    placeholder="Ciudad"
+                    className={style.inputcontainer}
+                    value={city}
+                    onChange={e => setCity(e.target.value)}
+                />
+            </div> 
+            <div className={style.divcontainer}>
+                <input
                     id="address"
                     type="text"
                     placeholder="Direccion"
@@ -98,17 +121,29 @@ const BuyForm = () => {
                     value={address}
                     onChange={e => setAddress(e.target.value)}
                 />
-            </div>            
-
+            </div> 
+            <div className={style.divcontainer}>
+                <input
+                    id="postalcode"
+                    type="number"
+                    placeholder="Codigo Postal"
+                    className={style.inputcontainer}
+                    value={postalcode}
+                    onChange={e => setPostalcode(e.target.value)}
+                />
+            </div>          
             <div className={style.divcontainer}>
             <input 
                 type="submit"
                 value="Comprar"
                 className={style.button}
             />
+            <div className={style.buttons}>
+            <Link className={style.a} to="/cart"><button className={style.com}>Volver al Carrito</button></Link>
+            </div>
+            
             </div>
             <div >
-          
             <ToastContainer />
          </div>
         </form>
