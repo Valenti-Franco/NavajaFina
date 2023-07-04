@@ -20,6 +20,7 @@ import Perfil from './components/Perfil/Perfil';
 import Login from './components/Login/login';
 
 import Admin from './components/admin/Admin';
+import BuyForm from './components/BuyForm/BuyForm';
 
 
 
@@ -27,10 +28,6 @@ import Admin from './components/admin/Admin';
 
 function App() {
   
-
-
-
-
   return (
     <CartProvider>
       <AuthProvider>
@@ -49,6 +46,8 @@ function App() {
           <Route path='/cart' element={<CartPage />} />
           <Route path='/perfil' element={<Perfil />} />
           <Route path='/admin' element={<Admin />} />
+          <Route path='/BuyForm' element={<BuyForm />} />
+
 
 
         </Routes>
