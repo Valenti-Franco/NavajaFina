@@ -4,6 +4,7 @@ import CartItem from '../Cart/CartItem';
 import style from './index.module.css'
 import { Scrollbars } from 'react-custom-scrollbars';
 import { AuthContext } from '../../context/Auth';
+import { Link } from 'react-router-dom';
 
 const CartPage = () => {
     const {cart, clearCart, addToCart,removeToCart, removeFromCart} = useCart();
@@ -26,9 +27,7 @@ const CartPage = () => {
             <h2>CARRITO DE COMPRAS</h2>
                     {cart.map(product => (
                         <CartItem key={product._id} removeToCart={() => removeToCart(product)} removeFromCart={() => removeFromCart(product)} addToCart={() => addToCart(product)} {...product} />
-                    ))}
-                
-                
+                    ))}              
                
             </ul>
             
@@ -42,7 +41,12 @@ const CartPage = () => {
                 <p>--------------</p> 
 
                 <p>TOTAL: ${total + 20}</p>
-                <button>IR A PAGAR</button>
+
+                <div className={style.buttons}>
+                <Link to="/BuyForm"><button className={style.but}>IR A PAGAR</button></Link>
+                <Link className={style.a} to="/Products"><button className={style.com}>CONTINUAR COMPRANDO</button></Link>
+                </div>
+                
             </div>
         </>
         }
