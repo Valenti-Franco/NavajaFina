@@ -21,7 +21,9 @@ const Header = () => {
   useEffect(() => {
     if(Auth.auth._id  !== undefined){
       toast.success('Session iniciada', { autoClose: 1500 });   
+
       setIsAdmin(true)
+
 
     }else{
       setIsAdmin(false)
