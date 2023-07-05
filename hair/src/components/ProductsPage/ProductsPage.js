@@ -35,7 +35,7 @@ const ProductsPage = () => {
 
   const obtenerProductos = async (limit) => {
     try {
-      const response = await axios.get('http://localhost:4000/api/product', {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/product`, {
         params: { limit: limit }
       });
   

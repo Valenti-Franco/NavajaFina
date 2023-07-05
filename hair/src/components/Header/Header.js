@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Cart from "../Cart/Cart";
 import { AnimatePresence, motion } from "framer-motion";
-import { FaBars, FaHome, FaTimes, FaUser, FaShopify, FaSignInAlt, FaSignOutAlt, FaSun, FaMoon } from "react-icons/fa";
+import { FaBars, FaHome, FaTimes, FaUser, FaShopify, FaSignInAlt, FaSignOutAlt, FaSun, FaMoon, FaKey } from "react-icons/fa";
 import {AuthContext} from "../../context/Auth";
 import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,21 +13,23 @@ import ButtonAdmin from "./ButtonAdmin";
 
 const Header = () => {
   const { autenticarUsuario } = useContext(AuthContext);
+  const [ isadmin, setIsAdmin] = useState(false)
   const Auth = useContext(AuthContext) 
   const {modoOscuro,setModoOscuro}= useContext(AuthContext) 
 
 
   useEffect(() => {
     if(Auth.auth._id  !== undefined){
-      toast.success('Session iniciada', { autoClose: 1500 });
-      
-      // console.log(Auth.auth.role)
+      toast.success('Session iniciada', { autoClose: 1500 });   
+      setIsAdmin(true)
 
+    }else{
+      setIsAdmin(false)
     }
 
   }, [Auth.auth._id])
  
-  // console.log(modoOscuro)
+  
 
 
   const [isScrolled, setIsScrolled] = useState(false);
@@ -72,7 +74,7 @@ const handlerSingOut = () => {
     <>
     
       <header className={`${style.header} ${isScrolled ? style.scrolled : ""}`}>
-      {Auth.auth.role === "Admin" && Auth.auth.role !== undefined ? <ButtonAdmin /> : null}
+      
       <div className={style.burguer}>
 
         {clicked ? (
@@ -81,7 +83,7 @@ const handlerSingOut = () => {
         whileHover={{ scale: 1.15 }}
          transition={{ type: "spring", stiffness: 400, damping: 10 }}
         >
-        <FaTimes className={`${style.navicon} }`} clicked={clicked} onClick={handleClick} />
+        <FaTimes className={`${style.navicon} }`} onClick={handleClick} />
         </motion.div>
 
         ):
@@ -90,7 +92,7 @@ const handlerSingOut = () => {
         whileHover={{ scale: 1.15 }}
          transition={{ type: "spring", stiffness: 400, damping: 10 }}
         >
-        <FaBars className={`${style.navicon} }`} clicked={clicked} onClick={handleClick} />
+        <FaBars className={`${style.navicon} }`} onClick={handleClick} />
         </motion.div>
         }
           </div>
@@ -114,7 +116,9 @@ const handlerSingOut = () => {
           <Link to="/"><FaHome/> INICIO</Link>
           
           <Link to='/products'><FaShopify/> Productos</Link>
-          
+          {isadmin ? (
+            <Link to="/admin"><FaKey/>PANEL</Link>
+          ): null}
           {Auth.auth._id  ? (
             <>
             <ToastContainer />
@@ -132,9 +136,9 @@ const handlerSingOut = () => {
           
             {!modoOscuro ?
            
-            <FaMoon/>
+            <FaMoon className={style.oscuro}/>
             :
-            <FaSun/>
+            <FaSun className={style.oscuro}/>
           }
             
           

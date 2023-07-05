@@ -4,6 +4,7 @@ import {
   registrar,
   autenticar,
   perfil,
+  obtenerUsuarios,
 } from "../controllers/usuarioController.js";
 
 
@@ -16,5 +17,5 @@ router.post("/login", autenticar);
 // router.post("/olvide-password", olvidePassword);
 // router.route("/olvide-password/:token").get(comprobarToken).post(nuevoPassword);
 router.get("/perfil/:_id", perfil);
-
+router.get("/", obtenerUsuarios);
 export default router;

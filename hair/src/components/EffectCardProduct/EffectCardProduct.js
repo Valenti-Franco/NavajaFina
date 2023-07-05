@@ -13,6 +13,8 @@ const EffectCardProduct = () => {
     modules={[EffectCards]}
     className="user__swiper"
     style={{
+      backgroundSize: "cover",
+      backgroundPosition: "center",
       maxWidth: "180px",
       height: "240px", // Ajustamos la altura para que se ajuste al contenido
       marginTop: "1rem",
@@ -21,35 +23,20 @@ const EffectCardProduct = () => {
     }}
     
     >
-      <SwiperSlide className={style.swiperSlide} style={{ backgroundColor: "rgb(206, 17, 17)" }}>
-        Slide 1
+      <SwiperSlide className={style.swiperSlide} style={{ backgroundPosition: "center",backgroundSize: "cover", backgroundImage: "url('https://www.barbershop.com.ar/product_images/l/674/2056__68568_zoom.jpg')" }}>
+       
       </SwiperSlide>
-      <SwiperSlide className={style.swiperSlide} style={{ backgroundColor: "rgb(0, 140, 255)" }}>
-        Slide 2
+      <SwiperSlide className={style.swiperSlide} style={{ backgroundPosition: "center",backgroundSize: "cover", backgroundImage: "url('https://images-ext-2.discordapp.net/external/_IeQK5Q5GAC6fsSlG5SXHdD8mDhVcN4Ebp8f6tKTIfU/https/www.barbershop.com.ar/product_images/u/764/15357__31275_zoom.jpg?width=589&height=589')" }}>
+        
       </SwiperSlide>
-      <SwiperSlide className={style.swiperSlide} style={{ backgroundColor: "rgb(10, 184, 111)" }}>
-        Slide 3
+      <SwiperSlide className={style.swiperSlide} style={{ backgroundPosition: "center",backgroundSize: "cover", backgroundImage: "url('https://www.barbershop.com.ar/product_images/u/975/515789__68760_zoom.jpg')" }}>
+        
       </SwiperSlide>
-      <SwiperSlide className={style.swiperSlide} style={{ backgroundColor: "rgb(211, 122, 7)" }}>
-        Slide 4
+      <SwiperSlide className={style.swiperSlide} style={{ backgroundPosition: "center",backgroundSize: "cover", backgroundImage: "url('https://www.barbershop.com.ar/product_images/d/065/534492__97769_zoom.jpg')" }}>
+        
       </SwiperSlide>
-      <SwiperSlide className={style.swiperSlide} style={{ backgroundColor: "rgb(118, 163, 12)" }}>
-        Slide 5
-      </SwiperSlide>
-      <SwiperSlide className={style.swiperSlide} style={{ backgroundColor: "rgb(180, 10, 47)" }}>
-        Slide 6
-      </SwiperSlide>
-      <SwiperSlide className={style.swiperSlide} style={{ backgroundColor: "rgb(35, 99, 19)" }}>
-        Slide 7
-      </SwiperSlide>
-      <SwiperSlide className={style.swiperSlide} style={{ backgroundColor: "rgb(0, 68, 255)" }}>
-        Slide 8
-      </SwiperSlide>
-      <SwiperSlide className={style.swiperSlide} style={{ backgroundColor: "rgb(218, 12, 218)" }}>
-        Slide 9
-      </SwiperSlide>
-      <SwiperSlide className={style.swiperSlide} style={{ backgroundColor: "rgb(54, 94, 77)" }}>
-        Slide 10
+      <SwiperSlide className={style.swiperSlide} style={{ backgroundPosition: "center",backgroundSize: "cover", backgroundImage: "url('https://www.barbershop.com.ar/product_images/z/391/5608__02909_zoom.jpg')" }}>
+        
       </SwiperSlide>
     </Swiper>
   );

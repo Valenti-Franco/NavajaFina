@@ -4,10 +4,11 @@ import { createContext, useEffect, useState } from "react";
 const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({});
-  const [modoOscuro, setModoOscuro] = useState(false);
-
+  const [modoOscuro, setModoOscuro] = useState(true);
+ 
   const autenticarUsuario = async () => {
-  
+    
+     // Verifica si esta en el localstorage el id
     if (localStorage.getItem("_id") === null) {
      
       setAuth({})
@@ -17,7 +18,7 @@ const AuthProvider = ({ children }) => {
    
     try {
       const response = await axios.get(
-        `http://localhost:4000/api/usuarios/perfil/${_id}`
+        `${process.env.REACT_APP_BACKEND_URL}/api/usuarios/perfil/${_id}`
       );
       const { data } = response;
      

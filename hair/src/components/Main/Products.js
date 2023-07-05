@@ -17,13 +17,14 @@ const fetchProducts = async (url, limit) => {
 };
 
 const Products = () => {
-  
-  const {modoOscuro}= useContext(AuthContext) 
-  console.log(modoOscuro)
-  const { data: products, error } = useSWR(
-    'http://localhost:4000/api/product?limit=9',
-    fetchProducts
-  );
+  const { modoOscuro } = useContext(AuthContext);
+  console.log(modoOscuro);
+
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
+
+  const { data: products, error } = useSWR(`${backendUrl}/api/product?limit=9`, fetchProducts);
+
 
   if (error) {
     return <div>Error al cargar los productos.</div>;

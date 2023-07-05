@@ -65,6 +65,7 @@ const autenticar = async (req, res) => {
       nombre: usuario.nombre,
       email: usuario.email,
       usuario: usuario.usuario,
+      role: usuario.role
 
       // token: generarJWT(usuario._id),
     });
@@ -75,13 +76,21 @@ const autenticar = async (req, res) => {
   
 };
 
+const obtenerUsuarios = async (req, res) => {
+  try {
+    const usuarios = await Usuario.find().select("-password -createdAt -updatedAt -__v");
+    res.json(usuarios);
+  } catch (error) {
+    res.status(500).json({ msg: "Hubo un error al obtener los usuarios" });
+  }
+};
 
 const perfil = async (req, res) => {
   const userId = req.params._id; // Obtén el valor de _id desde los parámetros de la solicitud
 
   try {
     const usuario = await Usuario.findById(userId).select(
-      "-password -role -createdAt -updatedAt -__v"
+      "-password  -createdAt -updatedAt -__v"
     );
 
     if (!usuario) {
@@ -97,6 +106,6 @@ const perfil = async (req, res) => {
 export {
   registrar,
   autenticar,
- 
+  obtenerUsuarios,
   perfil,
 };

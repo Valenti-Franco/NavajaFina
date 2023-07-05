@@ -6,6 +6,7 @@ import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../../context/Auth';
 import { Link } from 'react-router-dom';
+import { FaTimes } from "react-icons/fa";
 
 
 const Signin = () => {
@@ -72,10 +73,10 @@ const Signin = () => {
     animate={{
       opacity:1,
         transition:{
-            dutaion:1
+            dutaion:10
         },
     }}
-    exit={{opacity:0}} className={style.main + (modoOscuro ? ' ' + style.mainDark : '')}>
+    exit={{opacity:0}} className={style.main + (!modoOscuro ? ' ' + style.mainDark : '')}>
 
    
         
@@ -86,7 +87,7 @@ const Signin = () => {
             className={style.formreg}
             onSubmit={handleSubmitRegister}
         >
-            <Link className={style.x} to="/login">X</Link>
+            <Link className={style.x} to="/login"><FaTimes /></Link>
            <h2 className={style.tittle}>Registro</h2>
             <div className={style.divcontainer}>
 

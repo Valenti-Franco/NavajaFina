@@ -39,7 +39,11 @@ const Login = () => {
 
 
     try {
-      const { data } = await axios.post(`http://localhost:4000/api/usuarios/login`, { email, password });
+      const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/usuarios/login`, {
+        email,
+        password,
+      });
+
 
       
       localStorage.setItem('_id', data._id);
@@ -67,6 +71,7 @@ const Login = () => {
             dutaion:1
         },
     }}
+
     exit={{opacity:0}} className={style.main + (!modoOscuro ? ' ' + style.mainDark : '')}> 
  
     
