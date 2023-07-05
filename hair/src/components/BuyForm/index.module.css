@@ -8,7 +8,7 @@
     background: #f0f2f5;
 }
 
-form{
+form {
     width: 398px;
     display: flex;
     flex-direction: column;
@@ -21,8 +21,18 @@ form{
     border-radius: 8px;
     border: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    contain: content;
 }
+.title{
+    width: 100%;
+    text-align: center;
+}
+.puntos{
+   width: 100%;
+   padding: 50px !important;
+   
 
+}
 .tittle {
     font-size: 30px;
     color: #501a8d;
