@@ -106,21 +106,20 @@ textarea:focus, input:focus, input[type]:focus {
 }
 
 .mainDark form {
-    background-color: rgb(136, 136, 136);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px #40b7d3;
+    background-color: rgb(30 30 30);
     
 }
 
 .mainDark .inputcontainer {
-    background-color:#40b7d3;
-    border: 1px solid rgb(136, 136, 136);   
-    color:  #501a8d; 
+    background-color: #2d2d2d;
+    border: 1px solid rgb(136, 136, 136);
+    color: #fafafa;
 }
 
 .mainDark .button {
-    border: 1px solid  #40b7d3;
+    border: 1px solid #40b7d3;
     background-color: #40b7d3;
-    color:  #501a8d;
+    color: #501a8d;
 }
 
 .mainDark p {
@@ -128,7 +127,7 @@ textarea:focus, input:focus, input[type]:focus {
 }
 
 .mainDark .tittle {
-    color: #501a8d;
+    color: #ffffff;
 }
 
 .mainDark a {

@@ -29,6 +29,7 @@
 .containerPeinadosDark{
     background-color: rgb(49, 49, 49);
     color: #fff;
+    text-shadow: 1px 1px #fff;
 }
 .containerTurno{
     background-color: rgb(229, 229, 230);

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useId, useState } from 'react'
-import  style  from './index.module.css';
+import style from './index.module.css';
 import ProductCard from '../ProductCard/ProductCard';
 
 import Scrollbars from 'react-custom-scrollbars';
@@ -12,11 +12,11 @@ import { AuthContext } from '../../context/Auth';
 const ProductsPage = () => {
   const [listView, setListView] = useState("grid")
   const [products, setProducts] = useState([]);
-  const {modoOscuro}= useContext(AuthContext) 
+  const { modoOscuro } = useContext(AuthContext)
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth < 767) {
-  
+
         setListView("grid");
       }
     }
@@ -35,10 +35,10 @@ const ProductsPage = () => {
 
   const obtenerProductos = async (limit) => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/product`, {
+      const response = await axios.get(`https://localhost:7014/api/Productos`, {
         params: { limit: limit }
       });
-  
+
       const productData = response.data;
       const productsArray = productData;
       setProducts(productsArray);
@@ -76,13 +76,13 @@ const ProductsPage = () => {
     setCategory('all');
     document.getElementById('category').value = 'all';
   };
-  
+
 
   const filterProducts = () => {
 
     return products.filter(product => {
-      return ( 
-        product.price >= filter.price &&
+      return (
+        product.precio >= filter.price &&
         (
           filter.category === 'all' ||
           product.category === filter.category
@@ -90,73 +90,73 @@ const ProductsPage = () => {
       )
     })
   }
-  
+
   const filteredProducts = filterProducts(products)
   return (
-    <motion.div 
-    initial={{opacity:0}}
-    animate={{
-      opacity:1,
-        transition:{
-            dutaion:1
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{
+        opacity: 1,
+        transition: {
+          dutaion: 1
         },
-    }}
-    exit={{opacity:0}}
-    className={style.container}>
-    <h1 >PAGINA DE PRODUCTOS</h1>
-    
-    <div className={style.main}>
-      
-    < Filters  />
+      }}
+      exit={{ opacity: 0 }}
+      className={style.container}>
+      <h1 >PAGINA DE PRODUCTOS</h1>
+
+      <div className={style.main}>
+
+        < Filters />
         <div className={style.containerFilterProduct + (!modoOscuro ? ' ' + style.mainDark : '')}>
-          
+
           <div className={style.filterItems}>
-          {filter.price > 0 ? ( 
-            <p style={{display:'flex'}}><FaTimes onClick={handlerPriceClear} className={style.cartClose} />Precio Mínimo: {filter.price}$ </p>
-            ): null }
-          {filter.category !== 'all' ? ( 
-            <p style={{display:'flex'}}> <FaTimes onClick={handlerCategoryClear}  className={style.cartClose}/>Categoria: {filter.category}</p>
-            ): null }
-              <div className={style.ContainerlistProduct}>
-              
-                    <FaList onClick={() => handlerViewList("list")} className={listView === "list" ? style.activeList : ""}/>
-                    <FaTh onClick={() => handlerViewList("grid")} className={listView === "grid" ? style.activeList : ""}/>
-            
-              
-              </div>
-           
+            {filter.price > 0 ? (
+              <p style={{ display: 'flex' }}><FaTimes onClick={handlerPriceClear} className={style.cartClose} />Precio Mínimo: {filter.price}$ </p>
+            ) : null}
+            {filter.category !== 'all' ? (
+              <p style={{ display: 'flex' }}> <FaTimes onClick={handlerCategoryClear} className={style.cartClose} />Categoria: {filter.category}</p>
+            ) : null}
+            <div className={style.ContainerlistProduct}>
+
+              <FaList onClick={() => handlerViewList("list")} className={listView === "list" ? style.activeList : ""} />
+              <FaTh onClick={() => handlerViewList("grid")} className={listView === "grid" ? style.activeList : ""} />
+
+
             </div>
-            
+
+          </div>
+
           <div>
-            
-          </div>
-          <Scrollbars style={{ height:'100vh' }}>
-          
-              <div className={(listView === 'grid' ? style.sliderGroup : style.sliderGroupList) + (!modoOscuro ? ' ' + style.mainDark : '')}>
-                  {filteredProducts.length > 0 ? (
-
-                  
-                  filteredProducts.map((product) => (
-                
-                      <div
-                          className={style.productContainer}
-
-                          tabIndex={0}
-                          key={product._id + product.name}
-                      >
-                          <ProductCard listView={listView} setListView={setListView}  product={product} />
-                      </div>
-                      
-                  ))
-                  ):(  
-                    <p>No hay productos disponibles</p>
-                  )}
 
           </div>
-         </Scrollbars>
+          <Scrollbars style={{ height: '100vh' }}>
+
+            <div className={(listView === 'grid' ? style.sliderGroup : style.sliderGroupList) + (!modoOscuro ? ' ' + style.mainDark : '')}>
+              {filteredProducts.length > 0 ? (
+
+
+                filteredProducts.map((product) => (
+
+                  <div
+                    className={style.productContainer}
+
+                    tabIndex={0}
+                    key={product._id + product.name}
+                  >
+                    <ProductCard listView={listView} setListView={setListView} product={product} />
+                  </div>
+
+                ))
+              ) : (
+                <p>No hay productos disponibles</p>
+              )}
+
+            </div>
+          </Scrollbars>
         </div>
 
-    </div>
+      </div>
     </motion.div>
   )
 }

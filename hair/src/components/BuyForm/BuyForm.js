@@ -76,7 +76,7 @@ const BuyForm = () => {
         
       <form className={style.formreg} onSubmit={handleSubmit}>
       <h1 className={style.title}> Checkout</h1>
-        <Stepper className={style.puntos} activeStep={activeStep} alternativeLabel>
+        <Stepper className={style.puntos + (!modoOscuro ? ' ' + style.puntosDark : '')}  activeStep={activeStep} alternativeLabel>
           {steps.map(label => (
             <Step key={label}>
               <StepLabel>{label}</StepLabel>

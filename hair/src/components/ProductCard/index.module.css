@@ -49,6 +49,7 @@ modo oscuro
     
 }
 .containerDescription{
+    
     position: absolute;
     width: inherit;
     margin-top: -150px;
@@ -59,6 +60,8 @@ modo oscuro
     align-items: center;
     color: #FFf;
     text-shadow: 2px 2px 2px #000;
+    contain: content;
+
 }
 .info{
     position: absolute;
@@ -86,7 +89,7 @@ modo oscuro
     font-weight: bold;
     text-align: center;
     width: auto;
-    
+    height: 30px;
     
     }
 .ContainertextProduct{

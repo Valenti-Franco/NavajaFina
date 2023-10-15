@@ -1,5 +1,5 @@
 import React from 'react'
-import  style  from './index.module.css';
+import style from './index.module.css';
 
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
 
@@ -8,9 +8,9 @@ import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <div className={style.footer}>
+    <div title='Principal' className={style.footer}>
       <div className={style.horarios}>
-        <h3>Horarios de atencion:</h3>
+        <h3 name="horarios">Horarios de atencion:</h3>
         <ul>Lunes a Viernes de  9:00 a 20:00</ul>
         <ul>Sabados de 10:00 a 20:00</ul>
       </div>
@@ -28,7 +28,7 @@ const Footer = () => {
 
           <FaFacebook className={style.facebook} />
           <FaTwitter className={style.twitter} />
-          <FaInstagram className={style.instagram}/>
+          <FaInstagram className={style.instagram} />
 
         </div>
 

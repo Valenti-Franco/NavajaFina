@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import style from './index.module.css';
 import ProductCard from '../ProductCard/ProductCard';
 import EffectCardProduct from '../EffectCardProduct/EffectCardProduct';
-import  useSWR  from 'swr';
+import useSWR from 'swr';
 import ContentLoader from 'react-content-loader';
 import { AuthContext } from '../../context/Auth';
 const fetchProducts = async (url, limit) => {
@@ -23,7 +23,7 @@ const Products = () => {
   const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 
-  const { data: products, error } = useSWR(`${backendUrl}/api/product?limit=9`, fetchProducts);
+  const { data: products, error } = useSWR(`https://localhost:7014/api/Productos`, fetchProducts);
 
 
   if (error) {
@@ -48,48 +48,48 @@ const Products = () => {
         <div className={style.mySwiper}>
           {/* Placeholder para el slider de productos */}
           <div className={style.placeholderSlider}>
-          <ContentLoader 
-    speed={1}
-    width={400}
-    height={460}
-    viewBox="0 0 400 460"
-    backgroundColor="#dfdddd"
-    foregroundColor="#ffffff"
-    
-  >
-    <rect x="3" y="435" rx="2" ry="2" width="188" height="22" /> 
-    <rect x="-2" y="22" rx="2" ry="2" width="399" height="24" /> 
-    <rect x="-1" y="49" rx="2" ry="2" width="400" height="384" /> 
-    <rect x="197" y="435" rx="0" ry="0" width="201" height="21" />
-  </ContentLoader>
-  <ContentLoader 
-    speed={1}
-    width={400}
-    height={460}
-    viewBox="0 0 400 460"
-    backgroundColor="#dfdddd"
-    foregroundColor="#ffffff"
-    
-  >
-    <rect x="3" y="435" rx="2" ry="2" width="188" height="22" /> 
-    <rect x="-2" y="22" rx="2" ry="2" width="399" height="24" /> 
-    <rect x="-1" y="49" rx="2" ry="2" width="400" height="384" /> 
-    <rect x="197" y="435" rx="0" ry="0" width="201" height="21" />
-  </ContentLoader>
-  <ContentLoader 
-    speed={1}
-    width={400}
-    height={460}
-    viewBox="0 0 400 460"
-    backgroundColor="#dfdddd"
-    foregroundColor="#ffffff"
-    
-  >
-    <rect x="3" y="435" rx="2" ry="2" width="188" height="22" /> 
-    <rect x="-2" y="22" rx="2" ry="2" width="399" height="24" /> 
-    <rect x="-1" y="49" rx="2" ry="2" width="400" height="384" /> 
-    <rect x="197" y="435" rx="0" ry="0" width="201" height="21" />
-  </ContentLoader>
+            <ContentLoader
+              speed={1}
+              width={400}
+              height={460}
+              viewBox="0 0 400 460"
+              backgroundColor="#dfdddd"
+              foregroundColor="#ffffff"
+
+            >
+              <rect x="3" y="435" rx="2" ry="2" width="188" height="22" />
+              <rect x="-2" y="22" rx="2" ry="2" width="399" height="24" />
+              <rect x="-1" y="49" rx="2" ry="2" width="400" height="384" />
+              <rect x="197" y="435" rx="0" ry="0" width="201" height="21" />
+            </ContentLoader>
+            <ContentLoader
+              speed={1}
+              width={400}
+              height={460}
+              viewBox="0 0 400 460"
+              backgroundColor="#dfdddd"
+              foregroundColor="#ffffff"
+
+            >
+              <rect x="3" y="435" rx="2" ry="2" width="188" height="22" />
+              <rect x="-2" y="22" rx="2" ry="2" width="399" height="24" />
+              <rect x="-1" y="49" rx="2" ry="2" width="400" height="384" />
+              <rect x="197" y="435" rx="0" ry="0" width="201" height="21" />
+            </ContentLoader>
+            <ContentLoader
+              speed={1}
+              width={400}
+              height={460}
+              viewBox="0 0 400 460"
+              backgroundColor="#dfdddd"
+              foregroundColor="#ffffff"
+
+            >
+              <rect x="3" y="435" rx="2" ry="2" width="188" height="22" />
+              <rect x="-2" y="22" rx="2" ry="2" width="399" height="24" />
+              <rect x="-1" y="49" rx="2" ry="2" width="400" height="384" />
+              <rect x="197" y="435" rx="0" ry="0" width="201" height="21" />
+            </ContentLoader>
           </div>
         </div>
       </div>
@@ -131,7 +131,7 @@ const Products = () => {
         }, []).map((group, index) => (
           <SwiperSlide key={index}>
             <div className={style.sliderGroup}>
-           
+
               {group.map((product) => (
                 <div
                   className={style.productContainer}
@@ -139,10 +139,10 @@ const Products = () => {
                   key={product._id}
                 >
                   <ProductCard
-                  listView={"grid"}
-                   
-                     product={product}
-                  
+                    listView={"grid"}
+
+                    product={product}
+
                   />
                 </div>
               ))}

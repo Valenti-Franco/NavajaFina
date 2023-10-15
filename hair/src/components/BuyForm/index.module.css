@@ -8,7 +8,9 @@
     background: #f0f2f5;
 }
 
-form {
+
+.formreg {
+
     width: 398px;
     display: flex;
     flex-direction: column;
@@ -26,6 +28,11 @@ form {
 .title{
     width: 100%;
     text-align: center;
+}
+.puntosDark{
+    background-color: rgb(30 30 30) !important;
+    text-shadow: 2px 2px 1px rgba(255, 255, 255);
+    
 }
 .puntos{
    width: 100%;
@@ -111,15 +118,14 @@ textarea:focus, input:focus, input[type]:focus {
 }
 
 .mainDark form {
-    background-color: rgb(136, 136, 136);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px #40b7d3;
+    background-color: rgb(30 30 30);
     
 }
 
 .mainDark .inputcontainer {
-    background-color:#40b7d3;
-    border: 1px solid rgb(136, 136, 136);   
-    color:  #501a8d; 
+    background-color: #2d2d2d;
+    border: 1px solid rgb(136, 136, 136);
+    color: #fafafa;
 }
 
 
@@ -135,11 +141,12 @@ textarea:focus, input:focus, input[type]:focus {
 }
 
 .mainDark .tittle {
-    color: #501a8d;
+    color: #ffffff;
 }
 
 .mainDark a {
     color: #40b7d3;  
+
 }
 
 .buttons {
@@ -150,6 +157,10 @@ textarea:focus, input:focus, input[type]:focus {
     align-content: flex-start;
     flex-direction: column;
 }
+
+
+
+
 .com {
     width: 370px;
     border: 1px solid #501a8d;

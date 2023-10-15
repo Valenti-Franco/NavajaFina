@@ -10,33 +10,33 @@ import axios from 'axios';
 
 const ProductDetail = ({ products }) => {
 
-  
+
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
   const [lightboxKey, setLightboxKey] = useState(0); // Agregar clave única para el componente SlideshowLightbox
-// console.log(products)
+  // console.log(products)
 
-useEffect(() => {
-  const fetchProduct = async () => {
-    try {
-      const response = await axios.get(`http://localhost:4000/api/product/${id}`);
-      setProduct(response.data);
-      setSelectedImage('');
-      setLightboxKey((prevKey) => prevKey + 1); // Actualizar la clave del componente SlideshowLightbox
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await axios.get(`https://localhost:7014/api/Productos/${id}`);
+        setProduct(response.data);
+        setSelectedImage('');
+        setLightboxKey((prevKey) => prevKey + 1); // Actualizar la clave del componente SlideshowLightbox
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  fetchProduct();
-}, [id]);
+    fetchProduct();
+  }, [id]);
   if (!product) {
     return <div className={style.main}>Producto no encontrado</div>;
   }
 
-  const { name, price, description } = product;
+  const { nombre, precio, descripcion } = product;
 
   const openLightbox = (image) => {
     setSelectedImage(image);
@@ -46,36 +46,42 @@ useEffect(() => {
   const closeLightbox = () => {
     setLightboxOpen(false);
   };
+  console.log(product)
+  const images = product.imagenes
 
-  const images = product.images
-  .slice(1, -1) // Eliminar los caracteres de apertura y cierre ({})
-  .split(",") // Dividir la cadena en elementos individuales
-  .map((image) => image.trim());
+  const firstImageUrls = [];
+  for (let i = 0; i < images.length; i++) {
+    const imagesrc = images[i];
+    if (imagesrc?.url && imagesrc.url.length > 0) {
+      firstImageUrls.push(imagesrc.url);
+    }
+  }
 
+  console.log(images)
   return (
     <motion.div
-    animate={{ x: "0%" }}
-    initial={{  x: "100%" }}
- 
-    className={style.main}>
+      animate={{ x: "0%" }}
+      initial={{ x: "100%" }}
+
+      className={style.main}>
       <div className={style.ProductDetail}>
         <div className={style.imagesContainer}>
           <SlideshowLightbox key={lightboxKey} className={style.containerimages}>
-            {images.map((image, index) => (
+            {firstImageUrls.map((image, index) => (
               <img
                 key={index}
                 className={style.images}
                 src={image}
-                alt={name}
+                alt={nombre}
                 onClick={() => openLightbox(image)}
               />
             ))}
           </SlideshowLightbox>
         </div>
         <div className={style.detailsContainer}>
-          <h2 className={style.name}>{name}</h2>
-          <p className={style.price}>Precio: ${price}</p>
-          <p className={style.description}>{description}</p>
+          <h2 className={style.name}>{nombre}</h2>
+          <p className={style.price}>Precio: ${precio}</p>
+          <p className={style.description}>{descripcion}</p>
           <BtnCart product={product} />
         </div>
       </div>

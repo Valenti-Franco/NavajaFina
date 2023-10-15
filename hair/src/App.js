@@ -1,5 +1,5 @@
 
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 
 import Footer from './components/Footer/Footer';
 
@@ -23,6 +23,8 @@ import Login from './components/Login/login';
 import AdminComponent from './components/admin/AdminComponent';
 
 import BuyForm from './components/BuyForm/BuyForm';
+import NotFoundPage from './components/NotFoundPage/NotFoundPage';
+
 
 
 
@@ -50,8 +52,10 @@ function App() {
           <Route path='/perfil' element={<Perfil />} />
 
           <Route path='/admin' element={<AdminComponent />} />
+          <Route path='/BuyForm' element={<BuyForm />} />           
+          <Route path='*' element={<NotFoundPage/>} />
 
-          <Route path='/BuyForm' element={<BuyForm />} />
+
 
 
 
