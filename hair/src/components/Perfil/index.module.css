@@ -31,6 +31,7 @@
   background: #fff;
   border-radius: 100%;
   border: 5px solid #42b3ce;
+  max-width: 300px;
 }
 .sectionUserDark label p{
   color: #42b3ce !important;

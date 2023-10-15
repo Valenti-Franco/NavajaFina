@@ -16,10 +16,10 @@ const Header = () => {
   const [isadmin, setIsAdmin] = useState(false)
   const Auth = useContext(AuthContext)
   const { modoOscuro, setModoOscuro } = useContext(AuthContext)
-
+  console.log(Auth)
 
   useEffect(() => {
-    if (Auth.auth._id !== undefined) {
+    if (Auth.auth.id !== undefined) {
       toast.success('Session iniciada', { autoClose: 1500 });
 
       setIsAdmin(true)
@@ -29,7 +29,7 @@ const Header = () => {
       setIsAdmin(false)
     }
 
-  }, [Auth.auth._id])
+  }, [Auth.auth.id])
 
 
 
@@ -121,7 +121,7 @@ const Header = () => {
           {isadmin ? (
             <Link to="/admin"><FaKey />PANEL</Link>
           ) : null}
-          {Auth.auth._id ? (
+          {Auth.auth.id ? (
             <>
               <ToastContainer />
               <Link to='/perfil'><FaUser /> Perfil</Link>

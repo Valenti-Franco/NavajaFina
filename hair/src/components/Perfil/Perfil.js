@@ -9,16 +9,19 @@ import { toast, ToastContainer } from 'react-toastify';
 import Products from '../Main/Products';
 import EffectCardProduct from '../EffectCardProduct/EffectCardProduct';
 const Perfil = () => {
-    const {modoOscuro}= useContext(AuthContext) 
+  const { modoOscuro } = useContext(AuthContext)
   const [editIndex, setEditIndex] = useState(null);
   const [editedValue, setEditedValue] = useState('');
   const Auth = useContext(AuthContext);
   const navigate = useNavigate();
-  const [usuario, setUsuario] = useState(Auth.auth.usuario);
+  // console.log(Auth.auth)
+  const [usuario, setUsuario] = useState(Auth.auth.Nombre);
   const [nombre, setNombre] = useState(Auth.auth.nombre);
   const [email, setEmail] = useState(Auth.auth.email);
+  const [imagen, setSetImagen] = useState(Auth.auth.imagen.url);
 
-  if (!Auth.auth._id) {
+
+  if (!Auth.auth.id) {
     navigate('/signin');
     return null;
   }
@@ -60,7 +63,7 @@ const Perfil = () => {
     } else {
       toast.error('Error: Valor indefinido');
     }
-  
+
     setEditIndex(null);
     setEditedValue('');
   };
@@ -69,13 +72,14 @@ const Perfil = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { duration: 1 } }}
       exit={{ opacity: 0 }}
-      className={style.main + (!modoOscuro ? ' ' + style.mainDark : '')}> 
-    
-      <div  className={style.containerPerfil + (!modoOscuro ? ' ' + style.containerPerfilDark : '')}>
+      className={style.main + (!modoOscuro ? ' ' + style.mainDark : '')}>
+
+      <div className={style.containerPerfil + (!modoOscuro ? ' ' + style.containerPerfilDark : '')}>
         <h1 className={style.title}>PERFIL</h1>
         <div className={style.divContainer}>
-          <FaUser  className={style.User + (!modoOscuro ? ' ' + style.UserDark : '')} />
-          <section  className={style.sectionUser + (!modoOscuro ? ' ' + style.sectionUserDark : '')}>
+          {/* <FaUser  /> */}
+          <img className={style.User + (!modoOscuro ? ' ' + style.UserDark : '')} src={imagen} />
+          <section className={style.sectionUser + (!modoOscuro ? ' ' + style.sectionUserDark : '')}>
             <label>
               <p>Nombre:</p>
               <div className={style.containerEdit}>
@@ -116,7 +120,7 @@ const Perfil = () => {
                   onClick={() => handleEditClick(2)}
                   onChange={handleInputChange}
                 />
-                
+
                 {editIndex === 2 && (
                   <FaEdit className={style.btnEdit} onClick={handleSaveClick} />
                 )}
@@ -125,16 +129,16 @@ const Perfil = () => {
           </section>
         </div>
         <div className={style.ProductDiv}>
-        <EffectCardProduct />
-        <Link className={style.icontextProduct} to="/products">
-              Buscar Prodcutos! <FaRegEye />
-            </Link>
+          <EffectCardProduct />
+          <Link className={style.icontextProduct} to="/products">
+            Buscar Prodcutos! <FaRegEye />
+          </Link>
         </div>
-        
-            
+
+
       </div>
-       <ToastContainer />
-       
+      <ToastContainer />
+
     </motion.div>
   );
 };
