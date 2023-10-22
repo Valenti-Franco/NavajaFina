@@ -39,7 +39,7 @@ const Login = () => {
 
 
     try {
-      const { data } = await axios.post('https://localhost:7014/api/Usuarios/authenticate', {
+      const { data } = await axios.post('https://tpibarbershop20231015224614.azurewebsites.net/api/Usuarios/authenticate', {
         nombre: email,
         password: password,
       });

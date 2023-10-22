@@ -23,7 +23,7 @@ const Products = () => {
   const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 
-  const { data: products, error } = useSWR(`https://localhost:7014/api/Productos`, fetchProducts);
+  const { data: products, error } = useSWR(`https://tpibarbershop20231015224614.azurewebsites.net/api/Productos`, fetchProducts);
 
 
   if (error) {

@@ -21,7 +21,7 @@ const ProductDetail = ({ products }) => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`https://localhost:7014/api/Productos/${id}`);
+        const response = await axios.get(`https://tpibarbershop20231015224614.azurewebsites.net/api/Productos/${id}`);
         setProduct(response.data);
         setSelectedImage('');
         setLightboxKey((prevKey) => prevKey + 1); // Actualizar la clave del componente SlideshowLightbox
@@ -89,7 +89,7 @@ const ProductDetail = ({ products }) => {
       {lightboxOpen && (
         <div className={style.lightboxContainer} onClick={closeLightbox}>
           <div className={style.lightboxContent}>
-            <img src={selectedImage} alt={name} />
+            <img src={selectedImage} alt='' />
           </div>
         </div>
       )}

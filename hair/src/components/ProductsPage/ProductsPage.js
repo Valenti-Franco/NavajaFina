@@ -35,7 +35,7 @@ const ProductsPage = () => {
 
   const obtenerProductos = async (limit) => {
     try {
-      const response = await axios.get(`https://localhost:7014/api/Productos`, {
+      const response = await axios.get(`https://tpibarbershop20231015224614.azurewebsites.net/api/Productos`, {
         params: { limit: limit }
       });
 

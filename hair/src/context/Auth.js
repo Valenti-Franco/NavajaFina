@@ -16,7 +16,7 @@ const AuthProvider = ({ children }) => {
     }
     const _id = localStorage.getItem("_id");
     try {
-      const response = await axios.get("https://localhost:7014/api/Usuarios/ObtenerUsuario", {
+      const response = await axios.get("https://tpibarbershop20231015224614.azurewebsites.net/api/Usuarios/ObtenerUsuario", {
         headers: {
           Authorization: `Bearer ${_id}`,
         },
