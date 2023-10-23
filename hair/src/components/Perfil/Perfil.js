@@ -8,23 +8,29 @@ import { toast, ToastContainer } from 'react-toastify';
 
 import Products from '../Main/Products';
 import EffectCardProduct from '../EffectCardProduct/EffectCardProduct';
+
 const Perfil = () => {
   const { modoOscuro } = useContext(AuthContext)
   const [editIndex, setEditIndex] = useState(null);
   const [editedValue, setEditedValue] = useState('');
   const Auth = useContext(AuthContext);
-  const navigate = useNavigate();
-  // console.log(Auth.auth)
-  const [usuario, setUsuario] = useState(Auth.auth.Nombre);
-  const [nombre, setNombre] = useState(Auth.auth.nombre);
-  const [email, setEmail] = useState(Auth.auth.email);
-  const [imagen, setSetImagen] = useState(Auth.auth.imagen.url);
 
+  const navigate = useNavigate();
+
+
+
+
+
+  const [usuario, setUsuario] = useState(Auth.auth?.Nombre);
+  const [nombre, setNombre] = useState(Auth.auth?.nombre);
+  const [email, setEmail] = useState(Auth.auth?.email);
+  const [imagen, setSetImagen] = useState(Auth.auth?.imagen?.url);
 
   if (!Auth.auth.id) {
     navigate('/signin');
     return null;
   }
+
 
   const handleInputChange = (event) => {
     setEditedValue(event.target.value);
