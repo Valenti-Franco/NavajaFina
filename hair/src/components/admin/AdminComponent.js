@@ -13,7 +13,16 @@ import BodyProductEdit from './BodyProductEdit';
 import { ToastContainer, toast } from 'react-toastify';
 import BodyDeleteProduct from './BodyDeleteProduct';
 import BodyProductImg from './BodyProductImg';
+// import config from '../../utils/Config';
 
+
+const token = localStorage.getItem("_id");
+console.log(token)
+const config = {
+  headers: {
+    'Authorization': `Bearer ${token}` // Agrega el token JWT en la cabecera de autorización
+  }
+};
 
 
 
@@ -165,11 +174,12 @@ const AdminComponent = () => {
 
 
   const { modoOscuro } = useContext(AuthContext)
-  const navigate = useNavigate();
+
   const [users, setUsers] = useState([]);
   const [category, setCategory] = useState([]);
   const [subcategory, setSubCategory] = useState([]);
 
+  const navigate = useNavigate();
 
   //CONST PRODUCT
   const [products, setProducts] = useState([]);
@@ -281,7 +291,7 @@ const AdminComponent = () => {
   }, [Auth]);
 
   useEffect(() => {
-
+    console.log(config)
     obtenerUsuarios();
     obtenerProductos();
     obtenerCategoria();
@@ -293,25 +303,27 @@ const AdminComponent = () => {
 
 
 
-  const token = localStorage.getItem("_id");
-  const config = {
-    headers: {
-      'Authorization': `Bearer ${token}` // Agrega el token JWT en la cabecera de autorización
-    }
-  };
+  // const token = localStorage.getItem("_id");
+  // const config = {
+  //   headers: {
+  //     'Authorization': `Bearer ${token}` // Agrega el token JWT en la cabecera de autorización
+  //   }
+  // };
 
 
   //CRUD USER
   const obtenerUsuarios = async () => {
     try {
-      const response = await axios.get('https://tpibarbershop20231015224614.azurewebsites.net/api/usuarios/admin', config);
-      const userData = response.data.map((user, index) => ({
-        ...user,
+      const response = await axios.get('https://tpibarbershop20231015224614.azurewebsites.net/api/Usuarios/Admin', config);
 
-      }));
-      setUsers(userData);
+      setUsers(response.data);
 
     } catch (error) {
+
+
+      navigate('/');
+
+
       console.error(error);
     }
   };
@@ -319,10 +331,7 @@ const AdminComponent = () => {
   const obtenerCategoria = async () => {
     try {
       const response = await axios.get('https://tpibarbershop20231015224614.azurewebsites.net/api/Category', config);
-      const CategoryData = response.data.map((user, index) => ({
-        ...user,
-
-      }));
+      const CategoryData = response.data
       setCategory(CategoryData);
 
     } catch (error) {

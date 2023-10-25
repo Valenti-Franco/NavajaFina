@@ -4,26 +4,26 @@ import style from './index.module.css';
 import { AuthContext } from '../../context/Auth';
 
 const Admin = () => {
-   
+
   const navigate = useNavigate();
 
   const Auth = useContext(AuthContext);
-    console.log("Adasd",Auth.auth.role)
+  // console.log("Adasd",Auth.auth.role)
 
-//   useEffect(() => {
-//     if(Auth.auth._id  !== undefined){
-    
-//       console.log(Auth.auth._id)
-//       // console.log(Auth.auth.role)
+  //   useEffect(() => {
+  //     if(Auth.auth._id  !== undefined){
 
-//     }
+  //       console.log(Auth.auth._id)
+  //       // console.log(Auth.auth.role)
 
-//   }, [Auth.auth._id])
+  //     }
+
+  //   }, [Auth.auth._id])
   useEffect(() => {
-    
-    if (Auth.auth.role !== "Admin" ){
-        
-                navigate('/');
+
+    if (Auth.auth.role !== "Admin") {
+
+      navigate('/');
 
     }
   }, [Auth]);

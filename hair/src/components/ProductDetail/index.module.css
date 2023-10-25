@@ -1,10 +1,17 @@
 .main{
-    height: 100vh;
+
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     
+}
+.mainNotFound{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 .imagesContainer{
     
@@ -33,11 +40,15 @@
 }
 .images{
 
-    width: 1000px;
-    height: 1000px;
+    display: block;
+    vertical-align: middle;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
 }
 .ProductDetail{
-    width: 1200px;
+    max-width: 1200px;
+    min-width: 760px;
     display: flex;
     flex-direction: row;
     height: 70vh;
@@ -48,15 +59,56 @@
     
     
 }
+.name{
+    font-size: 35px;
+}
+.containerbtn{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+.containerPuntosUsers{
+    display: flex;
+    /* font-size: 20px !important; */
+    justify-content: space-around;
+    gap: 20px;
+    
+}
+.containerPuntosUsers p{
+   font-size: 25px;
+    
+}
+.Containerdetails{
+    contain: content;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.sectionStar{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #b9b9b92e;
+    gap: 5px;
+    border: 2px solid #501a8d;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 15px;
+    width: 100%;
+}
 .detailsContainer{
     width: 55%;
     margin: 30px 0px;
     height: 75%;
     display: flex;
     flex-direction: column;
+    gap: 15px;
     justify-content: center;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(241 241 241);
     align-items: center;
+
     
     
 }
@@ -78,7 +130,26 @@
    
 
 }
+.notStart{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+.estrella{
+    font-size: 34px;
+    color: #30303085;
+    /* border: 1px solid #000; */
+   
+     
 
+}
+.estrellaHover{
+    color: #d1e617be;
+    filter:drop-shadow(3px 3px 3px #303030)  ;
+
+}
 .icontextProduct:hover{
     
     background-color: #a1aef5;
@@ -87,15 +158,71 @@
     
 
 }
-
-
+.containerPeinadosDark span{
+    color: #fff;
+}
+.containerPeinadosDark p{
+    color: #fff;
+}
+.containerPeinadosDark{
+    background-color: rgb(49, 49, 49) !important;
+    color: #fff !important;
+    /* text-shadow: 1px 1px #fff; */
+}
+.modal {
+    position: absolute;
+    width: 400px;
+    background-color: #fff; /* Cambia esto a tu preferencia */
+    border: 2px solid #000;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    padding: 16px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+.Lista
+{
+    margin: auto;
+    overflow-y: auto;
+   min-height: 400px;
+   max-height: 800px;
+   width: 100%;
+    background-color: rgb(201, 201, 201);
+    align-items: center;
+    justify-content: center;
+}
+.mainDark{
+    background-color: rgb(136, 136, 136);
+    color: #fff;
+}
+.mainDark2{
+    background-color: rgb(107, 107, 107);
+    color: #fff;
+}
 @media screen and  (max-width: 767px) {
+    .Lista
+{
+    width: 100vw;
+    margin: auto;
+    overflow-y: auto;
+    min-height: 400px;
+    /* background-color: rgb(201, 201, 201); */
+    align-items: center;
+
+}
+.containerbtn{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
     .ProductDetail{
         width: 1200px;
         display: flex;
         flex-direction: column;
-        height: 70vh;
-        background-color: rgb(201, 201, 201);
+        height: 100vh;
+        /* background-color: rgb(201, 201, 201); */
         align-items: center;
         justify-content: center;
     }
@@ -106,7 +233,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        background-color: rgb(255, 255, 255);
+        /* background-color: rgb(255, 255, 255); */
         align-items: center;
         
         
@@ -115,9 +242,9 @@
         display: flex;
         flex-direction: row;
         height: 100%;
-        width: 100%;
+        width: 100vw;
         overflow-x: auto;
-        background: #fff;
+        /* background: #fff; */
         
     }
     .imagesContainer{
@@ -127,7 +254,7 @@
         contain: content;
         overflow: auto;
         height: 75%;
-        width: 100%;
+        width: auto;
     
         /* background-color: red; */
        

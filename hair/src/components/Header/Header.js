@@ -1,7 +1,7 @@
 import style from "./index.module.css";
 import logo from "../../assets/logo.png";
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Cart from "../Cart/Cart";
 import { AnimatePresence, motion } from "framer-motion";
 import { FaBars, FaHome, FaTimes, FaUser, FaShopify, FaSignInAlt, FaSignOutAlt, FaSun, FaMoon, FaKey } from "react-icons/fa";
@@ -16,13 +16,15 @@ const Header = () => {
   const [isadmin, setIsAdmin] = useState(false)
   const Auth = useContext(AuthContext)
   const { modoOscuro, setModoOscuro } = useContext(AuthContext)
-  console.log(Auth)
+
 
   useEffect(() => {
     if (Auth.auth.id !== undefined) {
       toast.success('Session iniciada', { autoClose: 1500 });
+      if (Auth.auth.role === "Admin" || Auth.auth.role === "Editor") {
 
-      setIsAdmin(true)
+        setIsAdmin(true)
+      }
 
 
     } else {
@@ -71,6 +73,7 @@ const Header = () => {
     autenticarUsuario(); // Llama a autenticarUsuario desde el contexto para actualizar el estado de autenticación
 
   };
+  const location = useLocation();
   return (
 
     <>
@@ -175,7 +178,7 @@ const Header = () => {
           ) : null}
         </AnimatePresence>
 
-        <Cart />
+        {location.pathname !== '/cart' ? <Cart /> : null}
       </header>
     </>
   );

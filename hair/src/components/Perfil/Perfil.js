@@ -21,11 +21,11 @@ const Perfil = () => {
 
 
 
-  const [usuario, setUsuario] = useState(Auth.auth?.Nombre);
-  const [nombre, setNombre] = useState(Auth.auth?.nombre);
-  const [email, setEmail] = useState(Auth.auth?.email);
-  const [imagen, setSetImagen] = useState(Auth.auth?.imagen?.url);
-
+  // const [usuario, setUsuario] = useState(Auth.auth?.Nombre);
+  // const [nombre, setNombre] = useState(Auth.auth?.nombre);
+  // const [email, setEmail] = useState(Auth.auth?.email);
+  const [imagen, setSetImagen] = useState(Auth.auth?.imagen.url);
+  console.log(imagen)
   if (!Auth.auth.id) {
     navigate('/signin');
     return null;
@@ -41,38 +41,7 @@ const Perfil = () => {
     setEditIndex(index);
   };
 
-  const handleSaveClick = () => {
-    if (editIndex === 1) {
-      if (editedValue === undefined || editedValue === '') {
-        toast.error('Error: Valor indefinido');
-      } else {
-        setUsuario(editedValue);
-        Auth.auth.usuario = editedValue;
-        toast.success(`Valor editado: ${editedValue}`);
-      }
-    } else if (editIndex === 0) {
-      if (editedValue === undefined || editedValue === '') {
-        toast.error('Error: Valor indefinido');
-      } else {
-        setNombre(editedValue);
-        Auth.auth.nombre = editedValue;
-        toast.success(`Valor editado: ${editedValue}`);
-      }
-    } else if (editIndex === 2) {
-      if (editedValue === undefined || editedValue === '') {
-        toast.error('Error: Valor indefinido');
-      } else {
-        setEmail(editedValue);
-        Auth.auth.email = editedValue;
-        toast.success(`Valor editado: ${editedValue}`);
-      }
-    } else {
-      toast.error('Error: Valor indefinido');
-    }
 
-    setEditIndex(null);
-    setEditedValue('');
-  };
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -84,62 +53,37 @@ const Perfil = () => {
         <h1 className={style.title}>PERFIL</h1>
         <div className={style.divContainer}>
           {/* <FaUser  /> */}
-          <img className={style.User + (!modoOscuro ? ' ' + style.UserDark : '')} src={imagen} />
+          <img className={style.User + (!modoOscuro ? ' ' + style.UserDark : '')} src={imagen !== undefined ? imagen : "https://res.cloudinary.com/deh35rofi/image/upload/v1698237266/blank-profile-picture-973460_1280_rvjszn.jpg"} />
           <section className={style.sectionUser + (!modoOscuro ? ' ' + style.sectionUserDark : '')}>
-            <label>
-              <p>Nombre:</p>
-              <div className={style.containerEdit}>
-                <input
-                  type="text"
-                  value={editIndex === 0 ? editedValue : Auth.auth.nombre}
-                  placeholder={editIndex === 0 ? Auth.auth.nombre : ''}
-                  onClick={() => handleEditClick(0)}
-                  onChange={handleInputChange}
-                />
-                {editIndex === 0 && (
-                  <FaEdit className={style.btnEdit} onClick={handleSaveClick} />
-                )}
-              </div>
-            </label>
             <label>
               <p>Usuario:</p>
               <div className={style.containerEdit}>
-                <input
-                  type="text"
-                  value={editIndex === 1 ? editedValue : Auth.auth.usuario}
-                  placeholder={editIndex === 1 ? Auth.auth.usuario : ''}
-                  onClick={() => handleEditClick(1)}
-                  onChange={handleInputChange}
-                />
-                {editIndex === 1 && (
-                  <FaEdit className={style.btnEdit} onClick={handleSaveClick} />
-                )}
+
+                {Auth.auth.nombre}
+
+
+                {/* {editIndex === 0 && (
+                  // <FaEdit className={style.btnEdit} onClick={handleSaveClick} />
+                )} */}
               </div>
             </label>
+
             <label>
               <p>Email:</p>
               <div className={style.containerEdit}>
-                <input
-                  type="text"
-                  value={editIndex === 2 ? editedValue : Auth.auth.email}
-                  placeholder={editIndex === 2 ? Auth.auth.email : ''}
-                  onClick={() => handleEditClick(2)}
-                  onChange={handleInputChange}
-                />
 
-                {editIndex === 2 && (
+                {Auth.auth.email}
+
+
+
+                {/* {editIndex === 2 && (
                   <FaEdit className={style.btnEdit} onClick={handleSaveClick} />
-                )}
+                )} */}
               </div>
             </label>
           </section>
         </div>
-        <div className={style.ProductDiv}>
-          <EffectCardProduct />
-          <Link className={style.icontextProduct} to="/products">
-            Buscar Prodcutos! <FaRegEye />
-          </Link>
-        </div>
+
 
 
       </div>
