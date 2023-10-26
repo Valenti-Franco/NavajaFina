@@ -38,6 +38,7 @@
 }
 
 .cart  li {
+  
   border-bottom: 1px solid #b9b9b9;
   padding: 0 10px  0px 0px;
   list-style: none;
@@ -138,6 +139,8 @@
   justify-content: center;
   align-items: center;
   font-size: 25px;
+  background: #c9c9c9;
+
 }
 .containerItems{
     overflow-y: auto;

@@ -118,22 +118,22 @@ const Header = () => {
 
         </motion.div>
         <nav onClick={handleLinkClick} className={`${style.nav1} }`}>
-          <Link to="/"><FaHome /> INICIO</Link>
+          <Link to="/" className={location.pathname === "/" ? style.Active : ""} ><FaHome /> INICIO</Link>
 
-          <Link to='/products'><FaShopify /> Productos</Link>
+          <Link to='/products' className={location.pathname === "/products" ? style.Active : ""}><FaShopify /> PRODUCTOS</Link>
           {isadmin ? (
-            <Link to="/admin"><FaKey />PANEL</Link>
+            <Link className={location.pathname === "/admin" ? style.Active : ""} to="/admin"><FaKey />PANEL</Link>
           ) : null}
           {Auth.auth.id ? (
             <>
               <ToastContainer />
-              <Link to='/perfil'><FaUser /> Perfil</Link>
+              <Link to='/perfil' className={location.pathname === "/perfil" ? style.Active : ""}><FaUser /> PERFIL</Link>
               <Link onClick={handlerSingOut}><FaSignOutAlt />Cerrar Sesión</Link>
             </>
           ) : (
             <>
               <ToastContainer />
-              <Link to="/login"><FaSignInAlt /> Iniciar sesión</Link>
+              <Link to="/login" className={location.pathname === "/login" ? style.Active : ""}><FaSignInAlt />INICIAR SESIÓN</Link>
             </>
           )}
           <a onClick={handelModocuro} style={{ color: "#fff" }}>
@@ -162,24 +162,48 @@ const Header = () => {
               onClick={handleLinkClick} className={`${style.nav} ${clicked ? isScrolled ? style.activeScroll : style.active : ""}`}>
               <Link onClick={handleClick} to="/"><FaHome /> INICIO</Link>
 
-              <Link onClick={handleClick} to='/products'><FaShopify /> Productos</Link>
-
-              {Auth.auth._id ? (
+              <Link onClick={handleClick} to='/products'><FaShopify /> PRODUCTOS</Link>
+              {isadmin ? (
+                <Link className={location.pathname === "/admin" ? style.Active : ""} to="/admin"><FaKey />PANEL</Link>
+              ) : null}
+              {Auth.auth.id ? (
                 <>
-                  <Link onClick={handleClick} to='/perfil'><FaUser /> Perfil</Link>
-                  <Link onClick={() => { handlerSingOut(); handleClick(); }}><FaSignOutAlt />Cerrar Sesión</Link>
+                  <ToastContainer />
+                  <Link to='/perfil' className={location.pathname === "/perfil" ? style.Active : ""}><FaUser /> PERFIL</Link>
+                  <Link onClick={handlerSingOut}><FaSignOutAlt />Cerrar Sesión</Link>
                 </>
               ) : (
-                <Link to="/signin"><FaSignInAlt /> Iniciar sesión </Link>
-
+                <>
+                  <ToastContainer />
+                  <Link to="/login" className={location.pathname === "/login" ? style.Active : ""}><FaSignInAlt />INICIAR SESIÓN</Link>
+                </>
               )}
+
+              <a onClick={handelModocuro} style={{ color: "#fff" }}>
+                {!modoOscuro ? (
+
+
+                  <>
+
+                    <FaMoon className={style.oscuro} />
+                    <p style={{ color: "#fff" }}>Modo Oscuro </p>
+                  </>
+                ) : (
+                  <>
+
+                    <FaSun className={style.oscuro} />
+                    <p style={{ color: "#fff" }}>Modo Claro </p>
+                  </>
+
+                )}
+              </a>
 
             </motion.nav>
           ) : null}
         </AnimatePresence>
 
         {location.pathname !== '/cart' ? <Cart /> : null}
-      </header>
+      </header >
     </>
   );
 };

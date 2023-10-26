@@ -286,7 +286,7 @@ const AdminComponent = () => {
 
   useEffect(() => {
     if (Auth.auth.role !== 'Admin') {
-      navigate('/');
+      // navigate('/');
     }
   }, [Auth]);
 

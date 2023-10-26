@@ -28,6 +28,7 @@ const AuthProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
       setAuth({});
+      localStorage.removeItem('_id');
     }
   };
 

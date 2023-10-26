@@ -10,6 +10,7 @@ import Products from '../Main/Products';
 import EffectCardProduct from '../EffectCardProduct/EffectCardProduct';
 import ComprasUser from './ComprasUser';
 import axios from 'axios';
+import OrdenUser from './OrdenUser';
 
 const Perfil = () => {
   const { modoOscuro } = useContext(AuthContext)
@@ -70,6 +71,37 @@ const Perfil = () => {
       console.error(error);
     }
   };
+
+  const postPaypalOrden = async (compraId) => {
+    console.log(compraId)
+
+    if (!token) {
+      console.log("Token JWT no encontrado en localStorage");
+      // Puedes manejar esta situación, como redirigir al usuario al inicio de sesión.
+    }
+    try {
+      const response = await axios.post(
+        `https://tpibarbershop20231015224614.azurewebsites.net/Paypal/OrdenCompra/${compraId}`,
+        {},
+        config // Agrega el encabezado con el token JWT
+      );
+
+      const paypalUrl = response.data.links[1].href;
+      const popup = window.open(paypalUrl, '_blank', 'width=600, height=400');
+      if (popup) {
+        // Puedes agregar más acciones aquí si es necesario
+      } else {
+        // Si la ventana emergente se bloqueó, puedes mostrar un mensaje al usuario.
+        alert('La ventana emergente se bloqueó. Por favor, habilite las ventanas emergentes en su navegador.');
+      }
+
+      // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const postDeleteCompra = async (compraId) => {
     console.log(config);
     try {
@@ -84,6 +116,24 @@ const Perfil = () => {
         });
       }
       obtenerCompras();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const postDeleteOrden = async (compraId) => {
+    console.log(config);
+    try {
+      const response = await axios.delete(
+        `https://tpibarbershop20231015224614.azurewebsites.net/api/OrdenCompra/${compraId}`,
+        config // Aquí config ya contiene el encabezado 'Authorization'
+      );
+      if (response.status === 204) {
+        toast.success('Orden de Compra eliminada correctamente', {
+          position: 'top-right',
+          autoClose: 3000,
+        });
+      }
+      obtenerOrden();
     } catch (error) {
       console.error(error);
     }
@@ -109,8 +159,25 @@ const Perfil = () => {
       console.error(error);
     }
   };
+  const obtenerOrden = async () => {
+
+    // Realiza la solicitud GET con el token JWT
+    try {
+      const response = await axios.get(`https://tpibarbershop20231015224614.azurewebsites.net/api/OrdenCompra/usuario/${Auth.auth.id}`, config);
+      // console.log(response)
+      const ordenData = response.data.map((orden, index) => ({
+        ...orden,
+
+      }));
+      setOrden(ordenData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const [compras, setCompras] = useState([]);
+  const [orden, setOrden] = useState([]);
+
 
   const imagen = Auth.auth?.imagen?.url || "https://res.cloudinary.com/deh35rofi/image/upload/v1698237266/blank-profile-picture-973460_1280_rvjszn.jpg";
 
@@ -167,7 +234,7 @@ const Perfil = () => {
         </div>
 
         <ComprasUser postPaypalCompra={postPaypalCompra} postDeleteCompra={postDeleteCompra} obtenerCompras={obtenerCompras} compras={compras} setCompras={setCompras} />
-
+        <OrdenUser orden={orden} postPaypalOrden={postPaypalOrden} postDeleteOrden={postDeleteOrden} obtenerOrden={obtenerOrden} />
 
 
       </div>

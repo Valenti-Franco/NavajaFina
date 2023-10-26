@@ -152,7 +152,12 @@ const Signin = () => {
                         value="Crear Cuenta"
                         className={style.button}
                     />
+                    <div className={style.divcontainer}>
+                        <p>¿Ya tenes una cuenta?  <Link className={style.createa} to="/Login">Iniciar Sesión
+                        </Link> </p>
+                    </div>
                 </div>
+
                 <div >
 
                     <ToastContainer />

@@ -5,8 +5,8 @@ import axios from 'axios';
 import { AuthContext } from '../../context/Auth';
 import { Box, Button } from '@material-ui/core';
 import { DataGrid } from '@mui/x-data-grid';
-
-const ComprasUser = ({ postPaypalCompra, obtenerCompras, compras, setCompras, postDeleteCompra }) => {
+// { postPaypalCompra, obtenerCompras, compras, setCompras, postDeleteCompra }
+const OrdenUser = ({ obtenerOrden, orden, postDeleteOrden, postPaypalOrden }) => {
     const { modoOscuro } = useContext(AuthContext)
 
     const Auth = useContext(AuthContext);
@@ -16,7 +16,7 @@ const ComprasUser = ({ postPaypalCompra, obtenerCompras, compras, setCompras, po
     //     navigate('/');
     //   }
     // }, [Auth]);
-
+    console.log(orden)
 
     const productosColumns = [
         {
@@ -32,7 +32,7 @@ const ComprasUser = ({ postPaypalCompra, obtenerCompras, compras, setCompras, po
 
                                     <div>
                                         <MdAttachMoney className={style.btnMoney}
-                                            onClick={() => postPaypalCompra(params.row.id)}
+                                            onClick={() => postPaypalOrden(params.row.id)}
                                         />
                                     </div>
                                 </div>
@@ -54,7 +54,7 @@ const ComprasUser = ({ postPaypalCompra, obtenerCompras, compras, setCompras, po
                             {isConfirmado ? (
                                 <MdDelete
                                     className={style.btnDelete}
-                                    onClick={() => postDeleteCompra(params.row.id)}
+                                    onClick={() => postDeleteOrden(params.row.id)}
 
 
                                 />
@@ -101,30 +101,30 @@ const ComprasUser = ({ postPaypalCompra, obtenerCompras, compras, setCompras, po
             editable: false,
         },
 
-        {
-            field: 'imagen',
-            headerName: 'imagenes',
-            width: 350,
+        // {
+        //     field: 'imagen',
+        //     headerName: 'imagenes',
+        //     width: 350,
 
-            renderCell: (params) => {
-                if (params.row.producto.imagenes.length > 0) {
-                    return (
-                        <div>
-                            {params.row.producto.imagenes.map((imagen, index) => (
-                                <img
-                                    key={index}
-                                    src={imagen.url}
-                                    alt={`Imagen de ${params.row.nombre}`}
-                                    style={{ width: 50, height: 50, marginRight: 5 }}
-                                />
-                            ))}
-                        </div>
-                    );
-                } else {
-                    return <span>No imagen</span>;
-                }
-            },
-        },
+        //     renderCell: (params) => {
+        //         if (params.row.producto.imagenes.length > 0) {
+        //             return (
+        //                 <div>
+        //                     {params.row.producto.imagenes.map((imagen, index) => (
+        //                         <img
+        //                             key={index}
+        //                             src={imagen.url}
+        //                             alt={`Imagen de ${params.row.nombre}`}
+        //                             style={{ width: 50, height: 50, marginRight: 5 }}
+        //                         />
+        //                     ))}
+        //                 </div>
+        //             );
+        //         } else {
+        //             return <span>No imagen</span>;
+        //         }
+        //     },
+        // },
     ];
     const token = localStorage.getItem("_id");
     const config = {
@@ -137,8 +137,8 @@ const ComprasUser = ({ postPaypalCompra, obtenerCompras, compras, setCompras, po
 
     useEffect(() => {
 
-        obtenerCompras();
-        console.log(compras)
+        obtenerOrden();
+        // console.log(compras)
         // console.log(products)
 
     }, []);
@@ -146,11 +146,11 @@ const ComprasUser = ({ postPaypalCompra, obtenerCompras, compras, setCompras, po
     return (
 
         <div className={style.Container + (!modoOscuro ? ' ' + style.AdminContainerDark : '')}>
-            <h1 className={style.title}>Mis Compras <MdRefresh onClick={obtenerCompras} style={{ cursor: "pointer" }} /></h1>
+            <h1 className={style.title}>Mis Orden de Compra  <MdRefresh onClick={obtenerOrden} style={{ cursor: "pointer" }} /></h1>
             {/* <Button onClick={abrirCerrarModalInsertarProduct}>Insertar</Button> */}
             <Box sx={{ height: 400, width: '100%' }}>
                 <DataGrid
-                    rows={compras}
+                    rows={orden}
                     columns={productosColumns}
                     autoPageSize
                     // checkboxSelection
@@ -170,4 +170,4 @@ const ComprasUser = ({ postPaypalCompra, obtenerCompras, compras, setCompras, po
     )
 }
 
-export default ComprasUser
+export default OrdenUser
