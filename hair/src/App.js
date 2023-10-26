@@ -24,6 +24,7 @@ import AdminComponent from './components/admin/AdminComponent';
 
 import BuyForm from './components/BuyForm/BuyForm';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
+import VerificarToken from './components/Perfil/VerificarToken';
 
 
 
@@ -32,36 +33,38 @@ import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 
 
 function App() {
-  
+
   return (
     <CartProvider>
       <AuthProvider>
-      <Header />
-      <AnimatePresence>
-        <Routes>
-          <Route path='/' element={<Main />} />
-          <Route path='/products' element={
-            <FIlterProvider>
-              <ProductsPage  />
-            </FIlterProvider>
-          } />
-          <Route path='/login' element={<Login />} />
-          <Route path='/signin' element={<Signin />} />
-          <Route path='/products/:id' element={<ProductDetail  />} />
-          <Route path='/cart' element={<CartPage />} />
-          <Route path='/perfil' element={<Perfil />} />
-
-          <Route path='/admin' element={<AdminComponent />} />
-          <Route path='/BuyForm' element={<BuyForm />} />           
-          <Route path='*' element={<NotFoundPage/>} />
+        <Header />
+        <AnimatePresence>
+          <Routes>
+            <Route path='/' element={<Main />} />
+            <Route path='/products' element={
+              <FIlterProvider>
+                <ProductsPage />
+              </FIlterProvider>
+            } />
+            <Route path='/login' element={<Login />} />
+            <Route path='/signin' element={<Signin />} />
+            <Route path='/products/:id' element={<ProductDetail />} />
+            <Route path='/cart' element={<CartPage />} />
+            <Route path='/perfil' element={<Perfil />} />
+            <Route path='/VerificarToken/' element={<VerificarToken />} />
 
 
+            <Route path='/admin' element={<AdminComponent />} />
+            <Route path='/BuyForm' element={<BuyForm />} />
+            <Route path='*' element={<NotFoundPage />} />
 
 
 
-        </Routes>
-      </AnimatePresence>
-      <Footer />
+
+
+          </Routes>
+        </AnimatePresence>
+        <Footer />
       </AuthProvider>
     </CartProvider>
 

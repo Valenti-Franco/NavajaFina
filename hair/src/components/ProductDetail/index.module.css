@@ -47,8 +47,8 @@
     object-fit: contain;
 }
 .ProductDetail{
-    max-width: 1200px;
-    min-width: 760px;
+    width: 1200px;
+    
     display: flex;
     flex-direction: row;
     height: 70vh;
@@ -199,6 +199,21 @@
     background-color: rgb(107, 107, 107);
     color: #fff;
 }
+@media screen and  (max-width: 1200px) {
+    .ProductDetail{
+        width: 1000px;
+        
+        display: flex;
+        flex-direction: row;
+        height: 70vh;
+        background-color: rgb(201, 201, 201);
+        align-items: center;
+        justify-content: center;
+
+        
+        
+    }
+}
 @media screen and  (max-width: 767px) {
     .Lista
 {
@@ -245,6 +260,7 @@
         width: 100vw;
         overflow-x: auto;
         /* background: #fff; */
+        justify-content: center;
         
     }
     .imagesContainer{

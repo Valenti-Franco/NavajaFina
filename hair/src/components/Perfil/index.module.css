@@ -1,5 +1,5 @@
 .main{
-  height: 100vh;
+  height: auto;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -87,6 +87,30 @@
   
   
 }
+.btnDelete{
+
+  display: flex;
+  align-self: center;
+  padding: 5px 5px;
+
+  background-color: rgb(165, 47, 47);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btnMoney{
+cursor: pointer;
+display: flex;
+align-self: center;
+padding: 5px 5px;
+width: 100%;
+background-color: rgb(47, 165, 143);
+color: rgb(255, 255, 255);
+text-align: center;
+border-radius: 5px;
+font-size: 24px;
+}
 .btnEdit{
   color: #fff;
   background-color: red;
@@ -102,6 +126,14 @@
   display: flex;
   border-radius: 50%;
   text-align: center;
+  
+}
+.mainToken{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
 }
 .icontextProduct{
   width: 30%;
@@ -121,12 +153,36 @@
   margin: 20px;
   text-decoration: none;
 }
+.Container{
+  width: 100%;
+}
+
+.title{
+  text-align: center;
+ 
+}
+.AdminContainerDark {
+
+  -webkit-text-stroke: 1px white;
+    background-color: rgb(58, 58, 58) !important;
+}
 .icontextProduct:hover{
     
   background-color: #a1aef5;
   color: #303030;
   
 
+}
+
+.btnVolver{
+  padding: 10px;
+  text-decoration: none;
+  border: none;
+  font-size: 23px;
+  background: #5fb9d0;
+  cursor: pointer;
+  color: #fff;
+  text-align: center;
 }
 .mainDark{
   background-color: rgb(136, 136, 136);

@@ -151,7 +151,7 @@ const AdminComponent = () => {
       width: 350,
 
       renderCell: (params) => {
-        if (params.row.imagenes.length > 0) {
+        if (params.row.imagenes?.length > 0) {
           return (
             <div>
               {params.row.imagenes.map((imagen, index) => (
