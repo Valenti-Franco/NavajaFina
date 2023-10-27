@@ -36,6 +36,13 @@
   /* max-width: 400px; */
   
 }
+.btnDelete{
+  color: #fff;
+  padding: 5px;
+    background: #c51a1ad9;
+    border: 1px solid #000;
+    border-radius: 15px;
+}
 
 .cart  li {
   

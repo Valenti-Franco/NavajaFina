@@ -138,7 +138,7 @@ const ComprasUser = ({ postPaypalCompra, obtenerCompras, compras, setCompras, po
     useEffect(() => {
 
         obtenerCompras();
-        console.log(compras)
+        // console.log(compras)
         // console.log(products)
 
     }, []);

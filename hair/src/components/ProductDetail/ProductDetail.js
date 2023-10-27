@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import style from './index.module.css';
 import { SlideshowLightbox } from 'lightbox.js-react';
 import 'lightbox.js-react/dist/index.css';
@@ -39,6 +39,8 @@ const ProductDetail = ({ products }) => {
   const { modoOscuro } = useContext(AuthContext)
   const [cantidad, setCantidad] = useState(1)
   const [modalBuy, setModalBuy] = useState(false)
+  const navigate = useNavigate();
+
   const abrirCerrarModalBuy = () => {
 
     setModalBuy(!modalBuy);
@@ -121,7 +123,7 @@ const ProductDetail = ({ products }) => {
     return <div className={style.mainNotFound}>Producto no encontrado</div>;
   }
 
-  const { nombre, precio, descripcion } = product;
+  const { nombre, precio, descripcion, stock } = product;
 
   const openLightbox = (image) => {
     setSelectedImage(image);
@@ -161,10 +163,20 @@ const ProductDetail = ({ products }) => {
       });
       abrirCerrarModalBuy(); // Reutiliza el product
     } catch (error) {
-      toast.error('Debes Iniciar Sesión para Enviar Estrellas', {
-        position: 'top-right', // Puedes personalizar la posición
-        autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
-      });
+      abrirCerrarModalBuy()
+      if (error.response.status === 401) {
+        toast.error("Debes Iniciar Sesión para comprar", {
+          position: 'top-right', // Puedes personalizar la posición
+          autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
+        });
+        navigate("/login")
+      } else {
+        toast.error(error.response.data, {
+          position: 'top-right', // Puedes personalizar la posición
+          autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
+        });
+      }
+
       console.error(error);
     }
   };
@@ -205,22 +217,28 @@ const ProductDetail = ({ products }) => {
                   <h2 className={style.name}>{nombre}</h2>
                   <p className={style.price}>Precio: <b>${precio}</b> </p>
                   <p className={style.description}>Descripción: {descripcion}</p>
-                  <div className={style.containerbtn}>
-                    <BtnCart product={product} />
+                  <p className={style.description}>Stock: {stock}</p>
+
+                  {Auth.auth?.role !== "Admin" && Auth.auth?.role !== "Editor" ? (
+                    <>
+
+                      <div className={style.containerbtn}>
+                        <BtnCart product={product} />
 
 
 
-                    <ComparYa abrirCerrarModalBuy={abrirCerrarModalBuy} />
+                        <ComparYa abrirCerrarModalBuy={abrirCerrarModalBuy} />
 
-                  </div>
+                      </div>
 
 
-                  <section className={style.sectionStar}>
-                    <h3>Agregar Estrellas</h3>
+                      <section className={style.sectionStar}>
+                        <h3>Agregar Estrellas</h3>
 
-                    <PointsAdd puntoUsuario={puntoUsuario} handlerPointPut={handlerPointPut} handlerPointPost={handlerPointPost} />
-                  </section>
-
+                        <PointsAdd puntoUsuario={puntoUsuario} handlerPointPut={handlerPointPut} handlerPointPost={handlerPointPost} />
+                      </section>
+                    </>
+                  ) : (null)}
                 </div>
                 <div className={style.containerPuntosUsers}>
 
@@ -250,7 +268,7 @@ const ProductDetail = ({ products }) => {
 
 
       </div>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
 
       <Modal
         open={modalBuy}

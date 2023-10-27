@@ -201,8 +201,10 @@ const Header = () => {
             </motion.nav>
           ) : null}
         </AnimatePresence>
+        {Auth.auth?.role !== "Admin" && Auth.auth?.role !== "Editor" ? (
 
-        {location.pathname !== '/cart' ? <Cart /> : null}
+          location.pathname !== '/cart' ? <Cart /> : null
+        ) : (null)}
       </header >
     </>
   );

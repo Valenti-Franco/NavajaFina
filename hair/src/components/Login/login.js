@@ -45,8 +45,10 @@ const Login = () => {
       });
 
 
+      localStorage.removeItem('_id'); // Elimina el _id del almacenamiento local
 
       localStorage.setItem('_id', data);
+      console.log(data)
 
       navigate('/');
 

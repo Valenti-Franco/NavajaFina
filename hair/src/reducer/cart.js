@@ -34,7 +34,7 @@ export const cartReducer = (state, action) => {
         case 'REMOVE_TO_CART': {
             const { id } = actionPayload
             const productInCart = state.findIndex(item => item.id === id)
-            console.log(productInCart)
+            // console.log(productInCart)
 
             if (state[productInCart].quantity > 1) {
                 const newState = structuredClone(state)

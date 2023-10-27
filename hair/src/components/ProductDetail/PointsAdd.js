@@ -35,7 +35,7 @@ const PointsAdd = ({ puntoUsuario, handlerPointPost, handlerPointPut }) => {
     };
 
     const handleStarClick = (index) => {
-        console.log(starStates[0] === true)
+        // console.log(starStates[0] === true)
         if (starStates[0] === true && puntoUsuario?.id >= 0) {
             handlerPointPut(index, puntoUsuario?.id);
 
@@ -49,6 +49,8 @@ const PointsAdd = ({ puntoUsuario, handlerPointPost, handlerPointPut }) => {
         <div style={{ display: "flex", flexDirection: "row" }}>
             {[1, 2, 3, 4, 5].map((index) => (
                 <motion.div
+                    key={"123" + index}
+
                     whileHover={{ scale: 1.15 }}
                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >

@@ -11,7 +11,7 @@ import { MdDelete } from 'react-icons/md';
 
 const BodyProductImg = ({ idProducto, productEdit, productImgPost, productPost, DeleteImgProduct, abrirCerrarModalImgProduct }) => {
 
-    console.log(productEdit)
+    // console.log(productEdit)
 
     return (
         <div div className={style.modal} >

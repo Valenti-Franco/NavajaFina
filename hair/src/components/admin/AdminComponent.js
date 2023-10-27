@@ -13,6 +13,8 @@ import BodyProductEdit from './BodyProductEdit';
 import { ToastContainer, toast } from 'react-toastify';
 import BodyDeleteProduct from './BodyDeleteProduct';
 import BodyProductImg from './BodyProductImg';
+import BodyDeleteUser from './BodyDeleteUser';
+import BodyUsuarioEdit from './BodyUsuarioEdit';
 // import config from '../../utils/Config';
 
 
@@ -27,27 +29,7 @@ const config = {
 
 
 
-const usuariosColumns = [
-  { field: 'id', headerName: 'ID', width: 90 },
-  {
-    field: 'nombre',
-    headerName: 'Nombre',
-    width: 150,
-    editable: false,
-  },
-  {
-    field: 'email',
-    headerName: 'Email',
-    width: 200,
-    editable: false,
-  },
-  {
-    field: 'role',
-    headerName: 'Rol',
-    width: 120,
-    editable: false,
-  },
-];
+
 
 const categoryColumns = [
   { field: 'id', headerName: 'ID', width: 90 },
@@ -170,12 +152,54 @@ const AdminComponent = () => {
       },
     },
   ];
+  const usuariosColumns = [
+    {
+      field: 'Acciones',
+      renderCell: (params) => {
 
+        return (
+          <div className={style.acciones}>
+            <div>
+              <MdDelete
+                className={style.btnDelete}
+                onClick={() => abrirCerrarModalDeleteUsuario(params.row.id)}
+              />
+            </div>
+            <div>
+              <MdEdit className={style.btnEdit}
+                onClick={() => abrirCerrarModalEditUsuario(params.row.id)}
+              />
+            </div>
+          </div>
+        );
+      }
+    },
+    { field: 'id', headerName: 'ID', width: 90 },
+
+    {
+      field: 'nombre',
+      headerName: 'Nombre',
+      width: 150,
+      editable: false,
+    },
+    {
+      field: 'email',
+      headerName: 'Email',
+      width: 200,
+      editable: false,
+    },
+    {
+      field: 'role',
+      headerName: 'Rol',
+      width: 120,
+      editable: false,
+    },
+  ];
 
 
   const { modoOscuro } = useContext(AuthContext)
 
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
   const [category, setCategory] = useState([]);
   const [subcategory, setSubCategory] = useState([]);
 
@@ -183,15 +207,29 @@ const AdminComponent = () => {
 
   //CONST PRODUCT
   const [products, setProducts] = useState([]);
+  const [usuario, setUsuarios] = useState([]);
+
 
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedUsuario, setSelectedUsuario] = useState(null);
+
+
+
   const [modalInsertarProduct, setModalInsertarProduct] = useState(false);
 
   const [modalEditImgProduct, setModalEditImgProduct] = useState(false);
 
   const [modalEditProduct, setModalEditProduct] = useState(false);
+  const [modalEditUsuario, setModalEditUsuario] = useState(false);
+
+
   const [modalDeleteProduct, setModalDeleteProduct] = useState(false);
+  const [modalDeleteUsuario, setModalDeleteUsuario] = useState(false);
+
+
   const [idProducto, setIdProducto] = useState("");
+  const [idUsuario, setIdUsuario] = useState("");
+
 
   const [productEdit, setProductEdit] = useState({
     nombre: '',
@@ -199,6 +237,10 @@ const AdminComponent = () => {
     descripcion: '',
     stock: '',
   });
+  const [usuarioEdit, setUsuarioEdit] = useState({
+    role: ''
+  });
+
 
   const [productEditImg, setProductEditImg] = useState({
     imagenes: []
@@ -215,7 +257,15 @@ const AdminComponent = () => {
 
   })
 
+  const handleChangeUsuarioEdit = e => {
 
+    const { name, value } = e.target;
+    // console.log(name, value);
+    setUsuarioEdit(prevState => ({
+      ...prevState,
+      [name]: value
+    }))
+  }
   const handleChangeProductEdit = e => {
 
     const { name, value } = e.target;
@@ -244,6 +294,35 @@ const AdminComponent = () => {
     setIdProducto(productId)
     // Si hay un elemento seleccionado, establece modalEditProduct en función de sus valores
 
+  };
+  const abrirCerrarModalDeleteUsuario = (usuarioId) => {
+
+    setModalDeleteUsuario(!modalDeleteUsuario);
+
+    setIdUsuario(usuarioId)
+    // Si hay un elemento seleccionado, establece modalEditProduct en función de sus valores
+
+  };
+
+
+  const abrirCerrarModalEditUsuario = (usuarioId) => {
+
+    setModalEditUsuario(!modalEditUsuario);
+    setSelectedUsuario(usuarioId);
+    setIdUsuario(usuarioId)
+    // Si hay un elemento seleccionado, establece modalEditusuario en función de sus valores
+    if (usuarioId) {
+      const selectedUsuarioData = usuario.find((usuario) => usuario.id === usuarioId);
+      // console.log(usuario)
+
+      // console.log(selectedusuarioData)
+      if (selectedUsuarioData) {
+        setUsuarioEdit({
+          role: selectedUsuarioData.role,
+
+        });
+      }
+    }
   };
   const abrirCerrarModalEditProduct = (productId) => {
 
@@ -285,13 +364,13 @@ const AdminComponent = () => {
   const Auth = useContext(AuthContext);
 
   useEffect(() => {
-    if (Auth.auth.role !== 'Admin') {
-      // navigate('/');
+    if (Auth.auth.role !== 'Admin' && Auth.auth?.role !== "Editor") {
+      navigate('/');
     }
   }, [Auth]);
 
   useEffect(() => {
-    console.log(config)
+    // console.log(config)
     obtenerUsuarios();
     obtenerProductos();
     obtenerCategoria();
@@ -316,13 +395,14 @@ const AdminComponent = () => {
     try {
       const response = await axios.get('https://tpibarbershop20231015224614.azurewebsites.net/api/Usuarios/Admin', config);
 
-      setUsers(response.data);
+      setUsuarios(response.data)
 
     } catch (error) {
 
+      if (Auth.auth.role !== 'Admin' && Auth.auth?.role !== "Editor") {
 
-      navigate('/');
-
+        navigate('/');
+      }
 
       console.error(error);
     }
@@ -361,11 +441,8 @@ const AdminComponent = () => {
     try {
       const response = await axios.get('https://tpibarbershop20231015224614.azurewebsites.net/api/productos', config);
       // console.log(response)
-      const productData = response.data.map((product, index) => ({
-        ...product,
 
-      }));
-      setProducts(productData);
+      setProducts(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -388,6 +465,54 @@ const AdminComponent = () => {
       // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
       obtenerProductos(); // Reutiliza la función que ya tienes para obtener productos
       abrirCerrarModalInsertarProduct(); // Reutiliza el product
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const usuarioPutAdmin = async () => {
+
+    try {
+      const response = await axios.put(
+        `https://tpibarbershop20231015224614.azurewebsites.net/api/Usuarios/CrearAdmin/${idUsuario}`,
+        {
+
+        },
+        config // Agrega el encabezado con el token JWT
+      );
+      if (response.status === 204) {
+        toast.success('Usuario Modificado Con Rol Admin!', {
+          position: 'top-right', // Puedes personalizar la posición
+          autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
+        });
+      }
+      // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
+      obtenerUsuarios(); // Reutiliza la función que ya tienes para obtener productos
+      abrirCerrarModalEditUsuario(); // Reutiliza el product
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const usuarioPutEditor = async () => {
+
+    try {
+      const response = await axios.put(
+        `https://tpibarbershop20231015224614.azurewebsites.net/api/Usuarios/CrearEditor/${idUsuario}`,
+        {
+
+        },
+        config // Agrega el encabezado con el token JWT
+      );
+      if (response.status === 204) {
+        toast.success('Usuario Modificado Con Rol Editor!', {
+          position: 'top-right', // Puedes personalizar la posición
+          autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
+        });
+      }
+      // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
+      obtenerUsuarios(); // Reutiliza la función que ya tienes para obtener productos
+      abrirCerrarModalEditUsuario(); // Reutiliza el product
+
     } catch (error) {
       console.error(error);
     }
@@ -419,6 +544,27 @@ const AdminComponent = () => {
       console.error(error);
     }
   };
+
+  const usuarioDelete = async () => {
+    try {
+      const response = await axios.delete(
+        `https://tpibarbershop20231015224614.azurewebsites.net/api/Usuarios/${idUsuario}/Admin`,
+        config // Agrega el encabezado con el token JWT
+      );
+      if (response.status === 204) {
+        toast.success('Usuario eliminado correctamente', {
+          position: 'top-right', // Puedes personalizar la posición
+          autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
+        });
+      }
+      // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
+      obtenerUsuarios(); // Reutiliza la función que ya tienes para obtener productos
+      abrirCerrarModalDeleteUsuario(); // Reutiliza el product
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const productDelete = async () => {
     try {
       const response = await axios.delete(
@@ -426,7 +572,7 @@ const AdminComponent = () => {
         config // Agrega el encabezado con el token JWT
       );
       if (response.status === 204) {
-        toast.success('Imagen eliminada correctamente', {
+        toast.success('Producto eliminado correctamente', {
           position: 'top-right', // Puedes personalizar la posición
           autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
         });
@@ -469,7 +615,7 @@ const AdminComponent = () => {
 
       reader.onload = async () => {
         const base64 = reader.result.split(',')[1]; // Remove the prefix
-        console.log(base64);
+        // console.log(base64);
         try {
           const response = await axios.post(
             'https://tpibarbershop20231015224614.azurewebsites.net/api/Imagenes/Producto/Admin',
@@ -511,19 +657,26 @@ const AdminComponent = () => {
   return (
     <div className={style.main + (!modoOscuro ? ' ' + style.mainDark : '')}>
       <div className={style.AdminContainer + (!modoOscuro ? ' ' + style.AdminContainerDark : '')}>
-        <div className={style.Container}>
-          <h1 className={style.title}>USUARIOS</h1>
-          <Box sx={{ height: 400, width: '100%' }}>
-            <DataGrid
-              rows={users}
-              columns={usuariosColumns}
-              autoPageSize
-              checkboxSelection
-              disableColumnSelector
-              disableColumnMenu
-            />
-          </Box>
-        </div>
+        {Auth.auth?.role !== "Editor" ? (
+          <>
+
+            <div className={style.Container}>
+
+              <h1 className={style.title}>USUARIOS</h1>
+              <Box sx={{ height: 400, width: '100%' }}>
+                <DataGrid
+                  rows={usuario}
+                  columns={usuariosColumns}
+                  autoPageSize
+                  // checkboxSelection
+                  disableColumnSelector
+                  disableColumnMenu
+                />
+              </Box>
+            </div>
+          </>
+        ) : (null)}
+
 
         <div className={style.Container}>
           <h1 className={style.title}>PRODUCTOS</h1>
@@ -633,8 +786,37 @@ const AdminComponent = () => {
 
         />
       </Modal>
+
+      <Modal
+        open={modalDeleteUsuario}
+        OnClose={abrirCerrarModalDeleteUsuario}
+      >
+        <BodyDeleteUser
+          usuarioDelete={usuarioDelete}
+          usuarioId={idUsuario}
+          abrirCerrarModalDeleteUsuario={abrirCerrarModalDeleteUsuario}
+
+        />
+      </Modal>
+
+      <Modal
+        open={modalEditUsuario}
+        OnClose={abrirCerrarModalEditUsuario}
+      >
+        <BodyUsuarioEdit
+          handleChangeUsuario={handleChangeUsuarioEdit}
+          abrirCerrarModalUsuario={abrirCerrarModalEditUsuario}
+          usuarioEdit={usuarioEdit}
+          usuarioPutEditor={usuarioPutEditor}
+          usuarioPutAdmin={usuarioPutAdmin}
+
+          idUsuario={idUsuario}
+          abrirCerrarModalEditUsuario={abrirCerrarModalEditUsuario}
+        />
+      </Modal>
+
       <ToastContainer />
-    </div>
+    </div >
 
   );
 };

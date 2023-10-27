@@ -173,7 +173,33 @@ font-size: 24px;
   
 
 }
-
+.AdminStyle{
+  height: 70VH;
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto !important;
+}
+.AdminStyleh1{
+  width: -webkit-fill-available;
+}
+.editImg{
+  position: absolute;
+    color: #fff;
+    background: #7d7d7da6;
+    padding: 5px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    font-size: 32px;
+    line-height: 32px;
+    cursor: pointer;
+}
+.containerImgEdit{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .btnVolver{
   padding: 10px;
   text-decoration: none;
@@ -193,4 +219,33 @@ font-size: 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+
+
+@media screen and  (max-width: 1023px) {
+  .containerPerfil{ 
+  width: 100%;
+  background-color: #dadada;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+}
+
+@media screen and  (max-width: 767px) {
+  .divContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+}
+@media screen and (max-width: 480px) {
+  /* Estilos para dispositivos móviles */
+ 
 }

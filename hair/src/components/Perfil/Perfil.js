@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import style from './index.module.css';
 import { FaEdit, FaRegEye, FaUser } from 'react-icons/fa';
 import { motion } from 'framer-motion';
@@ -11,6 +11,8 @@ import EffectCardProduct from '../EffectCardProduct/EffectCardProduct';
 import ComprasUser from './ComprasUser';
 import axios from 'axios';
 import OrdenUser from './OrdenUser';
+import { MdEdit, MdRefresh } from 'react-icons/md';
+import { Avatar } from '@mui/material';
 
 const Perfil = () => {
   const { modoOscuro } = useContext(AuthContext)
@@ -43,7 +45,7 @@ const Perfil = () => {
 
 
   const postPaypalCompra = async (compraId) => {
-    console.log(compraId)
+    // console.log(compraId)
 
     if (!token) {
       console.log("Token JWT no encontrado en localStorage");
@@ -73,7 +75,7 @@ const Perfil = () => {
   };
 
   const postPaypalOrden = async (compraId) => {
-    console.log(compraId)
+    // console.log(compraId)
 
     if (!token) {
       console.log("Token JWT no encontrado en localStorage");
@@ -103,7 +105,7 @@ const Perfil = () => {
   };
 
   const postDeleteCompra = async (compraId) => {
-    console.log(config);
+    // console.log(config);
     try {
       const response = await axios.delete(
         `https://tpibarbershop20231015224614.azurewebsites.net/api/Compras/${compraId}`,
@@ -121,7 +123,7 @@ const Perfil = () => {
     }
   };
   const postDeleteOrden = async (compraId) => {
-    console.log(config);
+    // console.log(config);
     try {
       const response = await axios.delete(
         `https://tpibarbershop20231015224614.azurewebsites.net/api/OrdenCompra/${compraId}`,
@@ -177,9 +179,16 @@ const Perfil = () => {
 
   const [compras, setCompras] = useState([]);
   const [orden, setOrden] = useState([]);
+  const [hoverEdit, setHoverEdit] = useState(false);
 
+  const handleEditImg = () => {
 
-  const imagen = Auth.auth?.imagen?.url || "https://res.cloudinary.com/deh35rofi/image/upload/v1698237266/blank-profile-picture-973460_1280_rvjszn.jpg";
+    setHoverEdit(!hoverEdit)
+  }
+
+  const imagen1 = Auth.auth?.imagen?.url || "https://res.cloudinary.com/deh35rofi/image/upload/v1698237266/blank-profile-picture-973460_1280_rvjszn.jpg";
+
+  const [imagen, setSetImagen] = useState(imagen1);
 
   const handleInputChange = (event) => {
     setEditedValue(event.target.value);
@@ -189,20 +198,98 @@ const Perfil = () => {
     setEditedValue(Auth.auth[index]);
     setEditIndex(index);
   };
+  const usuarioImgPost = async (archivo) => {
+    try {
+      var reader = new FileReader();
 
+      reader.readAsDataURL(archivo);
+
+      reader.onload = async () => {
+        const base64 = reader.result.split(',')[1]; // Remove the prefix
+        // console.log(base64);
+        try {
+          const response = await axios.post(
+            'https://tpibarbershop20231015224614.azurewebsites.net/api/Imagenes/Usuario',
+            {
+              usuarioId: Auth.auth.id, // Asegúrate de que idProducto sea correcto
+              base64: base64,
+            },
+            config // Agrega el encabezado con el token JWT
+          );
+
+          if (response.status === 200) {
+            toast.success('Imagen Añadida correctamente', {
+              position: 'top-right',
+              autoClose: 3000,
+            });
+            setSetImagen(response.data.url)
+            // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
+            // obtenerProductos(); // Asegúrate de que esta función sea válida y funcional
+          }
+        } catch (error) {
+
+          toast.error("El tamaño del archivo Base64 excede el límite de 1 MB.", {
+            position: 'top-right',
+            autoClose: 3000,
+          });
+
+        }
+      };
+    } catch (error) {
+      console.error(error);
+      toast.error("ERROR", {
+        position: 'top-right',
+        autoClose: 3000,
+      });
+    }
+  };
+  const inputRef = useRef();
+
+  const handleDivClick = () => {
+    inputRef.current.click();
+  };
 
   return (
     <motion.div
+
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { duration: 1 } }}
       exit={{ opacity: 0 }}
       className={style.main + (!modoOscuro ? ' ' + style.mainDark : '')}>
 
       <div className={style.containerPerfil + (!modoOscuro ? ' ' + style.containerPerfilDark : '')}>
-        <h1 className={style.title}>PERFIL</h1>
-        <div className={style.divContainer}>
+        <h1 className={style.title}>PERFIL </h1>
+        <div className={style.divContainer + " " + (Auth.auth?.role !== "Admin" && Auth.auth?.role !== "Editor" ? " " : style.AdminStyle)}>
           {/* <FaUser  /> */}
-          <img className={style.User + (!modoOscuro ? ' ' + style.UserDark : '')} src={imagen !== undefined ? imagen : "https://res.cloudinary.com/deh35rofi/image/upload/v1698237266/blank-profile-picture-973460_1280_rvjszn.jpg"} />
+          <div
+            onMouseEnter={handleEditImg}
+            onMouseLeave={handleEditImg}
+
+            className={style.containerImgEdit}>
+            {hoverEdit ? (
+              <motion.div
+                onClick={handleDivClick}
+                whileHover={{ scale: 1.15 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                className={style.editImg}><MdEdit /></motion.div>
+            ) : null}
+            <input
+              ref={inputRef}
+              type="file"
+              onChange={(e) => usuarioImgPost(e.target.files[0])}
+              accept="image/*"
+              style={{ display: 'none' }}
+              id="image-input"
+            />
+
+            <Avatar
+              alt={Auth.auth.nombre}
+              src={imagen !== undefined ? imagen : "https://res.cloudinary.com/deh35rofi/image/upload/v1698237266/blank-profile-picture-973460_1280_rvjszn.jpg"}
+              sx={{ width: 256, height: 256 }}
+
+            />
+            {/* <img className={style.User + (!modoOscuro ? ' ' + style.UserDark : '')} src={imagen !== undefined ? imagen : "https://res.cloudinary.com/deh35rofi/image/upload/v1698237266/blank-profile-picture-973460_1280_rvjszn.jpg"} /> */}
+          </div>
           <section className={style.sectionUser + (!modoOscuro ? ' ' + style.sectionUserDark : '')}>
             <label>
               <p>Usuario:</p>
@@ -232,15 +319,17 @@ const Perfil = () => {
             </label>
           </section>
         </div>
-
-        <ComprasUser postPaypalCompra={postPaypalCompra} postDeleteCompra={postDeleteCompra} obtenerCompras={obtenerCompras} compras={compras} setCompras={setCompras} />
-        <OrdenUser orden={orden} postPaypalOrden={postPaypalOrden} postDeleteOrden={postDeleteOrden} obtenerOrden={obtenerOrden} />
-
+        {Auth.auth?.role !== "Admin" && Auth.auth?.role !== "Editor" ? (
+          <>
+            <ComprasUser postPaypalCompra={postPaypalCompra} postDeleteCompra={postDeleteCompra} obtenerCompras={obtenerCompras} compras={compras} setCompras={setCompras} />
+            <OrdenUser orden={orden} postPaypalOrden={postPaypalOrden} postDeleteOrden={postDeleteOrden} obtenerOrden={obtenerOrden} />
+          </>
+        ) : (<h1 className={style.AdminStyleh1}>Mienbro del Personal de NavajaFIna como {Auth.auth?.role}</h1>)}
 
       </div>
       <ToastContainer />
 
-    </motion.div>
+    </motion.div >
   );
 };
 

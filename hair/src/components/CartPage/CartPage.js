@@ -4,10 +4,11 @@ import CartItem from '../Cart/CartItem';
 import style from './index.module.css'
 import { Scrollbars } from 'react-custom-scrollbars';
 import { AuthContext } from '../../context/Auth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { Box, CircularProgress } from '@material-ui/core';
+import { MdDelete } from 'react-icons/md';
 
 const CartPage = () => {
     const token = localStorage.getItem("_id");
@@ -21,6 +22,8 @@ const CartPage = () => {
     const total = cart.reduce((a, b) => a + b.precio * b.quantity, 0);
     const { modoOscuro } = useContext(AuthContext)
     const { auth } = useContext(AuthContext)
+    const navigate = useNavigate();
+
 
     const [isLoading, setIsLoading] = useState(false)
 
@@ -59,13 +62,25 @@ const CartPage = () => {
     };
 
     const handlerCrearDetalle = async (item, idOrden) => {
-        console.log(item)
+        // console.log(item)
         try {
             const response = await axios.post(
                 `https://tpibarbershop20231015224614.azurewebsites.net/api/DetalleCompra/${idOrden}/${item.id}/${item.quantity}`, {}, config
             );
-            console.log(response)
+            // console.log(response)
         } catch (error) {
+            if (error.response.status === 401) {
+                toast.error("Debes Iniciar Sesión para comprar", {
+                    position: 'top-right', // Puedes personalizar la posición
+                    autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
+                });
+                navigate("/login")
+            } else {
+                toast.error(error.response.data, {
+                    position: 'top-right', // Puedes personalizar la posición
+                    autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
+                });
+            }
             console.error(error);
             // Manejar el error al crear el detalle
         }
@@ -78,7 +93,7 @@ const CartPage = () => {
                     <h3>VACIO</h3>
 
                 </> */}
-            : <>
+            <>
                 <div>
                     <Scrollbars style={{ width: 800, height: 800 }}>
                         <ul className={style.containerItems + (!modoOscuro ? ' ' + style.itemsDark : '')}>
@@ -98,7 +113,7 @@ const CartPage = () => {
 
                     </Scrollbars>
                     {cart.length !== 0 ? (
-                        <button onClick={clearCart}>BORRAR  CARRITO </button>
+                        <button className={style.btnDelete} onClick={clearCart}>BORRAR  CARRITO <MdDelete /> </button>
                     ) : null}
                 </div>
                 <div className={style.total}>

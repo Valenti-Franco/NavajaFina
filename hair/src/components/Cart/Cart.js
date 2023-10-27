@@ -8,6 +8,7 @@ import { useCart } from '../../hooks/useCart';
 import { Link } from 'react-router-dom';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { AnimatePresence, motion } from 'framer-motion';
+import { MdDelete } from 'react-icons/md';
 
 const Cart = () => {
   const cartCheckId = useId();
@@ -23,7 +24,7 @@ const Cart = () => {
   }
   useEffect(() => {
     setNumberCart(cart.length);
-    setTotal(cart.reduce((a, b) => a + b.price * b.quantity, 0))
+    setTotal(cart.reduce((a, b) => a + b.precio * b.quantity, 0))
   }, [cart]);
 
   // console.log(cart)
@@ -99,10 +100,13 @@ const Cart = () => {
                 </Scrollbars>
                 <div className={style.total}>
                   <p>Total: ${total}</p>
-                  <button onClick={clearCart}>Clear</button>
-                  <button><Link to="/cart">
-                    VER CARRITO
-                  </Link></button>
+                  <div className={style.containerbtnComprarCarrito}>
+                    <button className={style.btnClear} onClick={clearCart}><MdDelete /></button>
+                    <Link className={style.btnComprarCarrito} to="/cart">
+                      IR A PAGAR
+                    </Link>
+                  </div>
+
 
                 </div>
               </>
@@ -113,7 +117,7 @@ const Cart = () => {
 
 
         ) : null}
-      </AnimatePresence>
+      </AnimatePresence >
     </>
   )
 }

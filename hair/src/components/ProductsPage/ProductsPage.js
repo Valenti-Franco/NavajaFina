@@ -9,6 +9,7 @@ import Filters from '../Filters/Filters';
 import { FilterContext } from '../../context/filters';
 import axios from 'axios';
 import { AuthContext } from '../../context/Auth';
+import ContentLoader from 'react-content-loader';
 const ProductsPage = () => {
   const [listView, setListView] = useState("grid")
   const [products, setProducts] = useState([]);
@@ -32,9 +33,11 @@ const ProductsPage = () => {
   useEffect(() => {
     obtenerProductos();
   }, []);
+  const [isLoading, setIsLoading] = useState(false)
 
   const obtenerProductos = async (limit) => {
     try {
+      setIsLoading(true)
       const response = await axios.get(`https://tpibarbershop20231015224614.azurewebsites.net/api/Productos`, {
         params: { limit: limit }
       });
@@ -42,6 +45,8 @@ const ProductsPage = () => {
       const productData = response.data;
       const productsArray = productData;
       setProducts(productsArray);
+      setIsLoading(false)
+
     } catch (error) {
       console.error(error);
     }
@@ -90,7 +95,7 @@ const ProductsPage = () => {
       )
     })
   }
-  console.log(products)
+  // console.log(products)
   const filteredProducts = filterProducts(products)
   return (
     <motion.div
@@ -133,31 +138,94 @@ const ProductsPage = () => {
           <Scrollbars style={{ height: '100vh' }}>
 
             <div className={(listView === 'grid' ? style.sliderGroup : style.sliderGroupList) + (!modoOscuro ? ' ' + style.mainDark : '')}>
-              {filteredProducts.length > 0 ? (
+              {isLoading ? (
 
 
-                filteredProducts.map((product) => (
+                <>
+                  <ContentLoader
+                    speed={1}
+                    width={400}
+                    height={460}
+                    viewBox="0 0 400 460"
+                    backgroundColor="#dfdddd"
+                    foregroundColor="#ffffff"
 
-                  <div
-                    className={style.productContainer}
-
-                    tabIndex={0}
-                    key={product._id + product.name}
                   >
-                    <ProductCard listView={listView} setListView={setListView} product={product} />
-                  </div>
+                    <rect x="3" y="435" rx="2" ry="2" width="188" height="22" />
+                    <rect x="-2" y="22" rx="2" ry="2" width="399" height="24" />
+                    <rect x="-1" y="49" rx="2" ry="2" width="400" height="384" />
+                    <rect x="197" y="435" rx="0" ry="0" width="201" height="21" />
+                  </ContentLoader>
+                  <ContentLoader
+                    speed={1}
+                    width={400}
+                    height={460}
+                    viewBox="0 0 400 460"
+                    backgroundColor="#dfdddd"
+                    foregroundColor="#ffffff"
 
-                ))
+                  >
+                    <rect x="3" y="435" rx="2" ry="2" width="188" height="22" />
+                    <rect x="-2" y="22" rx="2" ry="2" width="399" height="24" />
+                    <rect x="-1" y="49" rx="2" ry="2" width="400" height="384" />
+                    <rect x="197" y="435" rx="0" ry="0" width="201" height="21" />
+                  </ContentLoader>
+                  <ContentLoader
+                    speed={1}
+                    width={400}
+                    height={460}
+                    viewBox="0 0 400 460"
+                    backgroundColor="#dfdddd"
+                    foregroundColor="#ffffff"
+
+                  >
+                    <rect x="3" y="435" rx="2" ry="2" width="188" height="22" />
+                    <rect x="-2" y="22" rx="2" ry="2" width="399" height="24" />
+                    <rect x="-1" y="49" rx="2" ry="2" width="400" height="384" />
+                    <rect x="197" y="435" rx="0" ry="0" width="201" height="21" />
+                  </ContentLoader>
+                  <ContentLoader
+                    speed={1}
+                    width={400}
+                    height={460}
+                    viewBox="0 0 400 460"
+                    backgroundColor="#dfdddd"
+                    foregroundColor="#ffffff"
+
+                  >
+                    <rect x="3" y="435" rx="2" ry="2" width="188" height="22" />
+                    <rect x="-2" y="22" rx="2" ry="2" width="399" height="24" />
+                    <rect x="-1" y="49" rx="2" ry="2" width="400" height="384" />
+                    <rect x="197" y="435" rx="0" ry="0" width="201" height="21" />
+                  </ContentLoader>
+
+                </>
               ) : (
-                <p>No hay productos disponibles</p>
-              )}
+                filteredProducts.length > 0 ? (
 
+
+                  filteredProducts.map((product, index) => (
+
+                    <div
+                      className={style.productContainer}
+
+                      tabIndex={0}
+                      key={product.id}
+                    >
+                      <ProductCard key={index + product.nombre} listView={listView} setListView={setListView} product={product} />
+                    </div>
+
+                  ))
+                ) : (
+                  <p>No hay productos disponibles</p>
+                )
+              )}
             </div>
           </Scrollbars>
         </div>
 
-      </div>
-    </motion.div>
+      </div >
+    </motion.div >
   )
 }
 

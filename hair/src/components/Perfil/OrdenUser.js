@@ -16,7 +16,7 @@ const OrdenUser = ({ obtenerOrden, orden, postDeleteOrden, postPaypalOrden }) =>
     //     navigate('/');
     //   }
     // }, [Auth]);
-    console.log(orden)
+    // console.log(orden)
 
     const productosColumns = [
         {

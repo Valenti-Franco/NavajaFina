@@ -56,7 +56,7 @@ const CartItem = ({ id, imagenes, precio, nombre, quantity, addToCart, removeToC
             </div>
             <footer>
                 <small >
-                    Qty: {quantity}
+                    Cantidad: {quantity}
                 </small>
                 <button onClick={addToCart}><MdAdd /></button>
                 <button onClick={removeToCart}><MdRemove /></button>
