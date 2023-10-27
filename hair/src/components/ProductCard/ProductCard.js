@@ -29,7 +29,7 @@ const ProductCard = ({ product, setListView, listView }) => {
       firstImageUrls.push(imagesrc.url);
     }
   }
-
+  console.log(firstImageUrls.length)
   // console.log(firstImageUrls);
   const handlerDescription = () => {
     setDescriptionOn(!descriptionOn);
@@ -45,10 +45,32 @@ const ProductCard = ({ product, setListView, listView }) => {
         mousewheel={true}
         keyboard={true}
         modules={[Navigation, Pagination, Mousewheel, Keyboard]} className={style.mySwiper}>
-        {firstImageUrls.map((imagesrc, index) => (
+        {firstImageUrls.length === 0 ? (
 
-          <SwiperSlide className={style.swiperSlide} key={index}> <LazyLoadImage src={imagesrc} width={330} height={330} placeholderSrc={imagesrc} effect="blur" className={style.slideBackground} /> </SwiperSlide>
-        ))}
+          <SwiperSlide className={style.swiperSlide} >
+            <LazyLoadImage
+              src={'https://res.cloudinary.com/deh35rofi/image/upload/v1698212497/producto-sin-imagen_basarf.png'}
+              width={330}
+              height={330}
+              placeholderSrc={'https://res.cloudinary.com/deh35rofi/image/upload/v1698212497/producto-sin-imagen_basarf.png'}
+              effect="blur"
+              className={style.slideBackground}
+            />
+          </SwiperSlide>
+        ) :
+          firstImageUrls.map((imagesrc, index) => (
+            <SwiperSlide className={style.swiperSlide} key={index}>
+              <LazyLoadImage
+                src={imagesrc !== [] ? imagesrc : 'https://res.cloudinary.com/deh35rofi/image/upload/v1698212497/producto-sin-imagen_basarf.png'}
+                width={330}
+                height={330}
+                placeholderSrc={imagesrc}
+                effect="blur"
+                className={style.slideBackground}
+              />
+            </SwiperSlide>
+          ))}
+
       </Swiper>
       <AnimatePresence>
         {descriptionOn ? (

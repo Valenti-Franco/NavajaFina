@@ -15,6 +15,14 @@
   border: 3px solid #53bcd6;
 
 }
+.Active{
+  color: #00e1ff !important;
+  text-shadow: 2px 1px 8px #ffffff ;
+  transform: scale(1.1);
+  text-decoration: underline;
+  
+/* background-color: red; */
+}
 .btnAdmin a {
   text-decoration: none;
   color: #cec7d9;

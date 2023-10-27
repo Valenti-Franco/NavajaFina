@@ -23,10 +23,12 @@ const AuthProvider = ({ children }) => {
       });
       const userData = response.data;
       console.log(userData)
+      // console.log(userData)
       setAuth(userData);
     } catch (error) {
       console.log(error);
       setAuth({});
+      localStorage.removeItem('_id');
     }
   };
 

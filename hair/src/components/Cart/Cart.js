@@ -26,7 +26,7 @@ const Cart = () => {
     setTotal(cart.reduce((a, b) => a + b.price * b.quantity, 0))
   }, [cart]);
 
-  console.log(cart)
+  // console.log(cart)
 
   return (
     <>

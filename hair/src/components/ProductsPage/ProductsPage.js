@@ -85,12 +85,12 @@ const ProductsPage = () => {
         product.precio >= filter.price &&
         (
           filter.category === 'all' ||
-          product.category === filter.category
+          product.categoryId === filter.category
         )
       )
     })
   }
-
+  console.log(products)
   const filteredProducts = filterProducts(products)
   return (
     <motion.div

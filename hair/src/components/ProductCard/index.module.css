@@ -99,6 +99,23 @@ modo oscuro
     margin-bottom: 25px;
     
 }
+.icontextProductMoney{
+    width: 50%;
+    background-color: #0a7c13;
+
+    color: #fff;
+    border: solid 1px #a2a6bda9;
+    border-top: 0px;
+    border-bottom: 0px;
+    height: 40px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 14px; 
+    transition: all ease .2s;
+    text-decoration: none;
+    cursor: pointer;
+}
 .icontextProduct{
     width: 50%;
     background-color: #501a8d;

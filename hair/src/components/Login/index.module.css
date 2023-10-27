@@ -133,4 +133,22 @@ textarea:focus, input:focus, input[type]:focus {
 }
 
 
+@media screen and  (max-width: 767px) {
+    form{
+        width: 100%;
+        
+       
+    }
+    .main{
+        height: 100vh;
+        width: 100vw;
+        contain: content;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f0f2f5;
+    }
+}
+
+
 

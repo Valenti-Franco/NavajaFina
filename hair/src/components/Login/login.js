@@ -54,7 +54,7 @@ const Login = () => {
 
       autenticarUsuario(); // Llama a autenticarUsuario desde el contexto
     } catch (error) {
-      toast.error(error.response.data.msg);
+      toast.error("Error al Iniciar Sesión");
 
     }
   };
