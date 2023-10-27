@@ -60,10 +60,10 @@ function App() {
 
 
 
-          <Route path='/admin' element={<AdminComponent />} />
-          <Route path='/BuyForm' element={<BuyForm />} />           
-          <Route path='*' element={<NotFoundPage/>} />
-          <Route path='/RegistroEmail' element={<RegistroEmail/>} />
+            <Route path='/admin' element={<AdminComponent />} />
+            <Route path='/BuyForm' element={<BuyForm />} />
+            <Route path='*' element={<NotFoundPage />} />
+            {/* <Route path='/RegistroEmail' element={<RegistroEmail/>} /> */}
 
             <Route path='/admin' element={<AdminComponent />} />
             <Route path='/BuyForm' element={<BuyForm />} />
