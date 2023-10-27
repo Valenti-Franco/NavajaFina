@@ -134,12 +134,7 @@ const Perfil = () => {
             </label>
           </section>
         </div>
-        <div className={style.ProductDiv}>
-          <EffectCardProduct />
-          <Link className={style.icontextProduct} to="/products">
-            Buscar Prodcutos! <FaRegEye />
-          </Link>
-        </div>
+        
 
 
       </div>

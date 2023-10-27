@@ -51,7 +51,11 @@ const Signin = () => {
         // Crear el usuario en la API
         try {
          
-            const { data } = await axios.post(`http://localhost:4000/api/usuarios`, {nombre,usuario, email, password} )
+            const { data } = await axios.post(`https://tpibarbershop20231015224614.azurewebsites.net/api/Usuarios/Register`,
+             {  nombre: nombre,
+                email: email,
+                password: password
+                } )
             toast.success('Usurio registrado correctamente');
            
 

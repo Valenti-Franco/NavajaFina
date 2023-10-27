@@ -24,6 +24,8 @@ import AdminComponent from './components/admin/AdminComponent';
 
 import BuyForm from './components/BuyForm/BuyForm';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
+import RegistroEmail from './components/RegistroEmail/RegistroEmail';
+
 
 
 
@@ -54,6 +56,7 @@ function App() {
           <Route path='/admin' element={<AdminComponent />} />
           <Route path='/BuyForm' element={<BuyForm />} />           
           <Route path='*' element={<NotFoundPage/>} />
+          <Route path='/RegistroEmail' element={<RegistroEmail/>} />
 
 
 

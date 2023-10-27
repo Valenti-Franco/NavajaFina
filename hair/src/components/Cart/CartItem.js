@@ -47,7 +47,7 @@ const CartItem = ({ id, imagenes, precio, nombre, quantity, addToCart, removeToC
                 name='buton' className={style.removeFromCart} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} onClick={removeFromCart}><FaTimes /></motion.button>
             <Link to={`/products/${id}`}>
                 <img
-                    style={{ filter: hovered ? 'grayscale(1)' : '' }} src={images1[0].url} alt='' />
+                    style={{ filter: hovered ? 'grayscale(1)' : '' }} src={images1[0]?.url} alt='' />
             </Link>
             <div>
                 <strong >{nombre}</strong>
