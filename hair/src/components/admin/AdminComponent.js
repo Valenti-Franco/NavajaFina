@@ -7,19 +7,26 @@ import Box from '@mui/material/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import { DataGrid } from '@mui/x-data-grid';
 import { MdAttachMoney, MdCheck, MdDelete, MdEdit } from 'react-icons/md';
-import { Modal, Button, TextField } from '@material-ui/core';
-import BodyProduct from './BodyProduct';
-import BodyProductEdit from './BodyProductEdit';
+import { Modal, Button, TextField, Avatar } from '@material-ui/core';
+import BodyProduct from './ModalProduct/BodyProduct';
+import BodyProductEdit from './ModalProduct/BodyProductEdit';
 import { ToastContainer, toast } from 'react-toastify';
-import BodyDeleteProduct from './BodyDeleteProduct';
-import BodyProductImg from './BodyProductImg';
-import BodyDeleteUser from './BodyDeleteUser';
-import BodyUsuarioEdit from './BodyUsuarioEdit';
+import BodyDeleteProduct from './ModalProduct/BodyDeleteProduct';
+import BodyProductImg from './ModalProduct/BodyProductImg';
+import BodyDeleteUser from './ModalUser/BodyDeleteUser';
+import BodyUsuarioEdit from './ModalUser/BodyUsuarioEdit';
+
 // import config from '../../utils/Config';
 
-
+import { createChart } from 'lightweight-charts';
+import { ChartComponent, processData } from './GraficaCompra';
+import { comprasColumns, obtenerCompras } from './ColumnsTabla/comprasColumns';
+import { usuariosColumns } from './ColumnsTabla/usuariosComuns';
+import { subcategoryColumns } from './ColumnsTabla/subCategoryColumns';
+import { categoryColumns } from './ColumnsTabla/categoryColumns';
+import { productosColumns } from './ColumnsTabla/productosColumns';
 const token = localStorage.getItem("_id");
-console.log(token)
+
 const config = {
   headers: {
     'Authorization': `Bearer ${token}` // Agrega el token JWT en la cabecera de autorización
@@ -27,259 +34,11 @@ const config = {
 };
 
 
-
-
-
-
-const categoryColumns = [
-  { field: 'id', headerName: 'ID', width: 90 },
-  {
-    field: 'nombre',
-    headerName: 'Nombre',
-    width: 150,
-    editable: false,
-  },
-  {
-    field: 'descripcion',
-    headerName: 'Descripción',
-    width: 250,
-    editable: false,
-  },
-]
-
-const subcategoryColumns = [
-  { field: 'id', headerName: 'ID', width: 90 },
-  {
-    field: 'nombre',
-    headerName: 'Nombre',
-    width: 150,
-    editable: false,
-  },
-  {
-    field: 'categoryId',
-    headerName: 'Descripción',
-    width: 250,
-    editable: false,
-  },
-]
-
 const AdminComponent = () => {
-  const comprasColumns = [
-    {
-      field: 'PAGAR',
-      renderCell: (params) => {
-        // Verifica si el estado es 'confirmado' y deshabilita el botón de cancelación en consecuencia
-        const isConfirmado = params.row.estado === 'pendiente';
-        return (
-          <div className={style.acciones}>
-            <div>
-              {isConfirmado ? (
-                <div className={style.acciones}>
-
-                  <div>
-                    <MdEdit className={style.btnMoney}
-                      onClick={() => postConfirmarCompra(params.row.id)}
-                    />
-                  </div>
-                </div>
-              ) : <MdCheck style={{ background: "#fff", padding: "5px", borderRadius: "5px" }} />}
-
-            </div>
-          </div>
-        );
-      }
-    },
-    {
-      field: 'Cancelar',
-      renderCell: (params) => {
-        // Verifica si el estado es 'confirmado' y deshabilita el botón de cancelación en consecuencia
-        const isConfirmado = params.row.valorPago === 'null';
-        return (
-          <div className={style.acciones}>
-            <div>
-              {isConfirmado ? (
-                <MdDelete
-                  className={style.btnDelete}
-                  onClick={() => postDeleteCompra(params.row.id)}
 
 
-                />
-              ) : <MdCheck style={{ background: "#fff", padding: "5px", borderRadius: "5px" }} />}
-
-            </div>
-          </div>
-        );
-      }
-    },
-
-    { field: 'id', headerName: 'ID', width: 90 },
-    {
-      field: 'estado',
-      headerName: 'Estado',
-      width: 150,
-      editable: false,
-    },
 
 
-    {
-      field: 'total',
-      headerName: 'Total',
-      width: 150,
-      editable: false,
-    },
-    {
-      field: 'valorPago',
-      headerName: 'Tu Pago',
-      width: 150,
-      editable: false,
-    },
-    {
-      field: 'clientePaypalId',
-      headerName: 'Tu Id PayPal',
-      width: 150,
-      editable: false,
-    },
-    {
-      field: 'fechaPago',
-      headerName: 'Fecha del Pago',
-      type: 'number',
-      width: 110,
-      editable: false,
-    },
-
-
-  ];
-
-  const productosColumns = [
-    {
-      field: 'Acciones',
-      renderCell: (params) => {
-
-        return (
-          <div className={style.acciones}>
-            <div>
-              <MdDelete
-                className={style.btnDelete}
-                onClick={() => abrirCerrarModalDeleteProduct(params.row.id)}
-              />
-            </div>
-            <div>
-              <MdEdit className={style.btnEdit}
-                onClick={() => abrirCerrarModalEditProduct(params.row.id)}
-              />
-            </div>
-          </div>
-        );
-      }
-    },
-    { field: 'id', headerName: 'ID', width: 90 },
-    {
-      field: 'nombre',
-      headerName: 'Nombre',
-      width: 150,
-      editable: false,
-    },
-    {
-      field: 'categoryId',
-      headerName: 'Categoria',
-      width: 80,
-      editable: false,
-    },
-    {
-      field: 'subcategoryId',
-      headerName: 'Subcategoria',
-      width: 80,
-      editable: false,
-    },
-    {
-      field: 'precio',
-      headerName: 'Precio',
-      type: 'number',
-      width: 110,
-      editable: false,
-    },
-    {
-      field: 'descripcion',
-      headerName: 'Descripción',
-      width: 250,
-      editable: false,
-    },
-    {
-      field: 'stock',
-      headerName: 'Stock',
-      type: 'number',
-      width: 110,
-      editable: false,
-    },
-
-    {
-      field: 'imagen',
-      headerName: 'Imagen',
-      width: 350,
-
-      renderCell: (params) => {
-        if (params.row.imagenes?.length > 0) {
-          return (
-            <div>
-              {params.row.imagenes.map((imagen, index) => (
-                <img
-                  key={index}
-                  src={imagen.url}
-                  alt={`Imagen de ${params.row.nombre}`}
-                  style={{ width: 50, height: 50, marginRight: 5 }}
-                />
-              ))}
-            </div>
-          );
-        } else {
-          return <span>No imagen</span>;
-        }
-      },
-    },
-  ];
-  const usuariosColumns = [
-    {
-      field: 'Acciones',
-      renderCell: (params) => {
-
-        return (
-          <div className={style.acciones}>
-            <div>
-              <MdDelete
-                className={style.btnDelete}
-                onClick={() => abrirCerrarModalDeleteUsuario(params.row.id)}
-              />
-            </div>
-            <div>
-              <MdEdit className={style.btnEdit}
-                onClick={() => abrirCerrarModalEditUsuario(params.row.id)}
-              />
-            </div>
-          </div>
-        );
-      }
-    },
-    { field: 'id', headerName: 'ID', width: 90 },
-
-    {
-      field: 'nombre',
-      headerName: 'Nombre',
-      width: 150,
-      editable: false,
-    },
-    {
-      field: 'email',
-      headerName: 'Email',
-      width: 200,
-      editable: false,
-    },
-    {
-      field: 'role',
-      headerName: 'Rol',
-      width: 120,
-      editable: false,
-    },
-  ];
 
 
   const { modoOscuro } = useContext(AuthContext)
@@ -295,6 +54,9 @@ const AdminComponent = () => {
   //CONST PRODUCT
   const [products, setProducts] = useState([]);
   const [usuario, setUsuarios] = useState([]);
+  const [chartData, setChartData] = useState([]);
+
+
 
 
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -454,28 +216,21 @@ const AdminComponent = () => {
     if (Auth.auth.role !== 'Admin' && Auth.auth?.role !== "Editor") {
       navigate('/');
     }
-  }, [Auth]);
 
-  useEffect(() => {
-    // console.log(config)
+
     obtenerUsuarios();
     obtenerProductos();
     obtenerCategoria();
     obtenerSubCategoria();
-    obtenerCompras();
+    obtenerCompras({
+      setCompras, // Asegúrate de que setCompras sea la función apropiada
+      processData,
+      setChartData
+    });
 
-    // console.log(products)
+  }, [Auth]);
 
-  }, []);
-
-
-
-  // const token = localStorage.getItem("_id");
-  // const config = {
-  //   headers: {
-  //     'Authorization': `Bearer ${token}` // Agrega el token JWT en la cabecera de autorización
-  //   }
-  // };
+  // console.log(usuario)
 
 
   //CRUD USER
@@ -520,20 +275,7 @@ const AdminComponent = () => {
       console.error(error);
     }
   };
-  const obtenerCompras = async () => {
-    try {
-      const response = await axios.get('https://tpibarbershop20231015224614.azurewebsites.net/api/Compras/Admin', config);
-      const ComprasData = response.data.map((user, index) => ({
-        ...user,
 
-      }));
-      setCompras(ComprasData);
-      console.log(ComprasData);
-
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   //CRUD PRODUCT
   const obtenerProductos = async () => {
@@ -571,30 +313,7 @@ const AdminComponent = () => {
     }
   };
 
-  const postConfirmarCompra = async (idcompra) => {
-    console.log(idcompra);
-    try {
-      const response = await axios.put(
 
-        `https://tpibarbershop20231015224614.azurewebsites.net/api/Compras/${idcompra}/ConfirmarCompra/Admin`,
-        {
-
-        },
-        config // Agrega el encabezado con el token JWT
-      );
-
-      toast.success('Compra Confirmada', {
-        position: 'top-right', // Puedes personalizar la posición
-        autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
-      });
-
-      // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
-      obtenerCompras(); // Reutiliza la función que ya tienes para obtener productos
-      // abrirCerrarModalInsertarProduct(); // Reutiliza el product
-    } catch (error) {
-      console.error(error);
-    }
-  };
   const usuarioPutAdmin = async () => {
 
     try {
@@ -671,26 +390,7 @@ const AdminComponent = () => {
     }
   };
 
-  const postDeleteCompra = async (idCompra) => {
-    try {
-      const response = await axios.delete(
-        `https://tpibarbershop20231015224614.azurewebsites.net/api/Compras/${idCompra}`,
-        config // Agrega el encabezado con el token JWT
-      );
-      if (response.status === 204) {
-        toast.success('Compra eliminada correctamente', {
-          position: 'top-right', // Puedes personalizar la posición
-          autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
-        });
-      }
-      // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
-      obtenerCompras(); // Reutiliza la función que ya tienes para obtener productos
-      // abrirCerrarModalDeleteUsuario(); // Reutiliza el product
 
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const usuarioDelete = async () => {
     try {
@@ -810,10 +510,11 @@ const AdminComponent = () => {
             <div className={style.Container}>
 
               <h1 className={style.title}>USUARIOS</h1>
+              {/* <createChart style={{ height: 400, width: '100%' }} /> */}
               <Box sx={{ height: 400, width: '100%' }}>
                 <DataGrid
                   rows={usuario}
-                  columns={usuariosColumns}
+                  columns={usuariosColumns(abrirCerrarModalDeleteUsuario, abrirCerrarModalEditUsuario)}
                   autoPageSize
                   // checkboxSelection
                   disableColumnSelector
@@ -831,7 +532,7 @@ const AdminComponent = () => {
           <Box sx={{ height: 400, width: '100%' }}>
             <DataGrid
               rows={products}
-              columns={productosColumns}
+              columns={productosColumns(abrirCerrarModalDeleteProduct, abrirCerrarModalEditProduct)}
               autoPageSize
               // checkboxSelection
               disableColumnSelector
@@ -880,6 +581,13 @@ const AdminComponent = () => {
 
         <div className={style.Container}>
           <h1 className={style.title}>COMPRAS</h1>
+          {chartData.length ? (
+
+            <ChartComponent style={{ height: 400, width: '100%' }} data={chartData}></ChartComponent>
+          ) : null
+
+          }
+          {/* <ChartComponent style={{ height: 400, width: '100%' }} data={initialData}></ChartComponent> */}
           <Box sx={{ height: 400, width: '100%' }}>
             <DataGrid
               rows={compras}

@@ -69,3 +69,60 @@
 
    
 }
+
+
+
+
+@media  screen and (max-width: 768px){ 
+    .footer{
+        background-color: black;
+        height: 350px;
+        width: auto;
+        /* display: grid; */
+        display: flex;
+        /* grid-template-columns: 1fr 2fr 1fr; */
+        color: white;
+        contain: content;
+        flex-direction: column;
+        align-items: center;
+        /* position: absolute; */
+        justify-content: space-around;
+        z-index: 12322313132313 !important;
+    }
+    .horarios{
+        margin: 5px;
+
+        display: flex;
+    /* margin-top: 3%; */
+    /* margin-left: 30%; */
+    flex-direction: column;
+
+    }
+    .Social{
+        display: flex;
+        margin: 0;
+        flex-direction: column;
+    }
+    .ubication{
+        margin: 5px;
+
+        display: flex;
+    /* margin-top: 3%; */
+    /* margin-left: 30%; */
+    flex-direction: column;
+
+    }
+    .ubication h3{
+        margin: 0;
+    }
+    .ubication ul{
+        margin: 0;
+    }
+    .horarios h3{
+        margin: 0;
+    }
+    .horarios ul{
+        margin: 0;
+    }
+    
+  }

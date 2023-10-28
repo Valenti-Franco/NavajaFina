@@ -5,7 +5,7 @@
 }
   
 .total{
-  width: 50vw;
+  width: 30vw;
 }
 .cart {
   
@@ -15,7 +15,9 @@
   text-align: center;
   height: 100vh;
   display: flex;
-  
+  justify-content: center;
+  flex-direction: column;
+
   
 }
 .itemsDark{
@@ -23,7 +25,7 @@
 }
 
 .cartDark{
-  color: #fff;
+  color: #000;
   background-color: rgb(136, 136, 136);
 }
 .cartDark li{
@@ -42,6 +44,7 @@
     background: #c51a1ad9;
     border: 1px solid #000;
     border-radius: 15px;
+    cursor: pointer;
 }
 
 .cart  li {
@@ -50,7 +53,7 @@
   padding: 0 10px  0px 0px;
   list-style: none;
   margin-top: 20px;
-  display: flex;
+  /* display: flex; */
   align-items: center;
   border: 1px solid #000;
   background: #fff;
@@ -122,6 +125,11 @@
   overflow-y: auto;
 }
 
+.containerCartItem{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
 .cart li button{
  position: inherit;
  align-self: stretch;
@@ -142,18 +150,26 @@
 
 .total{
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 25px;
-  background: #c9c9c9;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    background: #e9e7e7;
+    border: 2px solid #00000073;
+    border-top: 0;
+    border-bottom: 0;
+    min-width: 400px;
 
 }
 .containerItems{
-    overflow-y: auto;
-    padding: 50px;
-    background-color: rgb(229, 229, 230);
-    margin: 50px;
+  overflow-y: scroll;
+  padding: 50px;
+  background-color: rgb(229, 229, 230);
+  margin: 50px 0;
+  max-height: 60vh;
+  border: 3px solid #000000a1;
+  border-right: 0;
+  border-radius: 10px 10px 0;
 }
 
 .but {
@@ -211,4 +227,40 @@
   justify-content: center;
   align-content: flex-start;
   flex-direction: column;
+}
+
+
+
+@media  screen and (max-width: 740px){ 
+
+ 
+
+  .cart{
+    color: #000000;
+    text-align: center;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    contain: content;
+  }
+  .containerItems{
+    background-color: rgb(229, 229, 230);
+    margin: 50px;
+    display: flex;
+    width: 100vw;
+    gap: 25px;
+
+  }
+  .containerCartItem{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+  .total{
+    
+    width: 90vw;
+    margin-top: 50px;
+  }
 }

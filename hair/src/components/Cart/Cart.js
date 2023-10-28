@@ -85,7 +85,7 @@ const Cart = () => {
 
               </>
               : <>
-                <Scrollbars style={{ width: 300, height: '80%', marginBottom: '50px' }}>
+                <Scrollbars style={{ width: 300, height: '80%', marginBottom: '50px', inset: "-5px", filter: "drop-shadow(0px 0px 0px #fff)" }}>
 
                   <ul className={style.containerItems}>
                     <AnimatePresence>

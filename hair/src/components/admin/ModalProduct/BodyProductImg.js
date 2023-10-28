@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal, Button, TextField, Card } from '@material-ui/core';
-import style from './index.module.css';
+import style from '../index.module.css';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import { Swiper, SwiperSlide } from "swiper/react";

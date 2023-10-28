@@ -7,7 +7,7 @@ import { AuthContext } from '../../context/Auth';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { Box, CircularProgress } from '@material-ui/core';
+import { Avatar, Box, CircularProgress } from '@material-ui/core';
 import { MdDelete } from 'react-icons/md';
 
 const CartPage = () => {
@@ -85,33 +85,48 @@ const CartPage = () => {
             // Manejar el error al crear el detalle
         }
     };
+
     return (
 
         <div className={style.cart + (!modoOscuro ? ' ' + style.cartDark : '')}>
+            <h1 style={{ width: "100vw" }}>CARRITO DE COMPRAS</h1>
+
             {/* {cart.length === 0
                 ? <>
                     <h3>VACIO</h3>
 
                 </> */}
-            <>
-                <div>
-                    <Scrollbars style={{ width: 800, height: 800 }}>
-                        <ul className={style.containerItems + (!modoOscuro ? ' ' + style.itemsDark : '')}>
+            <div className={style.containerCartItem}>
 
-                            <h2>CARRITO DE COMPRAS</h2>
-                            {cart.length === 0 ? (
-                                <h2>Vacio</h2>
-                            ) : (
 
-                                cart.map(product => (
-                                    <CartItem key={product.id} removeToCart={() => removeToCart(product)} removeFromCart={() => removeFromCart(product)} addToCart={() => addToCart(product)} {...product} />
-                                ))
+                <div style={{
+                    flexDirection: "column",
+                    display: "flex",
+                }}>
 
-                            )}
+                    <ul className={style.containerItems + (!modoOscuro ? ' ' + style.itemsDark : '')}>
 
-                        </ul>
+                        {cart.length === 0 ? (
+                            <h2>Vacio</h2>
+                        ) : (
 
-                    </Scrollbars>
+                            cart.map(product => (
+                                // <>
+                                //     <Avatar
+                                //         style={{ width: 106, height: 106, backgroundSize: "contain" }}
+                                //         variant="square"
+                                //         key={product.id}
+                                //         src={product.imagenes[0]?.url}
+                                //     />
+                                // </>
+                                <CartItem key={product.id} removeToCart={() => removeToCart(product)} removeFromCart={() => removeFromCart(product)} addToCart={() => addToCart(product)} {...product} />
+                            ))
+
+                        )}
+
+                    </ul>
+
+
                     {cart.length !== 0 ? (
                         <button className={style.btnDelete} onClick={clearCart}>BORRAR  CARRITO <MdDelete /> </button>
                     ) : null}
@@ -122,26 +137,35 @@ const CartPage = () => {
                         <h2>Vacio</h2>
                     ) : (
                         <>
-                            <h2>TOTAL DEL CARRITO </h2>
+                            <h2>Resumen </h2>
                             {/* <p>SUBTOTAL: ${total}</p>
                          */}
                             <div>
                                 {cart.map((item) => (
-                                    <h5 key={item.id}>
+                                    <p key={item.id}>
                                         {item.nombre} - {item.precio} x {item.quantity}
-                                    </h5>
+                                    </p>
                                 ))}
                             </div>
                             {/* <p>ENVIO: $20</p> */}
-                            <p>--------------</p>
 
-                            <h2>TOTAL: ${total}</h2>
+                            <h4>
+                                Total:
 
-                            <div className={style.buttons}>
+                                <b style={{
+                                    color: "green"
+                                }}>
+                                    ${total}
+                                </b>
+                            </h4>
+
+
+                            <div className={style.buttons
+                            } >
                                 {!isLoading ? (
                                     <>
 
-                                        <button onClick={handlerCrearOrden} className={style.but}>PAGAR</button>
+                                        <button onClick={handlerCrearOrden} className={style.but}>Crear Orden de Compra</button>
                                         <Link className={style.a} to="/Products"><button className={style.com}>CONTINUAR COMPRANDO</button></Link>
                                     </>
 
@@ -155,8 +179,11 @@ const CartPage = () => {
                             </div>
 
                         </>)}
+
                 </div>
-            </>
+            </div>
+
+
 
         </div >
     )
