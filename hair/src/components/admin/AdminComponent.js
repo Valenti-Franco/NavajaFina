@@ -6,7 +6,7 @@ import axios from 'axios';
 import Box from '@mui/material/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import { DataGrid } from '@mui/x-data-grid';
-import { MdDelete, MdEdit } from 'react-icons/md';
+import { MdAttachMoney, MdCheck, MdDelete, MdEdit } from 'react-icons/md';
 import { Modal, Button, TextField } from '@material-ui/core';
 import BodyProduct from './BodyProduct';
 import BodyProductEdit from './BodyProductEdit';
@@ -64,6 +64,91 @@ const subcategoryColumns = [
 ]
 
 const AdminComponent = () => {
+  const comprasColumns = [
+    {
+      field: 'PAGAR',
+      renderCell: (params) => {
+        // Verifica si el estado es 'confirmado' y deshabilita el botón de cancelación en consecuencia
+        const isConfirmado = params.row.estado === 'pendiente';
+        return (
+          <div className={style.acciones}>
+            <div>
+              {isConfirmado ? (
+                <div className={style.acciones}>
+
+                  <div>
+                    <MdEdit className={style.btnMoney}
+                      onClick={() => postConfirmarCompra(params.row.id)}
+                    />
+                  </div>
+                </div>
+              ) : <MdCheck style={{ background: "#fff", padding: "5px", borderRadius: "5px" }} />}
+
+            </div>
+          </div>
+        );
+      }
+    },
+    {
+      field: 'Cancelar',
+      renderCell: (params) => {
+        // Verifica si el estado es 'confirmado' y deshabilita el botón de cancelación en consecuencia
+        const isConfirmado = params.row.valorPago === 'null';
+        return (
+          <div className={style.acciones}>
+            <div>
+              {isConfirmado ? (
+                <MdDelete
+                  className={style.btnDelete}
+                  onClick={() => postDeleteCompra(params.row.id)}
+
+
+                />
+              ) : <MdCheck style={{ background: "#fff", padding: "5px", borderRadius: "5px" }} />}
+
+            </div>
+          </div>
+        );
+      }
+    },
+
+    { field: 'id', headerName: 'ID', width: 90 },
+    {
+      field: 'estado',
+      headerName: 'Estado',
+      width: 150,
+      editable: false,
+    },
+
+
+    {
+      field: 'total',
+      headerName: 'Total',
+      width: 150,
+      editable: false,
+    },
+    {
+      field: 'valorPago',
+      headerName: 'Tu Pago',
+      width: 150,
+      editable: false,
+    },
+    {
+      field: 'clientePaypalId',
+      headerName: 'Tu Id PayPal',
+      width: 150,
+      editable: false,
+    },
+    {
+      field: 'fechaPago',
+      headerName: 'Fecha del Pago',
+      type: 'number',
+      width: 110,
+      editable: false,
+    },
+
+
+  ];
 
   const productosColumns = [
     {
@@ -202,6 +287,8 @@ const AdminComponent = () => {
   // const [users, setUsers] = useState([]);
   const [category, setCategory] = useState([]);
   const [subcategory, setSubCategory] = useState([]);
+  const [compras, setCompras] = useState([]);
+
 
   const navigate = useNavigate();
 
@@ -375,6 +462,7 @@ const AdminComponent = () => {
     obtenerProductos();
     obtenerCategoria();
     obtenerSubCategoria();
+    obtenerCompras();
 
     // console.log(products)
 
@@ -432,7 +520,20 @@ const AdminComponent = () => {
       console.error(error);
     }
   };
+  const obtenerCompras = async () => {
+    try {
+      const response = await axios.get('https://tpibarbershop20231015224614.azurewebsites.net/api/Compras/Admin', config);
+      const ComprasData = response.data.map((user, index) => ({
+        ...user,
 
+      }));
+      setCompras(ComprasData);
+      console.log(ComprasData);
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   //CRUD PRODUCT
   const obtenerProductos = async () => {
@@ -465,6 +566,31 @@ const AdminComponent = () => {
       // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
       obtenerProductos(); // Reutiliza la función que ya tienes para obtener productos
       abrirCerrarModalInsertarProduct(); // Reutiliza el product
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const postConfirmarCompra = async (idcompra) => {
+    console.log(idcompra);
+    try {
+      const response = await axios.put(
+
+        `https://tpibarbershop20231015224614.azurewebsites.net/api/Compras/${idcompra}/ConfirmarCompra/Admin`,
+        {
+
+        },
+        config // Agrega el encabezado con el token JWT
+      );
+
+      toast.success('Compra Confirmada', {
+        position: 'top-right', // Puedes personalizar la posición
+        autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
+      });
+
+      // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
+      obtenerCompras(); // Reutiliza la función que ya tienes para obtener productos
+      // abrirCerrarModalInsertarProduct(); // Reutiliza el product
     } catch (error) {
       console.error(error);
     }
@@ -539,6 +665,27 @@ const AdminComponent = () => {
       // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
       obtenerProductos(); // Reutiliza la función que ya tienes para obtener productos
       abrirCerrarModalEditProduct(); // Reutiliza el product
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const postDeleteCompra = async (idCompra) => {
+    try {
+      const response = await axios.delete(
+        `https://tpibarbershop20231015224614.azurewebsites.net/api/Compras/${idCompra}`,
+        config // Agrega el encabezado con el token JWT
+      );
+      if (response.status === 204) {
+        toast.success('Compra eliminada correctamente', {
+          position: 'top-right', // Puedes personalizar la posición
+          autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
+        });
+      }
+      // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
+      obtenerCompras(); // Reutiliza la función que ya tienes para obtener productos
+      // abrirCerrarModalDeleteUsuario(); // Reutiliza el product
 
     } catch (error) {
       console.error(error);
@@ -727,6 +874,20 @@ const AdminComponent = () => {
               disableColumnSelector
               disableColumnMenu
 
+            />
+          </Box>
+        </div>
+
+        <div className={style.Container}>
+          <h1 className={style.title}>COMPRAS</h1>
+          <Box sx={{ height: 400, width: '100%' }}>
+            <DataGrid
+              rows={compras}
+              columns={comprasColumns}
+              autoPageSize
+              // checkboxSelection
+              disableColumnSelector
+              disableColumnMenu
             />
           </Box>
         </div>
