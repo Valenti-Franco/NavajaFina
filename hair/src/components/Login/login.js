@@ -116,7 +116,7 @@ const Login = () => {
         </div>
 
         <div className={style.divcontainer}>
-          <p>¿No tienes una cuenta? Crear <Link className={style.createa} to="/Signin">cuenta nueva
+          <p>¿No tienes una cuenta? Crear <Link className={style.createa} to="/NavajaFina/Signin">cuenta nueva
           </Link> </p>
         </div>
         <ToastContainer />
@@ -126,12 +126,12 @@ const Login = () => {
       {/* <nav className="lg:flex lg:justify-between">
             <Link 
                 className='block text-center my-5 text-slate-500 uppercase text-sm' 
-                to="/registrar"
+                to="NavajaFina/registrar"
             >¿No tienes una cuenta? Regístrate</Link>
 
             <Link 
                 className='block text-center my-5 text-slate-500 uppercase text-sm'
-                to="/olvide-password"
+                to="NavajaFina/olvide-password"
             >Olvide Mi Password</Link>
         </nav> */}
 

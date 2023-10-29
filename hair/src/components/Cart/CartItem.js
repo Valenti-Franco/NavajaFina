@@ -53,7 +53,7 @@ const CartItem = ({ id, imagenes, precio, nombre, quantity, addToCart, removeToC
                 </Fab>
 
             </motion.button>
-            <Link to={`/products/${id}`}>
+            <Link to={`NavajaFina/products/${id}`}>
                 <img
 
                     style={{ height: "200px", width: "200px", filter: hovered ? 'grayscale(1)' : '' }} src={images1[0] ? images1[0].url : 'https://res.cloudinary.com/deh35rofi/image/upload/v1698212497/producto-sin-imagen_basarf.png'} alt='' />

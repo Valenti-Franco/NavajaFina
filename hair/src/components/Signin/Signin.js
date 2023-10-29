@@ -51,12 +51,13 @@ const Signin = () => {
         // Crear el usuario en la API
         try {
 
-         
+
             const { data } = await axios.post(`https://tpibarbershop20231015224614.azurewebsites.net/api/Usuarios/Register`,
-             {  nombre: nombre,
-                email: email,
-                password: password
-                } )
+                {
+                    nombre: nombre,
+                    email: email,
+                    password: password
+                })
 
             toast.success('Usurio registrado correctamente');
 
@@ -93,7 +94,7 @@ const Signin = () => {
                 className={style.formreg}
                 onSubmit={handleSubmitRegister}
             >
-                <Link className={style.x} to="/login"><FaTimes /></Link>
+                <Link className={style.x} to="/NavajaFina/login"><FaTimes /></Link>
                 <h2 className={style.tittle}>Registro</h2>
                 <div className={style.divcontainer}>
 
@@ -156,7 +157,7 @@ const Signin = () => {
                         className={style.button}
                     />
                     <div className={style.divcontainer}>
-                        <p>¿Ya tenes una cuenta?  <Link className={style.createa} to="/Login">Iniciar Sesión
+                        <p>¿Ya tenes una cuenta?  <Link className={style.createa} to="/NavajaFina/Login">Iniciar Sesión
                         </Link> </p>
                     </div>
                 </div>

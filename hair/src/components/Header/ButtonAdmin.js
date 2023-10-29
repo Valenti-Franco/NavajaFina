@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const buttonAdmin = () => {
   return (
-    <div className={style.btnAdmin}><Link to='/admin'>IR AL PANEL</Link></div>
+    <div className={style.btnAdmin}><Link to='NavajaFina/admin'>IR AL PANEL</Link></div>
   )
 }
 

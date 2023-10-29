@@ -40,7 +40,7 @@ const Products = () => {
             <p className={style.textProduct}>
               Bienvenidos a la sección de productos de barbería, donde encontrarás una amplia gama de artículos para el cuidado de la barba, el cabello y el afeitado. Nuestra selección incluye productos de alta calidad y herramientas profesionales para ayudarte a lograr un estilo impecable. Explora nuestra variedad y descubre cómo nuestros productos pueden mejorar tu rutina de cuidado personal.
             </p>
-            <Link className={style.icontextProduct} to="/products">
+            <Link className={style.icontextProduct} to="NavajaFina/products">
               Ver Productos <FaRegEye />
             </Link>
           </div>
@@ -105,7 +105,7 @@ const Products = () => {
           <p className={style.textProduct}>
             Bienvenidos a la sección de productos de barbería, donde encontrarás una amplia gama de artículos para el cuidado de la barba, el cabello y el afeitado. Nuestra selección incluye productos de alta calidad y herramientas profesionales para ayudarte a lograr un estilo impecable. Explora nuestra variedad y descubre cómo nuestros productos pueden mejorar tu rutina de cuidado personal.
           </p>
-          <Link className={style.icontextProduct} to="/products">
+          <Link className={style.icontextProduct} to="/NavajaFina/products">
             Ver Productos <FaRegEye />
           </Link>
         </div>
