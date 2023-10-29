@@ -41,11 +41,18 @@ const CartItem = ({ id, imagenes, precio, nombre, quantity, addToCart, removeToC
             variants={variants}
             exit='hidden'
             layoutId={id}
-            style={{ color: hovered ? ' #FF0000' : '' }} >
+            style={{ color: hovered ? ' #FF0000' : '' }}
+        >
             <motion.button
-                whileHover={{ scale: 1.1, backgroundColor: 'black' }}
+                whileHover={{ scale: 1.1 }}
                 transition={{ type: "spring", stiffness: 700, damping: 10 }}
-                name='buton' className={style.removeFromCart} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} onClick={removeFromCart}><FaTimes /></motion.button>
+                name='buton' className={style.removeFromCart} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} onClick={removeFromCart}>
+                <Fab variant="extended" size="small" color="secondary">
+
+                    <FaTimes />
+                </Fab>
+
+            </motion.button>
             <Link to={`/products/${id}`}>
                 <img
 
@@ -59,11 +66,11 @@ const CartItem = ({ id, imagenes, precio, nombre, quantity, addToCart, removeToC
             <footer>
 
 
-                <Fab onClick={addToCart} color="primary" aria-label="add">
+                <Fab size="small" onClick={addToCart} color="primary" aria-label="add">
                     <MdAdd />
                 </Fab>
                 <h2>{quantity}</h2>
-                <Fab onClick={removeToCart} color="secondary" aria-label="add">
+                <Fab size="small" onClick={removeToCart} color="secondary" aria-label="add">
                     <MdRemove />
                 </Fab>
 

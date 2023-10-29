@@ -20,11 +20,14 @@ import BodyUsuarioEdit from './ModalUser/BodyUsuarioEdit';
 
 import { createChart } from 'lightweight-charts';
 import { ChartComponent, processData } from './GraficaCompra';
+
 import { comprasColumns, obtenerCompras } from './ColumnsTabla/comprasColumns';
 import { usuariosColumns } from './ColumnsTabla/usuariosComuns';
 import { subcategoryColumns } from './ColumnsTabla/subCategoryColumns';
 import { categoryColumns } from './ColumnsTabla/categoryColumns';
 import { productosColumns } from './ColumnsTabla/productosColumns';
+import { ChartOrdenComponent, processOrdenData } from './GraficaOrdenCompra';
+import { obtenerOrdenCompras, ordenComprasColumns } from './ColumnsTabla/ordenComprasColumns';
 const token = localStorage.getItem("_id");
 
 const config = {
@@ -47,6 +50,8 @@ const AdminComponent = () => {
   const [category, setCategory] = useState([]);
   const [subcategory, setSubCategory] = useState([]);
   const [compras, setCompras] = useState([]);
+  const [ordenCompras, setOrdenCompras] = useState([]);
+
 
 
   const navigate = useNavigate();
@@ -55,6 +60,8 @@ const AdminComponent = () => {
   const [products, setProducts] = useState([]);
   const [usuario, setUsuarios] = useState([]);
   const [chartData, setChartData] = useState([]);
+  const [chartOrdenData, setChartOrdenData] = useState([]);
+
 
 
 
@@ -226,6 +233,12 @@ const AdminComponent = () => {
       setCompras, // Asegúrate de que setCompras sea la función apropiada
       processData,
       setChartData
+    });
+
+    obtenerOrdenCompras({
+      setOrdenCompras, // Asegúrate de que setCompras sea la función apropiada
+      processOrdenData,
+      setChartOrdenData
     });
 
   }, [Auth]);
@@ -578,7 +591,6 @@ const AdminComponent = () => {
             />
           </Box>
         </div>
-
         <div className={style.Container}>
           <h1 className={style.title}>COMPRAS</h1>
           {chartData.length ? (
@@ -599,8 +611,34 @@ const AdminComponent = () => {
             />
           </Box>
         </div>
+        <div className={style.Container}>
+          <h1 className={style.title}>ORDEN DE COMPRAS</h1>
+          {chartData.length ? (
+
+            <ChartOrdenComponent style={{ height: 400, width: '100%' }} data={chartOrdenData}></ChartOrdenComponent>
+          ) : null
+
+          }
+          {/* <ChartComponent style={{ height: 400, width: '100%' }} data={initialData}></ChartComponent> */}
+          <Box sx={{ height: 400, width: '100%' }}>
+            <DataGrid
+              rows={ordenCompras}
+              columns={ordenComprasColumns}
+              autoPageSize
+              // checkboxSelection
+              disableColumnSelector
+              disableColumnMenu
+            />
+          </Box>
+        </div>
+
 
       </div>
+
+
+
+
+
       <Modal
         open={modalInsertarProduct}
         OnClose={abrirCerrarModalInsertarProduct}

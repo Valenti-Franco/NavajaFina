@@ -12,15 +12,15 @@ const config = {
     }
 };
 
-export const postDeleteCompra = async (idCompra) => {
-    console.log(idCompra)
+export const postDeleteOrdenCompra = async (idOrdenCompra) => {
+
     try {
         const response = await axios.delete(
-            `https://tpibarbershop20231015224614.azurewebsites.net/api/Compras/${idCompra}`,
+            `https://tpibarbershop20231015224614.azurewebsites.net/api/OrdenCompras/${idOrdenCompra}`,
             config // Agrega el encabezado con el token JWT
         );
         if (response.status === 204) {
-            toast.success('Compra eliminada correctamente', {
+            toast.success('Orden de Compras eliminada correctamente', {
                 position: 'top-right', // Puedes personalizar la posición
                 autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
             });
@@ -37,19 +37,18 @@ export const postDeleteCompra = async (idCompra) => {
         console.error(error);
     }
 };
-
-export const obtenerCompras = async ({ setCompras, processData, setChartData }) => {
+export const obtenerOrdenCompras = async ({ setOrdenCompras, processOrdenData, setChartOrdenData }) => {
     try {
-        const response = await axios.get('https://tpibarbershop20231015224614.azurewebsites.net/api/Compras/Admin', config);
+        const response = await axios.get('https://tpibarbershop20231015224614.azurewebsites.net/api/OrdenCompra', config);
         const ComprasData = response.data.map((user, index) => ({
             ...user,
 
         }));
-        setCompras(ComprasData);
-        processData(ComprasData)
+        setOrdenCompras(ComprasData);
+        processOrdenData(ComprasData)
             .then(result => {
                 // Hacer algo con el resultado, por ejemplo, pasar los datos a un componente
-                setChartData(result);
+                setChartOrdenData(result);
 
             })
             .catch(error => {
@@ -62,12 +61,13 @@ export const obtenerCompras = async ({ setCompras, processData, setChartData }) 
 };
 
 
-const postConfirmarCompra = async (idcompra) => {
+
+const postConfirmarOrdenCompra = async (idOrdencompra) => {
 
     try {
         const response = await axios.put(
 
-            `https://tpibarbershop20231015224614.azurewebsites.net/api/Compras/${idcompra}/ConfirmarCompra/Admin`,
+            `https://tpibarbershop20231015224614.azurewebsites.net/api/OrdenCompras/${idOrdencompra}/ConfirmarOrdenCompra/Admin`,
             {
 
             },
@@ -89,9 +89,9 @@ const postConfirmarCompra = async (idcompra) => {
 
 
 
-export const comprasColumns = [
+export const ordenComprasColumns = [
     {
-        field: 'PAGAR',
+        field: 'Confirmar',
         renderCell: (params) => {
             // Verifica si el estado es 'confirmado' y deshabilita el botón de cancelación en consecuencia
             const isConfirmado = params.row.estado === 'pendiente';
@@ -100,14 +100,13 @@ export const comprasColumns = [
                     <div>
                         {isConfirmado ? (
                             <div className={style.acciones}>
-                                <Fab variant="extended" size="small" color="primary">
 
-                                    <MdEdit className={style.btnMoney}
-                                        onClick={() => postConfirmarCompra(params.row.id)}
-                                    />
-                                </Fab>
                                 <div>
-
+                                    <Fab variant="extended" size="small" color="primary">
+                                        <MdEdit className={style.btnMoney}
+                                            onClick={() => postConfirmarOrdenCompra(params.row.id)}
+                                        />
+                                    </Fab>
                                 </div>
                             </div>
                         ) : <MdCheck style={{ background: "#fff", padding: "5px", borderRadius: "5px" }} />}
@@ -128,7 +127,7 @@ export const comprasColumns = [
                         {isConfirmado ? (
                             <MdDelete
                                 className={style.btnDelete}
-                                onClick={() => postDeleteCompra(params.row.id)}
+                                onClick={() => postDeleteOrdenCompra(params.row.id)}
 
 
                             />
@@ -165,6 +164,13 @@ export const comprasColumns = [
         field: 'clientePaypalId',
         headerName: 'Tu Id PayPal',
         width: 150,
+        editable: false,
+    },
+    {
+        field: 'fechaPago',
+        headerName: 'Fecha del Pago',
+        type: 'number',
+        width: 110,
         editable: false,
     },
     {
