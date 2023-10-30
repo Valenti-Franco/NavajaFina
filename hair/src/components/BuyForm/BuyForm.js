@@ -26,18 +26,18 @@ const BuyForm = () => {
       if (!validateStep1()) {
         return;
       }
-    }else if (activeStep === 1){
-        if (!validateStep2()) {
-            return;
-          }
+    } else if (activeStep === 1) {
+      if (!validateStep2()) {
+        return;
+      }
     }
     setActiveStep(prevStep => prevStep + 1);
-}
-  
+  }
+
   const validateStep2 = () => {
     if (address.trim() === '' || city.trim() === '' || postalcode.trim() === '' || province.trim() === '') {
-      toast.error('Por favor, complete todos los campos',{
-        autoClose: 1000, 
+      toast.error('Por favor, complete todos los campos', {
+        autoClose: 1000,
       });
       return false;
     }
@@ -45,14 +45,14 @@ const BuyForm = () => {
   };
   const validateStep1 = () => {
     if (name.trim() === '' || lastname.trim() === '') {
-      toast.error('Por favor, complete todos los campos',{
-        autoClose: 1000, 
+      toast.error('Por favor, complete todos los campos', {
+        autoClose: 1000,
       });
       return false;
     }
     return true;
   };
-  
+
   const handleSubmit = e => {
     e.preventDefault();
     handleNext();
@@ -73,22 +73,22 @@ const BuyForm = () => {
       exit={{ opacity: 0 }}
       className={style.main + (!modoOscuro ? ' ' + style.mainDark : '')}
     >
-        
+
       <form className={style.formreg} onSubmit={handleSubmit}>
-      <h1 className={style.title}> Checkout</h1>
-        <Stepper className={style.puntos + (!modoOscuro ? ' ' + style.puntosDark : '')}  activeStep={activeStep} alternativeLabel>
+        <h1 className={style.title}> Checkout</h1>
+        <Stepper className={style.puntos + (!modoOscuro ? ' ' + style.puntosDark : '')} activeStep={activeStep} alternativeLabel>
           {steps.map(label => (
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
             </Step>
           ))}
         </Stepper>
-        
-       
- 
+
+
+
 
         {activeStep === 0 && (
-            
+
           <div>
             <h2 className={style.tittle}>Datos Personales</h2>
             <div className={style.divcontainer}>
@@ -164,30 +164,30 @@ const BuyForm = () => {
           <div>
             <h2 className={style.tittle}>PAGAR</h2>
             <PayPalScriptProvider>
-                <PayPalButtons/>
+              <PayPalButtons />
             </PayPalScriptProvider>
           </div>
         )}
 
         <div className={style.divcontainer}>
-          {activeStep == steps.length - 1  ? (
+          {activeStep == steps.length - 1 ? (
             null
           ) : (
-            <input type="submit" value="Siguiente" className={style.button}  />
+            <input type="submit" value="Siguiente" className={style.button} />
           )}
           {activeStep > 0 && (
-      <button type="button" className={style.button} onClick={handleBack}>
-        Atras
-      </button>
-    )}
+            <button type="button" className={style.button} onClick={handleBack}>
+              Atras
+            </button>
+          )}
           <div className={style.buttons}>
-            
-            <Link className={style.a} to="/cart">
+
+            <Link className={style.a} to="NavajaFina/cart">
               <button className={style.com}>Volver al Carrito</button>
             </Link>
           </div>
         </div>
-        
+
       </form>
       <ToastContainer />
     </motion.div>

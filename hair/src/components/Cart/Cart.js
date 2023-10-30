@@ -8,6 +8,7 @@ import { useCart } from '../../hooks/useCart';
 import { Link } from 'react-router-dom';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { AnimatePresence, motion } from 'framer-motion';
+import { MdDelete } from 'react-icons/md';
 
 const Cart = () => {
   const cartCheckId = useId();
@@ -23,10 +24,10 @@ const Cart = () => {
   }
   useEffect(() => {
     setNumberCart(cart.length);
-    setTotal(cart.reduce((a, b) => a + b.price * b.quantity, 0))
+    setTotal(cart.reduce((a, b) => a + b.precio * b.quantity, 0))
   }, [cart]);
 
-  console.log(cart)
+  // console.log(cart)
 
   return (
     <>
@@ -84,7 +85,7 @@ const Cart = () => {
 
               </>
               : <>
-                <Scrollbars style={{ width: 300, height: '80%', marginBottom: '50px' }}>
+                <Scrollbars style={{ width: 300, height: '80%', marginBottom: '50px', inset: "-5px", filter: "drop-shadow(0px 0px 0px #fff)" }}>
 
                   <ul className={style.containerItems}>
                     <AnimatePresence>
@@ -99,10 +100,13 @@ const Cart = () => {
                 </Scrollbars>
                 <div className={style.total}>
                   <p>Total: ${total}</p>
-                  <button onClick={clearCart}>Clear</button>
-                  <button><Link to="/cart">
-                    VER CARRITO
-                  </Link></button>
+                  <div className={style.containerbtnComprarCarrito}>
+                    <button className={style.btnClear} onClick={clearCart}><MdDelete /></button>
+                    <Link className={style.btnComprarCarrito} to="NavajaFina/cart">
+                      IR A PAGAR
+                    </Link>
+                  </div>
+
 
                 </div>
               </>
@@ -113,7 +117,7 @@ const Cart = () => {
 
 
         ) : null}
-      </AnimatePresence>
+      </AnimatePresence >
     </>
   )
 }

@@ -18,14 +18,14 @@ const fetchProducts = async (url, limit) => {
 
 const Products = () => {
   const { modoOscuro } = useContext(AuthContext);
-  console.log(modoOscuro);
+  // console.log(modoOscuro);
 
   const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 
   const { data: products, error } = useSWR(`https://tpibarbershop20231015224614.azurewebsites.net/api/Productos`, fetchProducts);
 
-
+  // console.log(products)
   if (error) {
     return <div>Error al cargar los productos.</div>;
   }
@@ -40,7 +40,7 @@ const Products = () => {
             <p className={style.textProduct}>
               Bienvenidos a la sección de productos de barbería, donde encontrarás una amplia gama de artículos para el cuidado de la barba, el cabello y el afeitado. Nuestra selección incluye productos de alta calidad y herramientas profesionales para ayudarte a lograr un estilo impecable. Explora nuestra variedad y descubre cómo nuestros productos pueden mejorar tu rutina de cuidado personal.
             </p>
-            <Link className={style.icontextProduct} to="/products">
+            <Link className={style.icontextProduct} to="NavajaFina/products">
               Ver Productos <FaRegEye />
             </Link>
           </div>
@@ -105,7 +105,7 @@ const Products = () => {
           <p className={style.textProduct}>
             Bienvenidos a la sección de productos de barbería, donde encontrarás una amplia gama de artículos para el cuidado de la barba, el cabello y el afeitado. Nuestra selección incluye productos de alta calidad y herramientas profesionales para ayudarte a lograr un estilo impecable. Explora nuestra variedad y descubre cómo nuestros productos pueden mejorar tu rutina de cuidado personal.
           </p>
-          <Link className={style.icontextProduct} to="/products">
+          <Link className={style.icontextProduct} to="/NavajaFina/products">
             Ver Productos <FaRegEye />
           </Link>
         </div>
@@ -136,7 +136,7 @@ const Products = () => {
                 <div
                   className={style.productContainer}
                   tabIndex={0}
-                  key={product._id}
+                  key={index + product.id}
                 >
                   <ProductCard
                     listView={"grid"}

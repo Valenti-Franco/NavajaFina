@@ -11,7 +11,7 @@
     margin-bottom: 100px;
     
   }
-  
+
   .cart img {
     aspect-ratio: 0.5;
     width: 100%;
@@ -94,13 +94,13 @@
   .cart {
     height: 100%;
     display: block;
-    z-index: 13000;
+    z-index: 13000000;
     
   }
 
   .removeFromCart{
    position: relative;
-    background: #000000a6;
+    background: #00000000;
     top: 40px;
     float: left;
     border: none;
@@ -128,24 +128,71 @@
   .containerMotion{
     height: 100%;
   }
-  .total{
+  .total p{
+    color: #fff;
+    font-size: 24px;
+    text-transform: capitalize;
+  }
+  .coantainerButtonCart{
     display: flex;
-    background-color: #353535;
-    height: 10%;
-    position: sticky;
+    height: 40px;
+    flex-direction: row-reverse;
+  }
+  .total{
+    background-color: #b5b5b51a;
+    height: 20%;
+    position: absolute;
     color: #fff;
     z-index: 999;
     border-radius: 10px 10px 0 0;
     bottom: 0px;
     width: 100%;
     left: 0;
-    /* page-break-after: always; */
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    border-top: 2px solid #c1b7ce;
+
+  }
+  .containerbtnComprarCarrito{
+    display: flex;
+    /* height: 100%; */
+    height: 40px;
+    flex-direction: row-reverse;
+  }
+  .btnComprarCarrito{
+    background: #9886b1;
+    padding: 5px;
+    margin: 5px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    color: #fff;
+  }
+  .btnClear{
+    cursor: pointer;
+    margin: 10px;
+    display: flex;
+    align-self: center;
+    padding: 5px 15px;
+    font-size: 32px;
+    background-color: rgb(165, 47, 47) !important;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    border-radius: 5px;
   }
   .containerItems{
     height: 100%;
     margin-right: 20px;
     /* margin-bottom: 100px; */
+  }
+
+
+  @media  screen and (max-width: 1240px){ 
+    /* .total{
+     
+      position: absolute;
+     
+  
+    } */
+  
+    
   }

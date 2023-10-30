@@ -1,13 +1,17 @@
 import React from 'react'
 import style from './index.module.css';
 
-import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
+import { FaFacebook, FaInstagram, FaTwitter, FaWhatsapp } from 'react-icons/fa';
 
 
 
 
 const Footer = () => {
   return (
+
+    
+    
+
     <div title='Principal' className={style.footer}>
       <div className={style.horarios}>
         <h3 name="horarios">Horarios de atencion:</h3>
@@ -29,11 +33,13 @@ const Footer = () => {
           <FaFacebook className={style.facebook} />
           <FaTwitter className={style.twitter} />
           <FaInstagram className={style.instagram} />
+          <a href='https://walink.co/880caf'><FaWhatsapp  className={style.Whatsapp} /></a>
 
         </div>
 
       </div>
     </div>
+  
   )
 }
 

@@ -1,6 +1,12 @@
+<<<<<<< HEAD:hair/src/components/admin/BodyProduct.js
 import React from "react";
 import { Modal, Button, TextField } from "@material-ui/core";
 import style from "./index.module.css";
+=======
+import React from 'react'
+import { Modal, Button, TextField } from '@material-ui/core';
+import style from '../index.module.css';
+>>>>>>> 1b26eb00861be9c5cadef7d6807f8901cb91591c:hair/src/components/admin/ModalProduct/BodyProduct.js
 
 const BodyProduct = ({
   handleChangeProduct,

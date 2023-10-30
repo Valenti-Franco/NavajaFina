@@ -6,6 +6,7 @@ import FiltersItems from './FiltersItems';
 import { FilterContext } from '../../context/filters';
 
 import { AuthContext } from '../../context/Auth';
+import CategorySelect from './CategorySelect';
 const Filters = () => {
   const {
     filter,
@@ -26,11 +27,12 @@ const Filters = () => {
     }));
   };
 
-  const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
+  const handleCategoryChange = (value) => {
+
+    setCategory(value);
     setFilter((prevFilter) => ({
       ...prevFilter,
-      category: event.target.value,
+      category: value,
     }));
   };
 
@@ -56,7 +58,7 @@ const Filters = () => {
     handlerPriceClear();
     handlerCategoryClear();
   };
-  const {modoOscuro}= useContext(AuthContext) 
+  const { modoOscuro } = useContext(AuthContext)
   return (
     <main className={style.main + (!modoOscuro ? ' ' + style.mainDark : '')}>
       <div className={style.ContainerFilters}>
@@ -76,15 +78,16 @@ const Filters = () => {
         </div>
         <div className={style.container}>
           <label htmlFor='category'>Categoria:</label>
-          <div className={style.filtersItem}>
-            <select id='category' onChange={handleCategoryChange}>
+          {/* <div className={style.filtersItem}> */}
+          {/* <select id='category' onChange={handleCategoryChange}>
               <option value='all'>Todas</option>
               <option value='Tools'>Herraminetas</option>
               <option value='Scissors_Knives'>Tijeras & Navajas</option>
               <option value='Machines'>Maquinas</option>
               <option value='Hair_Care'>Cuidado del Cabello</option>
-            </select>
-          </div>
+            </select> */}
+          <CategorySelect handleCategoryChange={handleCategoryChange} handlerCategoryClear={handlerCategoryClear} />
+          {/* </div> */}
         </div>
         <div onClick={deleteFilters} className={style.delete}>
           <MdDelete />

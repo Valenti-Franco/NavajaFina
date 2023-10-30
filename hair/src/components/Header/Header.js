@@ -1,7 +1,7 @@
 import style from "./index.module.css";
 import logo from "../../assets/logo.png";
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Cart from "../Cart/Cart";
 import { AnimatePresence, motion } from "framer-motion";
 import { FaBars, FaHome, FaTimes, FaUser, FaShopify, FaSignInAlt, FaSignOutAlt, FaSun, FaMoon, FaKey } from "react-icons/fa";
@@ -16,13 +16,15 @@ const Header = () => {
   const [isadmin, setIsAdmin] = useState(false)
   const Auth = useContext(AuthContext)
   const { modoOscuro, setModoOscuro } = useContext(AuthContext)
-  console.log(Auth)
+
 
   useEffect(() => {
     if (Auth.auth.id !== undefined) {
       toast.success('Session iniciada', { autoClose: 1500 });
+      if (Auth.auth.role === "Admin" || Auth.auth.role === "Editor") {
 
-      setIsAdmin(true)
+        setIsAdmin(true)
+      }
 
 
     } else {
@@ -71,6 +73,8 @@ const Header = () => {
     autenticarUsuario(); // Llama a autenticarUsuario desde el contexto para actualizar el estado de autenticación
 
   };
+  const location = useLocation();
+  console.log(location)
   return (
 
     <>
@@ -109,28 +113,28 @@ const Header = () => {
 
           className={` ${isScrolled ? style.logoScroll : style.logo}`}>
 
-          <Link to="/">
+          <Link to="NavajaFina/">
             <img src={logo} alt="logo" />
           </Link>
 
         </motion.div>
         <nav onClick={handleLinkClick} className={`${style.nav1} }`}>
-          <Link to="/"><FaHome /> INICIO</Link>
+          <Link to="NavajaFina/" className={location.pathname === "/NavajaFina/" ? style.Active : ""} ><FaHome /> INICIO</Link>
 
-          <Link to='/products'><FaShopify /> Productos</Link>
+          <Link to='NavajaFina/products' className={location.pathname === "/NavajaFina/products" ? style.Active : ""}><FaShopify /> PRODUCTOS</Link>
           {isadmin ? (
-            <Link to="/admin"><FaKey />PANEL</Link>
+            <Link className={location.pathname === "/NavajaFina/admin" ? style.Active : ""} to="NavajaFina/admin"><FaKey />PANEL</Link>
           ) : null}
           {Auth.auth.id ? (
             <>
               <ToastContainer />
-              <Link to='/perfil'><FaUser /> Perfil</Link>
+              <Link to='NavajaFina/perfil' className={location.pathname === "/NavajaFina/perfil" ? style.Active : ""}><FaUser /> PERFIL</Link>
               <Link onClick={handlerSingOut}><FaSignOutAlt />Cerrar Sesión</Link>
             </>
           ) : (
             <>
               <ToastContainer />
-              <Link to="/login"><FaSignInAlt /> Iniciar sesión</Link>
+              <Link to="NavajaFina/login" className={location.pathname === "/NavajaFina/login" ? style.Active : ""}><FaSignInAlt />INICIAR SESIÓN</Link>
             </>
           )}
           <a onClick={handelModocuro} style={{ color: "#fff" }}>
@@ -157,26 +161,52 @@ const Header = () => {
               exit={{ x: "-100%", opacity: 1 }}
               transition={{ duration: .5 }}
               onClick={handleLinkClick} className={`${style.nav} ${clicked ? isScrolled ? style.activeScroll : style.active : ""}`}>
-              <Link onClick={handleClick} to="/"><FaHome /> INICIO</Link>
+              <Link onClick={handleClick} to="NavajaFina/"><FaHome /> INICIO</Link>
 
-              <Link onClick={handleClick} to='/products'><FaShopify /> Productos</Link>
-
-              {Auth.auth._id ? (
+              <Link onClick={handleClick} to='NavajaFina/products'><FaShopify /> PRODUCTOS</Link>
+              {isadmin ? (
+                <Link className={location.pathname === "/NavajaFina/admin" ? style.Active : ""} to="NavajaFina/admin"><FaKey />PANEL</Link>
+              ) : null}
+              {Auth.auth.id ? (
                 <>
-                  <Link onClick={handleClick} to='/perfil'><FaUser /> Perfil</Link>
-                  <Link onClick={() => { handlerSingOut(); handleClick(); }}><FaSignOutAlt />Cerrar Sesión</Link>
+                  <ToastContainer />
+                  <Link to='NavajaFina/perfil' className={location.pathname === "/NavajaFina/perfil" ? style.Active : ""}><FaUser /> PERFIL</Link>
+                  <Link onClick={handlerSingOut}><FaSignOutAlt />Cerrar Sesión</Link>
                 </>
               ) : (
-                <Link to="/signin"><FaSignInAlt /> Iniciar sesión </Link>
-
+                <>
+                  <ToastContainer />
+                  <Link to="NavajaFina/login" className={location.pathname === "/NavajaFina/login" ? style.Active : ""}><FaSignInAlt />INICIAR SESIÓN</Link>
+                </>
               )}
+
+              <a onClick={handelModocuro} style={{ color: "#fff" }}>
+                {!modoOscuro ? (
+
+
+                  <>
+
+                    <FaMoon className={style.oscuro} />
+                    <p style={{ color: "#fff" }}>Modo Oscuro </p>
+                  </>
+                ) : (
+                  <>
+
+                    <FaSun className={style.oscuro} />
+                    <p style={{ color: "#fff" }}>Modo Claro </p>
+                  </>
+
+                )}
+              </a>
 
             </motion.nav>
           ) : null}
         </AnimatePresence>
+        {Auth.auth?.role !== "Admin" && Auth.auth?.role !== "Editor" ? (
 
-        <Cart />
-      </header>
+          location.pathname !== '/NavajaFina/cart' ? <Cart /> : null
+        ) : (null)}
+      </header >
     </>
   );
 };

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import style from "./index.module.css";
@@ -347,6 +348,51 @@ const AdminComponent = () => {
       },
     },
     { field: "id", headerName: "ID", width: 90 },
+=======
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import style from './index.module.css';
+import { AuthContext } from '../../context/Auth';
+import axios from 'axios';
+import Box from '@mui/material/Box';
+import { makeStyles } from '@material-ui/core/styles';
+import { DataGrid } from '@mui/x-data-grid';
+import { MdAttachMoney, MdCheck, MdDelete, MdEdit } from 'react-icons/md';
+import { Modal, Button, TextField, Avatar } from '@material-ui/core';
+import BodyProduct from './ModalProduct/BodyProduct';
+import BodyProductEdit from './ModalProduct/BodyProductEdit';
+import { ToastContainer, toast } from 'react-toastify';
+import BodyDeleteProduct from './ModalProduct/BodyDeleteProduct';
+import BodyProductImg from './ModalProduct/BodyProductImg';
+import BodyDeleteUser from './ModalUser/BodyDeleteUser';
+import BodyUsuarioEdit from './ModalUser/BodyUsuarioEdit';
+
+// import config from '../../utils/Config';
+
+import { createChart } from 'lightweight-charts';
+import { ChartComponent, processData } from './GraficaCompra';
+
+import { comprasColumns, obtenerCompras } from './ColumnsTabla/comprasColumns';
+import { usuariosColumns } from './ColumnsTabla/usuariosComuns';
+import { subcategoryColumns } from './ColumnsTabla/subCategoryColumns';
+import { categoryColumns } from './ColumnsTabla/categoryColumns';
+import { productosColumns } from './ColumnsTabla/productosColumns';
+import { ChartOrdenComponent, processOrdenData } from './GraficaOrdenCompra';
+import { obtenerOrdenCompras, ordenComprasColumns } from './ColumnsTabla/ordenComprasColumns';
+const token = localStorage.getItem("_id");
+
+const config = {
+  headers: {
+    'Authorization': `Bearer ${token}` // Agrega el token JWT en la cabecera de autorización
+  }
+};
+
+
+const AdminComponent = () => {
+
+
+
+>>>>>>> 1b26eb00861be9c5cadef7d6807f8901cb91591c
 
     {
       field: "nombre",
@@ -370,16 +416,29 @@ const AdminComponent = () => {
 
   const { modoOscuro } = useContext(AuthContext);
 
+<<<<<<< HEAD
+=======
+  const { modoOscuro } = useContext(AuthContext)
+
+>>>>>>> 1b26eb00861be9c5cadef7d6807f8901cb91591c
   // const [users, setUsers] = useState([]);
   const [category, setCategory] = useState([]);
   const [subcategory, setSubCategory] = useState([]);
   const [compras, setCompras] = useState([]);
+<<<<<<< HEAD
+=======
+  const [ordenCompras, setOrdenCompras] = useState([]);
+>>>>>>> 1b26eb00861be9c5cadef7d6807f8901cb91591c
+
+  const navigate = useNavigate();
+
 
   const navigate = useNavigate();
 
   //CONST PRODUCT
   const [products, setProducts] = useState([]);
   const [usuario, setUsuarios] = useState([]);
+<<<<<<< HEAD
 
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedUsuario, setSelectedUsuario] = useState(null);
@@ -412,6 +471,19 @@ const AdminComponent = () => {
   //delete
 
   const [modalDeleteCategory, setModalDeleteCategory] = useState(false);
+=======
+  const [chartData, setChartData] = useState([]);
+  const [chartOrdenData, setChartOrdenData] = useState([]);
+
+
+
+
+
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedUsuario, setSelectedUsuario] = useState(null);
+
+
+>>>>>>> 1b26eb00861be9c5cadef7d6807f8901cb91591c
 
   const [modalInsertarProduct, setModalInsertarProduct] = useState(false);
 
@@ -420,11 +492,22 @@ const AdminComponent = () => {
   const [modalEditProduct, setModalEditProduct] = useState(false);
   const [modalEditUsuario, setModalEditUsuario] = useState(false);
 
+<<<<<<< HEAD
   const [modalDeleteProduct, setModalDeleteProduct] = useState(false);
   const [modalDeleteUsuario, setModalDeleteUsuario] = useState(false);
 
   const [idProducto, setIdProducto] = useState("");
   const [idUsuario, setIdUsuario] = useState("");
+=======
+
+  const [modalDeleteProduct, setModalDeleteProduct] = useState(false);
+  const [modalDeleteUsuario, setModalDeleteUsuario] = useState(false);
+
+
+  const [idProducto, setIdProducto] = useState("");
+  const [idUsuario, setIdUsuario] = useState("");
+
+>>>>>>> 1b26eb00861be9c5cadef7d6807f8901cb91591c
 
   const [productEdit, setProductEdit] = useState({
     nombre: "",
@@ -435,6 +518,10 @@ const AdminComponent = () => {
   const [usuarioEdit, setUsuarioEdit] = useState({
     role: "",
   });
+  const [usuarioEdit, setUsuarioEdit] = useState({
+    role: ''
+  });
+
 
   const [productEditImg, setProductEditImg] = useState({
     imagenes: [],
@@ -449,8 +536,32 @@ const AdminComponent = () => {
     stock: "",
   });
 
+<<<<<<< HEAD
   //////****************************************************************************************** */
   const handleChangesubCategoryEdit = (e) => {
+=======
+    nombre: '',
+    categoryId: '',
+    subcategoryId: '',
+    precio: '',
+    descripcion: '',
+    stock: '',
+
+
+  })
+
+  const handleChangeUsuarioEdit = e => {
+
+    const { name, value } = e.target;
+    // console.log(name, value);
+    setUsuarioEdit(prevState => ({
+      ...prevState,
+      [name]: value
+    }))
+  }
+  const handleChangeProductEdit = e => {
+
+>>>>>>> 1b26eb00861be9c5cadef7d6807f8901cb91591c
     const { name, value } = e.target;
     setProductEdit((prevState) => ({
       ...prevState,
@@ -703,6 +814,35 @@ const AdminComponent = () => {
       }
     }
   };
+  const abrirCerrarModalDeleteUsuario = (usuarioId) => {
+
+    setModalDeleteUsuario(!modalDeleteUsuario);
+
+    setIdUsuario(usuarioId)
+    // Si hay un elemento seleccionado, establece modalEditProduct en función de sus valores
+
+  };
+
+
+  const abrirCerrarModalEditUsuario = (usuarioId) => {
+
+    setModalEditUsuario(!modalEditUsuario);
+    setSelectedUsuario(usuarioId);
+    setIdUsuario(usuarioId)
+    // Si hay un elemento seleccionado, establece modalEditusuario en función de sus valores
+    if (usuarioId) {
+      const selectedUsuarioData = usuario.find((usuario) => usuario.id === usuarioId);
+      // console.log(usuario)
+
+      // console.log(selectedusuarioData)
+      if (selectedUsuarioData) {
+        setUsuarioEdit({
+          role: selectedUsuarioData.role,
+
+        });
+      }
+    }
+  };
   const abrirCerrarModalEditProduct = (productId) => {
     setModalEditProduct(!modalEditProduct);
     setSelectedProduct(productId);
@@ -744,17 +884,26 @@ const AdminComponent = () => {
   const Auth = useContext(AuthContext);
 
   useEffect(() => {
+<<<<<<< HEAD
     if (Auth.auth.role !== "Admin" && Auth.auth?.role !== "Editor") {
       navigate("/");
+=======
+    if (Auth.auth.role !== 'Admin' && Auth.auth?.role !== "Editor") {
+      navigate('/');
+>>>>>>> 1b26eb00861be9c5cadef7d6807f8901cb91591c
     }
-  }, [Auth]);
 
+<<<<<<< HEAD
   useEffect(() => {
     // console.log(config)
+=======
+
+>>>>>>> 1b26eb00861be9c5cadef7d6807f8901cb91591c
     obtenerUsuarios();
     obtenerProductos();
     obtenerCategoria();
     obtenerSubCategoria();
+<<<<<<< HEAD
     obtenerCompras();
 
     // console.log(products)
@@ -766,19 +915,50 @@ const AdminComponent = () => {
   //     'Authorization': `Bearer ${token}` // Agrega el token JWT en la cabecera de autorización
   //   }
   // };
+=======
+    obtenerCompras({
+      setCompras, // Asegúrate de que setCompras sea la función apropiada
+      processData,
+      setChartData
+    });
+
+    obtenerOrdenCompras({
+      setOrdenCompras, // Asegúrate de que setCompras sea la función apropiada
+      processOrdenData,
+      setChartOrdenData
+    });
+
+  }, [Auth]);
+
+  // console.log(usuario)
+
+>>>>>>> 1b26eb00861be9c5cadef7d6807f8901cb91591c
 
   //CRUD USER
   const obtenerUsuarios = async () => {
     try {
+<<<<<<< HEAD
       const response = await axios.get(
         "https://tpibarbershop20231015224614.azurewebsites.net/api/Usuarios/Admin",
         config
       );
+=======
+      const response = await axios.get('https://tpibarbershop20231015224614.azurewebsites.net/api/Usuarios/Admin', config);
+
+      setUsuarios(response.data)
+>>>>>>> 1b26eb00861be9c5cadef7d6807f8901cb91591c
 
       setUsuarios(response.data);
     } catch (error) {
+<<<<<<< HEAD
       if (Auth.auth.role !== "Admin" && Auth.auth?.role !== "Editor") {
         navigate("/");
+=======
+
+      if (Auth.auth.role !== 'Admin' && Auth.auth?.role !== "Editor") {
+
+        navigate('/');
+>>>>>>> 1b26eb00861be9c5cadef7d6807f8901cb91591c
       }
 
       console.error(error);
@@ -787,11 +967,16 @@ const AdminComponent = () => {
   //CRUD CATEGORY
   const obtenerCategoria = async () => {
     try {
+<<<<<<< HEAD
       const response = await axios.get(
         "https://tpibarbershop20231015224614.azurewebsites.net/api/Category",
         config
       );
       const CategoryData = response.data;
+=======
+      const response = await axios.get('https://tpibarbershop20231015224614.azurewebsites.net/api/Category', config);
+      const CategoryData = response.data
+>>>>>>> 1b26eb00861be9c5cadef7d6807f8901cb91591c
       setCategory(CategoryData);
     } catch (error) {
       console.error(error);
@@ -864,7 +1049,25 @@ const AdminComponent = () => {
     }
   };
 
+<<<<<<< HEAD
   const subcategoryPost = async () => {
+=======
+
+  //CRUD PRODUCT
+  const obtenerProductos = async () => {
+
+    // Realiza la solicitud GET con el token JWT
+    try {
+      const response = await axios.get('https://tpibarbershop20231015224614.azurewebsites.net/api/productos', config);
+      // console.log(response)
+
+      setProducts(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const productPost = async () => {
+>>>>>>> 1b26eb00861be9c5cadef7d6807f8901cb91591c
     try {
       const response = await axios.post(
         "https://tpibarbershop20231015224614.azurewebsites.net/api/SubCategory/Admin",
@@ -886,6 +1089,60 @@ const AdminComponent = () => {
       console.error(error);
     }
   };
+<<<<<<< HEAD
+=======
+
+
+  const usuarioPutAdmin = async () => {
+
+    try {
+      const response = await axios.put(
+        `https://tpibarbershop20231015224614.azurewebsites.net/api/Usuarios/CrearAdmin/${idUsuario}`,
+        {
+
+        },
+        config // Agrega el encabezado con el token JWT
+      );
+      if (response.status === 204) {
+        toast.success('Usuario Modificado Con Rol Admin!', {
+          position: 'top-right', // Puedes personalizar la posición
+          autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
+        });
+      }
+      // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
+      obtenerUsuarios(); // Reutiliza la función que ya tienes para obtener productos
+      abrirCerrarModalEditUsuario(); // Reutiliza el product
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const usuarioPutEditor = async () => {
+
+    try {
+      const response = await axios.put(
+        `https://tpibarbershop20231015224614.azurewebsites.net/api/Usuarios/CrearEditor/${idUsuario}`,
+        {
+
+        },
+        config // Agrega el encabezado con el token JWT
+      );
+      if (response.status === 204) {
+        toast.success('Usuario Modificado Con Rol Editor!', {
+          position: 'top-right', // Puedes personalizar la posición
+          autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
+        });
+      }
+      // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
+      obtenerUsuarios(); // Reutiliza la función que ya tienes para obtener productos
+      abrirCerrarModalEditUsuario(); // Reutiliza el product
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const productPut = async () => {
+>>>>>>> 1b26eb00861be9c5cadef7d6807f8901cb91591c
 
   // const productPut = async () => {
   //     try {
@@ -1113,6 +1370,29 @@ const AdminComponent = () => {
       console.error(error);
     }
   };
+
+
+
+  const usuarioDelete = async () => {
+    try {
+      const response = await axios.delete(
+        `https://tpibarbershop20231015224614.azurewebsites.net/api/Usuarios/${idUsuario}/Admin`,
+        config // Agrega el encabezado con el token JWT
+      );
+      if (response.status === 204) {
+        toast.success('Usuario eliminado correctamente', {
+          position: 'top-right', // Puedes personalizar la posición
+          autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
+        });
+      }
+      // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
+      obtenerUsuarios(); // Reutiliza la función que ya tienes para obtener productos
+      abrirCerrarModalDeleteUsuario(); // Reutiliza el product
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const productDelete = async () => {
     try {
       const response = await axios.delete(
@@ -1120,8 +1400,13 @@ const AdminComponent = () => {
         config // Agrega el encabezado con el token JWT
       );
       if (response.status === 204) {
+<<<<<<< HEAD
         toast.success("Producto eliminado correctamente", {
           position: "top-right", // Puedes personalizar la posición
+=======
+        toast.success('Producto eliminado correctamente', {
+          position: 'top-right', // Puedes personalizar la posición
+>>>>>>> 1b26eb00861be9c5cadef7d6807f8901cb91591c
           autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
         });
       }
@@ -1160,7 +1445,11 @@ const AdminComponent = () => {
       reader.readAsDataURL(archivo);
 
       reader.onload = async () => {
+<<<<<<< HEAD
         const base64 = reader.result.split(",")[1]; // Remove the prefix
+=======
+        const base64 = reader.result.split(',')[1]; // Remove the prefix
+>>>>>>> 1b26eb00861be9c5cadef7d6807f8901cb91591c
         // console.log(base64);
         try {
           const response = await axios.post(
@@ -1201,6 +1490,7 @@ const AdminComponent = () => {
   };
 
   return (
+<<<<<<< HEAD
     <div className={style.main + (!modoOscuro ? " " + style.mainDark : "")}>
       <div
         className={
@@ -1216,6 +1506,21 @@ const AdminComponent = () => {
                 <DataGrid
                   rows={usuario}
                   columns={usuariosColumns}
+=======
+    <div className={style.main + (!modoOscuro ? ' ' + style.mainDark : '')}>
+      <div className={style.AdminContainer + (!modoOscuro ? ' ' + style.AdminContainerDark : '')}>
+        {Auth.auth?.role !== "Editor" ? (
+          <>
+
+            <div className={style.Container}>
+
+              <h1 className={style.title}>USUARIOS</h1>
+              {/* <createChart style={{ height: 400, width: '100%' }} /> */}
+              <Box sx={{ height: 400, width: '100%' }}>
+                <DataGrid
+                  rows={usuario}
+                  columns={usuariosColumns(abrirCerrarModalDeleteUsuario, abrirCerrarModalEditUsuario)}
+>>>>>>> 1b26eb00861be9c5cadef7d6807f8901cb91591c
                   autoPageSize
                   // checkboxSelection
                   disableColumnSelector
@@ -1224,7 +1529,12 @@ const AdminComponent = () => {
               </Box>
             </div>
           </>
+<<<<<<< HEAD
         ) : null}
+=======
+        ) : (null)}
+
+>>>>>>> 1b26eb00861be9c5cadef7d6807f8901cb91591c
 
         <div className={style.Container}>
           <h1 className={style.title}>PRODUCTOS</h1>
@@ -1232,7 +1542,7 @@ const AdminComponent = () => {
           <Box sx={{ height: 400, width: "100%" }}>
             <DataGrid
               rows={products}
-              columns={productosColumns}
+              columns={productosColumns(abrirCerrarModalDeleteProduct, abrirCerrarModalEditProduct)}
               autoPageSize
               // checkboxSelection
               disableColumnSelector
@@ -1277,6 +1587,47 @@ const AdminComponent = () => {
             />
           </Box>
         </div>
+        <div className={style.Container}>
+          <h1 className={style.title}>COMPRAS</h1>
+          {chartData.length ? (
+
+            <ChartComponent style={{ height: 400, width: '100%' }} data={chartData}></ChartComponent>
+          ) : null
+
+          }
+          {/* <ChartComponent style={{ height: 400, width: '100%' }} data={initialData}></ChartComponent> */}
+          <Box sx={{ height: 400, width: '100%' }}>
+            <DataGrid
+              rows={compras}
+              columns={comprasColumns}
+              autoPageSize
+              // checkboxSelection
+              disableColumnSelector
+              disableColumnMenu
+            />
+          </Box>
+        </div>
+        <div className={style.Container}>
+          <h1 className={style.title}>ORDEN DE COMPRAS</h1>
+          {chartData.length ? (
+
+            <ChartOrdenComponent style={{ height: 400, width: '100%' }} data={chartOrdenData}></ChartOrdenComponent>
+          ) : null
+
+          }
+          {/* <ChartComponent style={{ height: 400, width: '100%' }} data={initialData}></ChartComponent> */}
+          <Box sx={{ height: 400, width: '100%' }}>
+            <DataGrid
+              rows={ordenCompras}
+              columns={ordenComprasColumns}
+              autoPageSize
+              // checkboxSelection
+              disableColumnSelector
+              disableColumnMenu
+            />
+          </Box>
+        </div>
+
 
         <div className={style.Container}>
           <h1 className={style.title}>COMPRAS</h1>
@@ -1292,6 +1643,11 @@ const AdminComponent = () => {
           </Box>
         </div>
       </div>
+
+
+
+
+
       <Modal
         open={modalInsertarProduct}
         OnClose={abrirCerrarModalInsertarProduct}
@@ -1334,26 +1690,49 @@ const AdminComponent = () => {
         />
       </Modal>
 
+<<<<<<< HEAD
       <Modal open={modalDeleteUsuario} OnClose={abrirCerrarModalDeleteUsuario}>
+=======
+      <Modal
+        open={modalDeleteUsuario}
+        OnClose={abrirCerrarModalDeleteUsuario}
+      >
+>>>>>>> 1b26eb00861be9c5cadef7d6807f8901cb91591c
         <BodyDeleteUser
           usuarioDelete={usuarioDelete}
           usuarioId={idUsuario}
           abrirCerrarModalDeleteUsuario={abrirCerrarModalDeleteUsuario}
+<<<<<<< HEAD
         />
       </Modal>
 
       <Modal open={modalEditUsuario} OnClose={abrirCerrarModalEditUsuario}>
+=======
+
+        />
+      </Modal>
+
+      <Modal
+        open={modalEditUsuario}
+        OnClose={abrirCerrarModalEditUsuario}
+      >
+>>>>>>> 1b26eb00861be9c5cadef7d6807f8901cb91591c
         <BodyUsuarioEdit
           handleChangeUsuario={handleChangeUsuarioEdit}
           abrirCerrarModalUsuario={abrirCerrarModalEditUsuario}
           usuarioEdit={usuarioEdit}
           usuarioPutEditor={usuarioPutEditor}
           usuarioPutAdmin={usuarioPutAdmin}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1b26eb00861be9c5cadef7d6807f8901cb91591c
           idUsuario={idUsuario}
           abrirCerrarModalEditUsuario={abrirCerrarModalEditUsuario}
         />
       </Modal>
 
+<<<<<<< HEAD
       <Modal open={modalInsertCategory} onClose={openCloseModalInsertCategory}>
         <BodyCategory
           handleChangeCategory={handleChangeCategory}
@@ -1411,6 +1790,11 @@ const AdminComponent = () => {
 
       <ToastContainer />
     </div>
+=======
+      <ToastContainer />
+    </div >
+
+>>>>>>> 1b26eb00861be9c5cadef7d6807f8901cb91591c
   );
 };
 

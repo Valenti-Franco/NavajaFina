@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
 import style from './index.module.css';
 import "swiper/css";
@@ -13,15 +13,15 @@ import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { AnimatePresence, motion } from 'framer-motion';
+import { AuthContext } from '../../context/Auth';
 
 
 const ProductCard = ({ product, setListView, listView }) => {
+  const Auth = useContext(AuthContext);
+
 
   const [descriptionOn, setDescriptionOn] = useState(false)
   const images = product.imagenes
-  // .slice(1, -1) // Eliminar los caracteres de apertura y cierre ({})
-  // .split(",") // Dividir la cadena en elementos individuales
-  // .map((image) => image.trim());
   const firstImageUrls = [];
   for (let i = 0; i < images.length; i++) {
     const imagesrc = images[i];
@@ -29,8 +29,7 @@ const ProductCard = ({ product, setListView, listView }) => {
       firstImageUrls.push(imagesrc.url);
     }
   }
-
-  // console.log(firstImageUrls);
+  // console.log(auth)
   const handlerDescription = () => {
     setDescriptionOn(!descriptionOn);
   }
@@ -45,10 +44,32 @@ const ProductCard = ({ product, setListView, listView }) => {
         mousewheel={true}
         keyboard={true}
         modules={[Navigation, Pagination, Mousewheel, Keyboard]} className={style.mySwiper}>
-        {firstImageUrls.map((imagesrc, index) => (
+        {firstImageUrls.length === 0 ? (
 
-          <SwiperSlide className={style.swiperSlide} key={index}> <LazyLoadImage src={imagesrc} width={330} height={330} placeholderSrc={imagesrc} effect="blur" className={style.slideBackground} /> </SwiperSlide>
-        ))}
+          <SwiperSlide className={style.swiperSlide} >
+            <LazyLoadImage
+              src={'https://res.cloudinary.com/deh35rofi/image/upload/v1698212497/producto-sin-imagen_basarf.png'}
+              width={330}
+              height={330}
+              placeholderSrc={'https://res.cloudinary.com/deh35rofi/image/upload/v1698212497/producto-sin-imagen_basarf.png'}
+              effect="blur"
+              className={style.slideBackground}
+            />
+          </SwiperSlide>
+        ) :
+          firstImageUrls.map((imagesrc, index) => (
+            <SwiperSlide className={style.swiperSlide} key={index}>
+              <LazyLoadImage
+                src={imagesrc !== [] ? imagesrc : 'https://res.cloudinary.com/deh35rofi/image/upload/v1698212497/producto-sin-imagen_basarf.png'}
+                width={330}
+                height={330}
+                placeholderSrc={imagesrc}
+                effect="blur"
+                className={style.slideBackground}
+              />
+            </SwiperSlide>
+          ))}
+
       </Swiper>
       <AnimatePresence>
         {descriptionOn ? (
@@ -77,11 +98,21 @@ const ProductCard = ({ product, setListView, listView }) => {
       <div className={style.ContainertextProduct}>
 
 
-        <Link className={style.icontextProduct} to={`/products/${product.id}`}>
-          Ver Producto <FaRegEye />
-        </Link>
 
-        <BtnCart product={product} />
+        {Auth.auth?.role !== "Admin" && Auth.auth?.role !== "Editor" ? (
+          <>
+
+            <Link className={style.icontextProduct} to={`/NavajaFina/products/${product.id}`}>
+              Ver Producto <FaRegEye />
+            </Link>
+            <BtnCart product={product} />
+          </>
+        ) : (
+          <Link className={style.icontextProduct2} to={`/NavajaFina/products/${product.id}`}>
+            Ver Producto <FaRegEye />
+          </Link>
+        )
+        }
 
       </div>
 
