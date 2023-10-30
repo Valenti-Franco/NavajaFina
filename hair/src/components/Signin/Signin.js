@@ -24,7 +24,7 @@ const Signin = () => {
     const handleSubmitRegister = async e => {
         e.preventDefault();
 
-        if ([nombre, email, password, repetirPassword].includes('')) {
+        if ([nombre, usuario, email, password, repetirPassword].includes('')) {
 
             toast.error('Todos los campos son obligatorios');
 
@@ -107,13 +107,22 @@ const Signin = () => {
                         onChange={e => setNombre(e.target.value)}
                     />
                 </div>
-               
+                <div className={style.divcontainer}>
+                    <input
+                        id="Usuario"
+                        type="text"
+                        placeholder="Apellido"
+                        className={style.inputcontainer}
+                        value={usuario}
+                        onChange={e => setUsuario(e.target.value)}
+                    />
+                </div>
 
                 <div className={style.divcontainer}>
                     <input
                         id="email"
                         type="email"
-                        placeholder="Correo electrónico"
+                        placeholder="Número de móvil o correo electrónico"
                         className={style.inputcontainer}
                         value={email}
                         onChange={e => setEmail(e.target.value)}

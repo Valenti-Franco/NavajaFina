@@ -29,7 +29,6 @@ import RegistroEmail from './components/RegistroEmail/RegistroEmail';
 
 
 import VerificarToken from './components/Perfil/VerificarToken';
-import VerificarTokenEmail from './components/Signin/VerificarTokenEmail';
 
 
 
@@ -52,16 +51,12 @@ function App() {
                 <ProductsPage />
               </FIlterProvider>
             } />
-
-            <Route path='/login' element={<Login />} />
-            <Route path='/signin' element={<Signin />} />
-            <Route path='/products/:id' element={<ProductDetail />} />
-            <Route path='/cart' element={<CartPage />} />
-            <Route path='/perfil' element={<Perfil />} />
-            <Route path='/VerificarToken/' element={<VerificarToken />} />
-            <Route path='/VerificarTokenEmail/:token' element={<VerificarTokenEmail />} />
-
-
+            <Route path='NavajaFina/login' element={<Login />} />
+            <Route path='NavajaFina/signin' element={<Signin />} />
+            <Route path='NavajaFina/products/:id' element={<ProductDetail />} />
+            <Route path='NavajaFina/cart' element={<CartPage />} />
+            <Route path='NavajaFina/perfil' element={<Perfil />} />
+            <Route path='NavajaFina/VerificarToken/' element={<VerificarToken />} />
 
 
 
