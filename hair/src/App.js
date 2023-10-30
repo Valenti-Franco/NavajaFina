@@ -45,30 +45,31 @@ function App() {
         <Header />
         <AnimatePresence>
           <Routes>
-            <Route path='NavajaFina/' element={<Main />} />
-            <Route path='NavajaFina/products' element={
+            <Route path='/' element={<Main />} />
+            <Route path='/products' element={
               <FIlterProvider>
                 <ProductsPage />
               </FIlterProvider>
             } />
-            <Route path='NavajaFina/login' element={<Login />} />
-            <Route path='NavajaFina/signin' element={<Signin />} />
-            <Route path='NavajaFina/products/:id' element={<ProductDetail />} />
-            <Route path='NavajaFina/cart' element={<CartPage />} />
-            <Route path='NavajaFina/perfil' element={<Perfil />} />
-            <Route path='NavajaFina/VerificarToken/' element={<VerificarToken />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/signin' element={<Signin />} />
+            <Route path='/products/:id' element={<ProductDetail />} />
+            <Route path='/cart' element={<CartPage />} />
+            <Route path='/perfil' element={<Perfil />} />
+            <Route path='/VerificarToken' element={<VerificarToken />} />
 
 
 
-            <Route path='NavajaFina/admin' element={<AdminComponent />} />
-            <Route path='NavajaFina/BuyForm' element={<BuyForm />} />
-            <Route path='NavajaFina*' element={<NotFoundPage />} />
-            {/* <Route path='NavajaFina/RegistroEmail' element={<RegistroEmail/>} /> */}
+            <Route path='/admin' element={<AdminComponent />} />
+            <Route path='/BuyForm' element={<BuyForm />} />
+            {/* <Route path='NavajaFina*' element={<NotFoundPage />} /> */}
+            <Route path='/RegistroEmail' element={<RegistroEmail />} />
 
-            <Route path='NavajaFina/admin' element={<AdminComponent />} />
-            <Route path='NavajaFina/BuyForm' element={<BuyForm />} />
-            <Route path='NavajaFina/*' element={<NotFoundPage />} />
+            <Route path='/admin' element={<AdminComponent />} />
+            <Route path='/BuyForm' element={<BuyForm />} />
             <Route path='/*' element={<NotFoundPage />} />
+            <Route path='/*' element={<NotFoundPage />} />
+
 
 
 

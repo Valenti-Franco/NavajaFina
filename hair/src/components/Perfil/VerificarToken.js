@@ -46,7 +46,7 @@ const VerificarToken = () => {
         <div className={style.mainToken}>
             <h1 style={{ textAlign: "center" }}>{verificationMessage}</h1>
             <h1 style={{ textAlign: "center" }}>Respuesta: {responseMessage}</h1>
-            <Link to="NavajaFina/" className={style.btnVolver}>VOLVER</Link>
+            <Link to="/" className={style.btnVolver}>VOLVER</Link>
         </div>
     );
 };

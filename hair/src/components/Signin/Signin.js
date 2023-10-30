@@ -94,7 +94,7 @@ const Signin = () => {
                 className={style.formreg}
                 onSubmit={handleSubmitRegister}
             >
-                <Link className={style.x} to="/NavajaFina/login"><FaTimes /></Link>
+                <Link className={style.x} to="/login"><FaTimes /></Link>
                 <h2 className={style.tittle}>Registro</h2>
                 <div className={style.divcontainer}>
 
@@ -157,7 +157,7 @@ const Signin = () => {
                         className={style.button}
                     />
                     <div className={style.divcontainer}>
-                        <p>¿Ya tenes una cuenta?  <Link className={style.createa} to="/NavajaFina/Login">Iniciar Sesión
+                        <p>¿Ya tenes una cuenta?  <Link className={style.createa} to="/Login">Iniciar Sesión
                         </Link> </p>
                     </div>
                 </div>

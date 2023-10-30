@@ -102,7 +102,7 @@ const Cart = () => {
                   <p>Total: ${total}</p>
                   <div className={style.containerbtnComprarCarrito}>
                     <button className={style.btnClear} onClick={clearCart}><MdDelete /></button>
-                    <Link className={style.btnComprarCarrito} to="NavajaFina/cart">
+                    <Link className={style.btnComprarCarrito} to="/cart">
                       IR A PAGAR
                     </Link>
                   </div>

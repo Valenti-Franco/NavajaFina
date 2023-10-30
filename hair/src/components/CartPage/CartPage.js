@@ -166,7 +166,7 @@ const CartPage = () => {
                                     <>
 
                                         <button onClick={handlerCrearOrden} className={style.but}>Crear Orden de Compra</button>
-                                        <Link className={style.a} to="NavajaFina/Products"><button className={style.com}>CONTINUAR COMPRANDO</button></Link>
+                                        <Link className={style.a} to="/Products"><button className={style.com}>CONTINUAR COMPRANDO</button></Link>
                                     </>
 
 

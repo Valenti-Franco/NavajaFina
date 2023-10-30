@@ -182,7 +182,7 @@ const BuyForm = () => {
           )}
           <div className={style.buttons}>
 
-            <Link className={style.a} to="NavajaFina/cart">
+            <Link className={style.a} to="/cart">
               <button className={style.com}>Volver al Carrito</button>
             </Link>
           </div>

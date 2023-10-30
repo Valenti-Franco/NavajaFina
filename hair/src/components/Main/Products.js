@@ -40,7 +40,7 @@ const Products = () => {
             <p className={style.textProduct}>
               Bienvenidos a la sección de productos de barbería, donde encontrarás una amplia gama de artículos para el cuidado de la barba, el cabello y el afeitado. Nuestra selección incluye productos de alta calidad y herramientas profesionales para ayudarte a lograr un estilo impecable. Explora nuestra variedad y descubre cómo nuestros productos pueden mejorar tu rutina de cuidado personal.
             </p>
-            <Link className={style.icontextProduct} to="NavajaFina/products">
+            <Link className={style.icontextProduct} to='/products'>
               Ver Productos <FaRegEye />
             </Link>
           </div>
@@ -100,12 +100,12 @@ const Products = () => {
     <div className={style.containerPeinados + (!modoOscuro ? ' ' + style.containerPeinadosDark : '')}>
       <h1 className={style.title}>PRODUCTOS</h1>
       <div className={style.containerProduct}>
-        <EffectCardProduct />
+        <EffectCardProduct products={products} />
         <div className={style.ContainertextProduct}>
           <p className={style.textProduct}>
             Bienvenidos a la sección de productos de barbería, donde encontrarás una amplia gama de artículos para el cuidado de la barba, el cabello y el afeitado. Nuestra selección incluye productos de alta calidad y herramientas profesionales para ayudarte a lograr un estilo impecable. Explora nuestra variedad y descubre cómo nuestros productos pueden mejorar tu rutina de cuidado personal.
           </p>
-          <Link className={style.icontextProduct} to="/NavajaFina/products">
+          <Link className={style.icontextProduct} to="/products">
             Ver Productos <FaRegEye />
           </Link>
         </div>

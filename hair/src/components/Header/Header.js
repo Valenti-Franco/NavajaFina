@@ -74,7 +74,7 @@ const Header = () => {
 
   };
   const location = useLocation();
-  console.log(location)
+  // console.log(location)
   return (
 
     <>
@@ -113,28 +113,28 @@ const Header = () => {
 
           className={` ${isScrolled ? style.logoScroll : style.logo}`}>
 
-          <Link to="NavajaFina/">
+          <Link to="/">
             <img src={logo} alt="logo" />
           </Link>
 
         </motion.div>
         <nav onClick={handleLinkClick} className={`${style.nav1} }`}>
-          <Link to="NavajaFina/" className={location.pathname === "/NavajaFina/" ? style.Active : ""} ><FaHome /> INICIO</Link>
+          <Link to="/" className={location.pathname === "/" ? style.Active : ""} ><FaHome /> INICIO</Link>
 
-          <Link to='NavajaFina/products' className={location.pathname === "/NavajaFina/products" ? style.Active : ""}><FaShopify /> PRODUCTOS</Link>
+          <Link to='/products' className={location.pathname === "/products" ? style.Active : ""}><FaShopify /> PRODUCTOS</Link>
           {isadmin ? (
-            <Link className={location.pathname === "/NavajaFina/admin" ? style.Active : ""} to="NavajaFina/admin"><FaKey />PANEL</Link>
+            <Link className={location.pathname === "/admin" ? style.Active : ""} to="/admin"><FaKey />PANEL</Link>
           ) : null}
           {Auth.auth.id ? (
             <>
               <ToastContainer />
-              <Link to='NavajaFina/perfil' className={location.pathname === "/NavajaFina/perfil" ? style.Active : ""}><FaUser /> PERFIL</Link>
+              <Link to='/perfil' className={location.pathname === "/perfil" ? style.Active : ""}><FaUser /> PERFIL</Link>
               <Link onClick={handlerSingOut}><FaSignOutAlt />Cerrar Sesión</Link>
             </>
           ) : (
             <>
               <ToastContainer />
-              <Link to="NavajaFina/login" className={location.pathname === "/NavajaFina/login" ? style.Active : ""}><FaSignInAlt />INICIAR SESIÓN</Link>
+              <Link to="/login" className={location.pathname === "/login" ? style.Active : ""}><FaSignInAlt />INICIAR SESIÓN</Link>
             </>
           )}
           <a onClick={handelModocuro} style={{ color: "#fff" }}>
@@ -161,22 +161,22 @@ const Header = () => {
               exit={{ x: "-100%", opacity: 1 }}
               transition={{ duration: .5 }}
               onClick={handleLinkClick} className={`${style.nav} ${clicked ? isScrolled ? style.activeScroll : style.active : ""}`}>
-              <Link onClick={handleClick} to="NavajaFina/"><FaHome /> INICIO</Link>
+              <Link onClick={handleClick} to="/"><FaHome /> INICIO</Link>
 
-              <Link onClick={handleClick} to='NavajaFina/products'><FaShopify /> PRODUCTOS</Link>
+              <Link onClick={handleClick} to='/products'><FaShopify /> PRODUCTOS</Link>
               {isadmin ? (
-                <Link className={location.pathname === "/NavajaFina/admin" ? style.Active : ""} to="NavajaFina/admin"><FaKey />PANEL</Link>
+                <Link className={location.pathname === "/admin" ? style.Active : ""} to="/admin"><FaKey />PANEL</Link>
               ) : null}
               {Auth.auth.id ? (
                 <>
                   <ToastContainer />
-                  <Link to='NavajaFina/perfil' className={location.pathname === "/NavajaFina/perfil" ? style.Active : ""}><FaUser /> PERFIL</Link>
+                  <Link to='/perfil' className={location.pathname === "/perfil" ? style.Active : ""}><FaUser /> PERFIL</Link>
                   <Link onClick={handlerSingOut}><FaSignOutAlt />Cerrar Sesión</Link>
                 </>
               ) : (
                 <>
                   <ToastContainer />
-                  <Link to="NavajaFina/login" className={location.pathname === "/NavajaFina/login" ? style.Active : ""}><FaSignInAlt />INICIAR SESIÓN</Link>
+                  <Link to="/login" className={location.pathname === "/login" ? style.Active : ""}><FaSignInAlt />INICIAR SESIÓN</Link>
                 </>
               )}
 
@@ -204,7 +204,7 @@ const Header = () => {
         </AnimatePresence>
         {Auth.auth?.role !== "Admin" && Auth.auth?.role !== "Editor" ? (
 
-          location.pathname !== '/NavajaFina/cart' ? <Cart /> : null
+          location.pathname !== '/cart' ? <Cart /> : null
         ) : (null)}
       </header >
     </>

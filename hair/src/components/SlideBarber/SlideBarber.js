@@ -66,17 +66,17 @@ const SlideBarber = () => {
                                 <h2 className={style.title}>Síguenos en nuestras redes sociales</h2>
                                 <p className={style.textSlide}>Síguenos en Facebook (@navajafinabarbershop), Instagram (@navajafinabarbershop) y Twitter (@navajafinabarber) para estar al tanto de nuestras últimas promociones, tendencias en cortes de pelo y mucho más. ¡Únete a nuestra comunidad en línea y sé parte de NavajaFina!</p>
                                 <div className={style.social}>
-                                    <a className={style.socialItem+ '' + style.facebook} href="https://www.facebook.com/navajafinabarbershop" target="_blank" rel="noopener noreferrer">
-                                        <FaFacebook className={style.facebook}/>
-                                       
+                                    <a className={style.socialItem + '' + style.facebook} href="https://www.facebook.com/barbershop" target="_blank" rel="noopener noreferrer">
+                                        <FaFacebook className={style.facebook} />
+
                                     </a>
-                                    <a className={style.socialItem+ '' + style.instagram} href="https://www.instagram.com/navajafinabarbershop" target="_blank" rel="noopener noreferrer">
+                                    <a className={style.socialItem + '' + style.instagram} href="https://www.instagram.com/barbershop" target="_blank" rel="noopener noreferrer">
                                         <FaInstagram className={style.instagram} />
-                                       
+
                                     </a>
-                                    <a className={style.socialItem + '' + style.twitter} href="https://www.twitter.com/navajafinabarber" target="_blank" rel="noopener noreferrer">
+                                    <a className={style.socialItem + '' + style.twitter} href="https://www.twitter.com/barber" target="_blank" rel="noopener noreferrer">
                                         <FaTwitter className={style.twitter} />
-                                      
+
                                     </a>
                                 </div>
 
