@@ -1,4 +1,13 @@
-
+.btnVolver{
+    padding: 10px;
+    text-decoration: none;
+    border: none;
+    font-size: 23px;
+    background: #5fb9d0;
+    cursor: pointer;
+    color: #fff;
+    text-align: center;
+  }
 .main{
     height: 100vh;
     display: flex;
@@ -53,6 +62,14 @@
     text-decoration: none;  
     cursor: pointer;
 }
+.mainToken{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+  }
+
 
 .inputcontainer {
     width: 364px;
