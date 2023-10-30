@@ -102,13 +102,13 @@ const ProductCard = ({ product, setListView, listView }) => {
         {Auth.auth?.role !== "Admin" && Auth.auth?.role !== "Editor" ? (
           <>
 
-            <Link className={style.icontextProduct} to={`/products/${product.id}`}>
+            <Link className={style.icontextProduct} to={`/NavajaFina/products/${product.id}`}>
               Ver Producto <FaRegEye />
             </Link>
             <BtnCart product={product} />
           </>
         ) : (
-          <Link className={style.icontextProduct2} to={`/products/${product.id}`}>
+          <Link className={style.icontextProduct2} to={`/NavajaFina/products/${product.id}`}>
             Ver Producto <FaRegEye />
           </Link>
         )

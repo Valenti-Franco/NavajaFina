@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal, Button, TextField } from '@material-ui/core';
-import style from './index.module.css';
+import style from '../index.module.css';
 
 const BodyUsuarioEdit = ({ idUsuario, usuarioEdit, usuarioPutEditor, usuarioPutAdmin, abrirCerrarModalUsuario }) => {
 

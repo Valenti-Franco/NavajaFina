@@ -100,7 +100,7 @@
 
   .removeFromCart{
    position: relative;
-    background: #000000a6;
+    background: #00000000;
     top: 40px;
     float: left;
     border: none;
@@ -139,8 +139,8 @@
     flex-direction: row-reverse;
   }
   .total{
-    background-color: #3d1e67;
-    height: 17%;
+    background-color: #b5b5b51a;
+    height: 20%;
     position: absolute;
     color: #fff;
     z-index: 999;
@@ -183,4 +183,16 @@
     height: 100%;
     margin-right: 20px;
     /* margin-bottom: 100px; */
+  }
+
+
+  @media  screen and (max-width: 1240px){ 
+    /* .total{
+     
+      position: absolute;
+     
+  
+    } */
+  
+    
   }

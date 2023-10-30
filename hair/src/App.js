@@ -46,12 +46,13 @@ function App() {
         <Header />
         <AnimatePresence>
           <Routes>
-            <Route path='/' element={<Main />} />
-            <Route path='/products' element={
+            <Route path='NavajaFina/' element={<Main />} />
+            <Route path='NavajaFina/products' element={
               <FIlterProvider>
                 <ProductsPage />
               </FIlterProvider>
             } />
+
             <Route path='/login' element={<Login />} />
             <Route path='/signin' element={<Signin />} />
             <Route path='/products/:id' element={<ProductDetail />} />
@@ -63,14 +64,17 @@ function App() {
 
 
 
-            <Route path='/admin' element={<AdminComponent />} />
-            <Route path='/BuyForm' element={<BuyForm />} />
-            <Route path='*' element={<NotFoundPage />} />
-            {/* <Route path='/RegistroEmail' element={<RegistroEmail/>} /> */}
 
-            <Route path='/admin' element={<AdminComponent />} />
-            <Route path='/BuyForm' element={<BuyForm />} />
-            <Route path='*' element={<NotFoundPage />} />
+            <Route path='NavajaFina/admin' element={<AdminComponent />} />
+            <Route path='NavajaFina/BuyForm' element={<BuyForm />} />
+            <Route path='NavajaFina*' element={<NotFoundPage />} />
+            {/* <Route path='NavajaFina/RegistroEmail' element={<RegistroEmail/>} /> */}
+
+            <Route path='NavajaFina/admin' element={<AdminComponent />} />
+            <Route path='NavajaFina/BuyForm' element={<BuyForm />} />
+            <Route path='NavajaFina/*' element={<NotFoundPage />} />
+            <Route path='/*' element={<NotFoundPage />} />
+
 
 
 
