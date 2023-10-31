@@ -6,19 +6,16 @@ function BodySubCategoryEdit({
   idsubCategory,
   subCategoryEdit,
   handleChangesubCategory,
-  subCategoryPost,
+
   abrirCerrarModalEditsubCategory,
+  subcategoryPost
 }) {
+  console.log(subCategoryEdit)
   return (
     <div className={style.modal}>
-      <h3>Editar Producto</h3>
+      <h3>Editar SubCategoria</h3>
       <div align="right">
-        <Button
-          onClick={() => abrirCerrarModalEditsubCategory()}
-          className={style.btnImg}
-        >
-          Editar Imagenes
-        </Button>
+
       </div>
       <TextField
         value={subCategoryEdit.nombre}
@@ -27,13 +24,21 @@ function BodySubCategoryEdit({
         label="Nombre"
         onChange={handleChangesubCategory}
       />
+      <TextField
+        value={subCategoryEdit.categoryId}
+        name="categoryId"
+        type="number"
+        className={style.inputMaterial}
+        label="Category Id"
+        onChange={handleChangesubCategory}
+      />
       <br />
 
       <br />
       <br />
 
       <div align="right">
-        <Button color="primary" onClick={() => subCategoryPost(idsubCategory)}>
+        <Button color="primary" onClick={() => subcategoryPost(idsubCategory)}>
           Guardar Cambios
         </Button>
         <Button onClick={() => abrirCerrarModalEditsubCategory()}>

@@ -24,32 +24,7 @@ function BodyCategory({
         onChange={handleChangeCategory}
       />
       <br />
-      <TextField
-        name="subcategory"
-        className={style.inputMaterial}
-        label="subcategory"
-        onChange={handleChangeCategory}
-      />
-      <br />
-      <TextField
-        type="Number"
-        name="subcategoryId"
-        className={style.inputMaterial}
-        label="SubCategoria Id"
-        onChange={handleChangeCategory}
-      />
-      <br />
-      <TextField
-        type="date"
-        name="fechaPublicado"
-        className={style.inputMaterial}
-        onChange={handleChangeCategory}
-      />
-      <br />
 
-      <br />
-
-      <br />
       <br />
       <div align="right">
         <Button color="primary" onClick={() => categoryPost()}>

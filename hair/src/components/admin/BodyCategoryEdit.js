@@ -6,14 +6,17 @@ function BodyCategoryEdit({
   categoryPut,
   handleChangeCategoryEdit,
   openCloseModalCategory,
-  categoryPost,
+  categoryEdit
+
+
 }) {
+
   return (
     <div className={style.modal}>
       <h3>Editar Categoria</h3>
 
       <TextField
-        value={categoryPut.nombre}
+        value={categoryEdit.nombre}
         name="nombre"
         className={style.inputMaterial}
         label="Nombre"
@@ -22,7 +25,7 @@ function BodyCategoryEdit({
       <br />
 
       <TextField
-        value={categoryPut.descripcion}
+        value={categoryEdit.descripcion}
         name="descripcion"
         className={style.inputMaterial}
         label="Descripción"
@@ -31,7 +34,7 @@ function BodyCategoryEdit({
       <br />
 
       <div align="right">
-        <Button color="primary" onClick={() => categoryPost(idCategory)}>
+        <Button color="primary" onClick={() => categoryPut(idCategory)}>
           Guardar Cambios
         </Button>
         <Button onClick={() => openCloseModalCategory()}>Cancelar</Button>

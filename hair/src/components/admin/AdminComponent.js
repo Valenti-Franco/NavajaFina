@@ -124,14 +124,16 @@ const AdminComponent = () => {
 
   const handleChangesubCategoryEdit = (e) => {
     const { name, value } = e.target;
-    setProductEdit((prevState) => ({
+
+    setsubCategoryEdit((prevState) => ({
       ...prevState,
       [name]: value,
     }));
+
   };
   const handleChangesubCategory = (e) => {
     const { name, value } = e.target;
-    setproductAdd((prevState) => ({
+    setsubCategoryAdd((prevState) => ({
       ...prevState,
       [name]: value,
     }));
@@ -164,46 +166,31 @@ const AdminComponent = () => {
     // Si hay un elemento seleccionado, establece modalEditProduct en función de sus valores
   };
 
-  const abrirCerrarModalEditCategory = (categoryId) => {
-    setModalEditCategory(!modalEditCategory);
-    setSelectedCategory(categoryId);
-    setIdCategory(categoryId);
-    // Si hay un elemento seleccionado, establece modalEditProduct en función de sus valores
-    if (categoryId) {
-      const selectedCategoryData = products.find(
-        (category) => category.id === categoryId
-      );
 
-      // console.log(selectedProductData)
-      if (selectedCategoryData) {
-        setProductEdit({
-          nombre: selectedCategoryData.nombre,
-        });
-      }
-    }
-  };
 
   const abrirCerrarModalDeletesubCategory = (subCategoryId) => {
-    setModalDeleteCategory(!modalDeletesubCategory);
+    setModalDeletesubCategory(!modalDeletesubCategory);
 
-    setIdCategory(subCategoryId);
+    setIdsubCategory(subCategoryId);
     // Si hay un elemento seleccionado, establece modalEditProduct en función de sus valores
   };
 
   const abrirCerrarModalEditsubCategory = (subCategoryId) => {
     setModalEditsubCategory(!modalEditsubCategory);
     setSelectedSubcategory(subCategoryId);
-    setIdProducto(subCategoryId);
+    setIdsubCategory(subCategoryId)
+
     // Si hay un elemento seleccionado, establece modalEditProduct en función de sus valores
     if (subCategoryId) {
-      const selectedsubCategoryData = products.find(
+      const selectedsubCategoryData = subcategory.find(
         (subCategory) => subCategory.id === subCategoryId
       );
 
       // console.log(selectedProductData)
       if (selectedsubCategoryData) {
-        setProductEdit({
+        setsubCategoryEdit({
           nombre: selectedsubCategoryData.nombre,
+          categoryId: selectedsubCategoryData.categoryId
         });
       }
     }
@@ -218,13 +205,13 @@ const AdminComponent = () => {
             <div>
               <MdDelete
                 className={style.btnDelete}
-                onClick={() => abrirCerrarModalDeletesubCategory(params.row.id)}
+                onClick={() => abrirCerrarModalDeleteCategory(params.row.id)}
               />
             </div>
             <div>
               <MdEdit
                 className={style.btnEdit}
-                onClick={() => abrirCerrarModalEditsubCategory(params.row.id)}
+                onClick={() => openCloseModalEditCategory(params.row.id)}
               />
             </div>
           </div>
@@ -297,7 +284,7 @@ const AdminComponent = () => {
 
   const handleChangeCategoryEdit = (e) => {
     const { name, value } = e.target;
-    setCategoryAdd((prevState) => ({
+    setCategoryEdit((prevState) => ({
       ...prevState,
       [name]: value,
     }));
@@ -310,16 +297,16 @@ const AdminComponent = () => {
     setSelectedCategory(idCategory);
     setIdCategory(idCategory);
     if (idCategory) {
-      const selectedCategoryData = usuario.find(
+      const selectedCategoryData = category.find(
         (category) => category.id === idCategory
       );
       // console.log(usuario)
 
-      // console.log(selectedusuarioData)
+      console.log(selectedCategoryData)
       if (selectedCategoryData) {
         setCategoryEdit({
           nombre: selectedCategoryData.nombre,
-          descripcion: selectedCategoryData.category,
+          descripcion: selectedCategoryData.descripcion,
         });
       }
     }
@@ -328,12 +315,14 @@ const AdminComponent = () => {
   const [modalInsertCategory, setModalInsertCategory] = useState(false);
 
   const subCategoryPut = async () => {
+    console.log(subCategoryEdit)
+
     try {
       const response = await axios.put(
         `https://tpibarbershop20231015224614.azurewebsites.net/api/SubCategory/${idsubCategory}/Admin`,
         {
-          nombre: categoryEdit.nombre,
-          categoryId: categoryEdit.id,
+          nombre: subCategoryEdit.nombre,
+          categoryId: subCategoryEdit.categoryId
         },
         config // Agrega el encabezado con el token JWT
       );
@@ -358,7 +347,7 @@ const AdminComponent = () => {
         config // Agrega el encabezado con el token JWT
       );
       if (response.status === 204) {
-        toast.success("subCategory eliminado correctamente", {
+        toast.success("subCategoria eliminada correctamente", {
           position: "top-right", // Puedes personalizar la posición
           autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
         });
@@ -366,6 +355,26 @@ const AdminComponent = () => {
       // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
       obtenerSubCategoria(); // Reutiliza la función que ya tienes para obtener productos
       abrirCerrarModalDeletesubCategory(); // Reutiliza el product
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const categoryDelete = async () => {
+    try {
+      const response = await axios.delete(
+        `https://tpibarbershop20231015224614.azurewebsites.net/api/Category/${idCategory}/Admin`,
+        config // Agrega el encabezado con el token JWT
+      );
+      if (response.status === 204) {
+        toast.success("Categoria eliminada correctamente", {
+          position: "top-right", // Puedes personalizar la posición
+          autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
+        });
+      }
+      // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
+      obtenerCategoria(); // Reutiliza la función que ya tienes para obtener productos
+      abrirCerrarModalDeleteCategory(); // Reutiliza el product
     } catch (error) {
       console.error(error);
     }
@@ -430,11 +439,8 @@ const AdminComponent = () => {
       const response = await axios.put(
         `https://tpibarbershop20231015224614.azurewebsites.net/api/Category/${idCategory}`,
         {
-          nombre: categoryAdd.nombre,
-          descripcion: categoryAdd.descripcion,
-          fechaPublicado: categoryAdd.fechaPublicado,
-          subcategory: categoryAdd.subcategory,
-          subcategoryId: categoryAdd.subcategoryId,
+          nombre: categoryEdit.nombre,
+          descripcion: categoryEdit.descripcion,
         },
         config // Agrega el encabezado con el token JWT
       );
@@ -453,23 +459,20 @@ const AdminComponent = () => {
   };
 
   const subcategoryPost = async () => {
+    console.log(subCategoryAdd)
     try {
       const response = await axios.post(
         "https://tpibarbershop20231015224614.azurewebsites.net/api/SubCategory/Admin",
         {
-          nombre: productAdd.nombre,
-          categoryId: productAdd.categoryId,
-          subcategoryId: productAdd.subcategoryId,
-          precio: productAdd.precio,
-          descripcion: productAdd.descripcion,
-          stock: productAdd.stock,
+          nombre: subCategoryAdd.nombre,
+          categoryId: subCategoryAdd.categoryId,
         },
         config // Agrega el encabezado con el token JWT
       );
 
       // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
-      obtenerProductos(); // Reutiliza la función que ya tienes para obtener productos
-      abrirCerrarModalInsertarProduct(); // Reutiliza el product
+      obtenerSubCategoria(); // Reutiliza la función que ya tienes para obtener productos
+      abrirCerrarModalInsertarsubCategory(); // Reutiliza el product
     } catch (error) {
       console.error(error);
     }
@@ -897,11 +900,11 @@ const AdminComponent = () => {
               // checkboxSelection
               disableColumnSelector
               disableColumnMenu
-              // editable={{
-              //   onRowAdd: (newRow) => new Promise((resolve, reject) => {
-              //     console.log(newRow);
-              //   })
-              // }}
+            // editable={{
+            //   onRowAdd: (newRow) => new Promise((resolve, reject) => {
+            //     console.log(newRow);
+            //   })
+            // }}
             />
           </Box>
         </div>
@@ -915,7 +918,7 @@ const AdminComponent = () => {
               rows={category}
               columns={categoryColumns}
               autoPageSize
-              checkboxSelection
+              // checkboxSelection
               disableColumnSelector
               disableColumnMenu
             />
@@ -932,7 +935,7 @@ const AdminComponent = () => {
               rows={subcategory}
               columns={subCategoryColumns}
               autoPageSize
-              checkboxSelection
+              // checkboxSelection
               disableColumnSelector
               disableColumnMenu
             />
@@ -1055,17 +1058,33 @@ const AdminComponent = () => {
           handleChangeCategoryEdit={handleChangeCategoryEdit}
           openCloseModalEditCategory={openCloseModalEditCategory}
           categoryPut={categoryPut}
-          categoryPost={categoryPost}
+          categoryEdit={categoryEdit}
           idCategory={idCategory}
           openCloseModalCategory={openCloseModalEditCategory}
         />
       </Modal>
 
       <Modal
+        open={modalDeleteCategory}
+        OnClose={abrirCerrarModalDeleteCategory}
+      >
+        <BodyCategoryDelete
+          categoryDelete={categoryDelete}
+          categoryId={idCategory}
+          abrirCerrarModalDeleteCategory={abrirCerrarModalDeleteCategory}
+        />
+      </Modal>
+
+
+
+
+
+      <Modal
         open={modalInsertarsubCategory}
         OnClose={abrirCerrarModalInsertarsubCategory}
       >
         <BodySubCategory
+          subCategoryAdd={subCategoryAdd}
           handleChangesubCategory={handleChangesubCategory}
           subCategoryPost={subcategoryPost}
           abrirCerrarModalInsertarsubCategory={

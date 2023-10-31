@@ -7,10 +7,12 @@ function BodyDeleteSubcategory({
   subCategoryId,
   abrirCerrarModalDeletesubCategory,
 }) {
+
+  // console.log(subCategoryId)
   return (
     <div className={style.modal} style={{ border: "3px solid red" }}>
-      <h3>Desea eliminar el Producto {subCategoryId}?</h3>
-      <p>El Producto se elimina para siempre y no se podrá recuperar</p>
+      <h3>Desea eliminar la subcategoria {subCategoryId}?</h3>
+      <p>La subcategoria se elimina para siempre con todos sus productos y no se podrá recuperar</p>
 
       <div align="right">
         <Button color="secondary" onClick={() => subCategoryDelete()}>
