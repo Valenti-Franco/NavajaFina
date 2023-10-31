@@ -10,7 +10,7 @@ function BodySubCategoryEdit({
   abrirCerrarModalEditsubCategory,
   subcategoryPost
 }) {
-  console.log(subCategoryEdit)
+  // console.log(subCategoryEdit)
   return (
     <div className={style.modal}>
       <h3>Editar SubCategoria</h3>

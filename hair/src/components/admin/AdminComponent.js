@@ -302,7 +302,7 @@ const AdminComponent = () => {
       );
       // console.log(usuario)
 
-      console.log(selectedCategoryData)
+      // console.log(selectedCategoryData)
       if (selectedCategoryData) {
         setCategoryEdit({
           nombre: selectedCategoryData.nombre,
@@ -315,7 +315,7 @@ const AdminComponent = () => {
   const [modalInsertCategory, setModalInsertCategory] = useState(false);
 
   const subCategoryPut = async () => {
-    console.log(subCategoryEdit)
+    // console.log(subCategoryEdit)
 
     try {
       const response = await axios.put(
@@ -425,7 +425,7 @@ const AdminComponent = () => {
       // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
       obtenerCategoria(); // Reutiliza la función que ya tienes para obtener productos
       openCloseModalInsertCategory();
-      console.log(response); // Reutiliza el product
+      // console.log(response); // Reutiliza el product
     } catch (error) {
       console.error(error);
     }
@@ -459,7 +459,7 @@ const AdminComponent = () => {
   };
 
   const subcategoryPost = async () => {
-    console.log(subCategoryAdd)
+    // console.log(subCategoryAdd)
     try {
       const response = await axios.post(
         "https://tpibarbershop20231015224614.azurewebsites.net/api/SubCategory/Admin",

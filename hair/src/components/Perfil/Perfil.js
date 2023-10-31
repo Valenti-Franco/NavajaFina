@@ -324,7 +324,7 @@ const Perfil = () => {
             <ComprasUser postPaypalCompra={postPaypalCompra} postDeleteCompra={postDeleteCompra} obtenerCompras={obtenerCompras} compras={compras} setCompras={setCompras} />
             <OrdenUser orden={orden} postPaypalOrden={postPaypalOrden} postDeleteOrden={postDeleteOrden} obtenerOrden={obtenerOrden} />
           </>
-        ) : (<h1 className={style.AdminStyleh1}>Mienbro del Personal de NavajaFIna como {Auth.auth?.role}</h1>)}
+        ) : (<h1 className={style.AdminStyleh1}>Miembro del Personal de NavajaFIna como {Auth.auth?.role}</h1>)}
 
       </div>
       <ToastContainer />
