@@ -1,58 +1,57 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import style from './index.module.css';
-import { AuthContext } from '../../context/Auth';
-import axios from 'axios';
-import Box from '@mui/material/Box';
-import { makeStyles } from '@material-ui/core/styles';
-import { DataGrid } from '@mui/x-data-grid';
-import { MdAttachMoney, MdCheck, MdDelete, MdEdit } from 'react-icons/md';
-import { Modal, Button, TextField, Avatar } from '@material-ui/core';
-import BodyProduct from './ModalProduct/BodyProduct';
-import BodyProductEdit from './ModalProduct/BodyProductEdit';
-import { ToastContainer, toast } from 'react-toastify';
-import BodyDeleteProduct from './ModalProduct/BodyDeleteProduct';
-import BodyProductImg from './ModalProduct/BodyProductImg';
-import BodyDeleteUser from './ModalUser/BodyDeleteUser';
-import BodyUsuarioEdit from './ModalUser/BodyUsuarioEdit';
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import style from "./index.module.css";
+import { AuthContext } from "../../context/Auth";
+import axios from "axios";
+import Box from "@mui/material/Box";
+import { makeStyles } from "@material-ui/core/styles";
+import { DataGrid } from "@mui/x-data-grid";
+import { MdAttachMoney, MdCheck, MdDelete, MdEdit } from "react-icons/md";
+import { Modal, Button, TextField, Avatar } from "@material-ui/core";
+import BodyProduct from "./ModalProduct/BodyProduct";
+import BodyProductEdit from "./ModalProduct/BodyProductEdit";
+import { ToastContainer, toast } from "react-toastify";
+import BodyDeleteProduct from "./ModalProduct/BodyDeleteProduct";
+import BodyProductImg from "./ModalProduct/BodyProductImg";
+import BodyDeleteUser from "./ModalUser/BodyDeleteUser";
+import BodyUsuarioEdit from "./ModalUser/BodyUsuarioEdit";
 
 // import config from '../../utils/Config';
 
-import { createChart } from 'lightweight-charts';
-import { ChartComponent, processData } from './GraficaCompra';
+import BodyCategory from "./BodyCategory";
+import BodyCategoryDelete from "./BodyCategoryDelete";
+import BodyCategoryEdit from "./BodyCategoryEdit";
+import BodyDeleteSubcategory from "./BodyDeleteSubcategory";
+import BodySubCategoryEdit from "./BodySubCategoryEdit";
+import BodySubCategory from "./BodySubCategory";
 
-import { comprasColumns, obtenerCompras } from './ColumnsTabla/comprasColumns';
-import { usuariosColumns } from './ColumnsTabla/usuariosComuns';
-import { subcategoryColumns } from './ColumnsTabla/subCategoryColumns';
-import { categoryColumns } from './ColumnsTabla/categoryColumns';
-import { productosColumns } from './ColumnsTabla/productosColumns';
-import { ChartOrdenComponent, processOrdenData } from './GraficaOrdenCompra';
-import { obtenerOrdenCompras, ordenComprasColumns } from './ColumnsTabla/ordenComprasColumns';
+import { createChart } from "lightweight-charts";
+import { ChartComponent, processData } from "./GraficaCompra";
+
+import { comprasColumns, obtenerCompras } from "./ColumnsTabla/comprasColumns";
+import { usuariosColumns } from "./ColumnsTabla/usuariosComuns";
+import { productosColumns } from "./ColumnsTabla/productosColumns";
+import { ChartOrdenComponent, processOrdenData } from "./GraficaOrdenCompra";
+import {
+  obtenerOrdenCompras,
+  ordenComprasColumns,
+} from "./ColumnsTabla/ordenComprasColumns";
 const token = localStorage.getItem("_id");
 
 const config = {
   headers: {
-    'Authorization': `Bearer ${token}` // Agrega el token JWT en la cabecera de autorización
-  }
+    Authorization: `Bearer ${token}`, // Agrega el token JWT en la cabecera de autorización
+  },
 };
 
-
 const AdminComponent = () => {
-
-
-
-
-
-
-  const { modoOscuro } = useContext(AuthContext)
+  const { modoOscuro } = useContext(AuthContext);
 
   // const [users, setUsers] = useState([]);
   const [category, setCategory] = useState([]);
   const [subcategory, setSubCategory] = useState([]);
   const [compras, setCompras] = useState([]);
   const [ordenCompras, setOrdenCompras] = useState([]);
-
-
 
   const navigate = useNavigate();
 
@@ -62,14 +61,9 @@ const AdminComponent = () => {
   const [chartData, setChartData] = useState([]);
   const [chartOrdenData, setChartOrdenData] = useState([]);
 
-
-
-
-
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedUsuario, setSelectedUsuario] = useState(null);
-
-
+  const [selectedSubCategory, setSelectedSubcategory] = useState(null);
 
   const [modalInsertarProduct, setModalInsertarProduct] = useState(false);
 
@@ -78,235 +72,390 @@ const AdminComponent = () => {
   const [modalEditProduct, setModalEditProduct] = useState(false);
   const [modalEditUsuario, setModalEditUsuario] = useState(false);
 
-
   const [modalDeleteProduct, setModalDeleteProduct] = useState(false);
   const [modalDeleteUsuario, setModalDeleteUsuario] = useState(false);
-
 
   const [idProducto, setIdProducto] = useState("");
   const [idUsuario, setIdUsuario] = useState("");
 
-
   const [productEdit, setProductEdit] = useState({
-    nombre: '',
-    precio: '',
-    descripcion: '',
-    stock: '',
+    nombre: "",
+    precio: "",
+    descripcion: "",
+    stock: "",
   });
   const [usuarioEdit, setUsuarioEdit] = useState({
-    role: ''
+    role: "",
   });
-
 
   const [productEditImg, setProductEditImg] = useState({
-    imagenes: []
+    imagenes: [],
   });
   const [productAdd, setproductAdd] = useState({
+    nombre: "",
+    categoryId: "",
+    subcategoryId: "",
+    precio: "",
+    descripcion: "",
+    stock: "",
+  });
+  const [categoryAdd, setCategoryAdd] = useState({
+    nombre: "",
+    descripcion: "",
+    fechaPublicado: "",
+    subcategory: "",
+    subcategoryId: "",
+  });
 
-    nombre: '',
-    categoryId: '',
-    subcategoryId: '',
-    precio: '',
-    descripcion: '',
-    stock: '',
+  const [categoryEdit, setCategoryEdit] = useState({
+    id: "",
+    nombre: "",
+    descripcion: "",
+    fechaPublicado: "",
+  });
+  //edit
 
+  const [modalEditCategory, setModalEditCategory] = useState(false);
+  const [id, setId] = useState("");
+  const [idCategory, setIdCategory] = useState("");
+  //delete
 
-  })
+  const [modalDeleteCategory, setModalDeleteCategory] = useState(false);
 
-  const handleChangeUsuarioEdit = e => {
-
+  const handleChangesubCategoryEdit = (e) => {
     const { name, value } = e.target;
-    // console.log(name, value);
-    setUsuarioEdit(prevState => ({
+    setProductEdit((prevState) => ({
       ...prevState,
-      [name]: value
-    }))
-  }
-  const handleChangeProductEdit = e => {
-
-    const { name, value } = e.target;
-    setProductEdit(prevState => ({
-      ...prevState,
-      [name]: value
-    }))
-  }
-  const handleChangeProduct = e => {
-
-    const { name, value } = e.target;
-    setproductAdd(prevState => ({
-      ...prevState,
-      [name]: value
-    }))
-
-  }
-  const abrirCerrarModalInsertarProduct = () => {
-    setModalInsertarProduct(!modalInsertarProduct);
-  }
-
-  const abrirCerrarModalDeleteProduct = (productId) => {
-
-    setModalDeleteProduct(!modalDeleteProduct);
-
-    setIdProducto(productId)
-    // Si hay un elemento seleccionado, establece modalEditProduct en función de sus valores
-
+      [name]: value,
+    }));
   };
-  const abrirCerrarModalDeleteUsuario = (usuarioId) => {
-
-    setModalDeleteUsuario(!modalDeleteUsuario);
-
-    setIdUsuario(usuarioId)
-    // Si hay un elemento seleccionado, establece modalEditProduct en función de sus valores
-
+  const handleChangesubCategory = (e) => {
+    const { name, value } = e.target;
+    setproductAdd((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
+  const [subCategoryAdd, setsubCategoryAdd] = useState({
+    nombre: "",
+    categoryId: "",
+  });
 
-  const abrirCerrarModalEditUsuario = (usuarioId) => {
+  const [subCategoryEdit, setsubCategoryEdit] = useState({
+    nombre: "",
+    categoryId: "",
+  });
 
-    setModalEditUsuario(!modalEditUsuario);
-    setSelectedUsuario(usuarioId);
-    setIdUsuario(usuarioId)
-    // Si hay un elemento seleccionado, establece modalEditusuario en función de sus valores
-    if (usuarioId) {
-      const selectedUsuarioData = usuario.find((usuario) => usuario.id === usuarioId);
+  const [modalEditsubCategory, setModalEditsubCategory] = useState(false);
+  const [modalInsertarsubCategory, setModalInsertarsubCategory] =
+    useState(false);
+  const [idsubCategory, setIdsubCategory] = useState("");
+  const [modalDeletesubCategory, setModalDeletesubCategory] = useState(false);
+
+  const abrirCerrarModalInsertarsubCategory = () => {
+    setModalInsertarsubCategory(!modalInsertarsubCategory);
+  };
+
+  const abrirCerrarModalDeleteCategory = (categoryId) => {
+    setModalDeleteCategory(!modalDeleteCategory);
+
+    setIdCategory(categoryId);
+    // Si hay un elemento seleccionado, establece modalEditProduct en función de sus valores
+  };
+
+  const abrirCerrarModalEditCategory = (categoryId) => {
+    setModalEditCategory(!modalEditCategory);
+    setSelectedCategory(categoryId);
+    setIdCategory(categoryId);
+    // Si hay un elemento seleccionado, establece modalEditProduct en función de sus valores
+    if (categoryId) {
+      const selectedCategoryData = products.find(
+        (category) => category.id === categoryId
+      );
+
+      // console.log(selectedProductData)
+      if (selectedCategoryData) {
+        setProductEdit({
+          nombre: selectedCategoryData.nombre,
+        });
+      }
+    }
+  };
+
+  const abrirCerrarModalDeletesubCategory = (subCategoryId) => {
+    setModalDeleteCategory(!modalDeletesubCategory);
+
+    setIdCategory(subCategoryId);
+    // Si hay un elemento seleccionado, establece modalEditProduct en función de sus valores
+  };
+
+  const abrirCerrarModalEditsubCategory = (subCategoryId) => {
+    setModalEditsubCategory(!modalEditsubCategory);
+    setSelectedSubcategory(subCategoryId);
+    setIdProducto(subCategoryId);
+    // Si hay un elemento seleccionado, establece modalEditProduct en función de sus valores
+    if (subCategoryId) {
+      const selectedsubCategoryData = products.find(
+        (subCategory) => subCategory.id === subCategoryId
+      );
+
+      // console.log(selectedProductData)
+      if (selectedsubCategoryData) {
+        setProductEdit({
+          nombre: selectedsubCategoryData.nombre,
+        });
+      }
+    }
+  };
+
+  const categoryColumns = [
+    {
+      field: "Acciones",
+      renderCell: (params) => {
+        return (
+          <div className={style.acciones}>
+            <div>
+              <MdDelete
+                className={style.btnDelete}
+                onClick={() => abrirCerrarModalDeletesubCategory(params.row.id)}
+              />
+            </div>
+            <div>
+              <MdEdit
+                className={style.btnEdit}
+                onClick={() => abrirCerrarModalEditsubCategory(params.row.id)}
+              />
+            </div>
+          </div>
+        );
+      },
+    },
+    { field: "id", headerName: "ID", width: 90 },
+
+    {
+      field: "nombre",
+      headerName: "Nombre",
+
+      width: 150,
+      editable: false,
+    },
+    {
+      field: "descripcion",
+      headerName: "Descripción",
+
+      width: 250,
+      editable: false,
+    },
+  ];
+
+  const subCategoryColumns = [
+    {
+      field: "Acciones",
+      renderCell: (params) => {
+        return (
+          <div className={style.acciones}>
+            <div>
+              <MdDelete
+                className={style.btnDelete}
+                onClick={() => abrirCerrarModalDeletesubCategory(params.row.id)}
+              />
+            </div>
+            <div>
+              <MdEdit
+                className={style.btnEdit}
+                onClick={() => abrirCerrarModalEditsubCategory(params.row.id)}
+              />
+            </div>
+          </div>
+        );
+      },
+    },
+    { field: "id", headerName: "ID", width: 90 },
+    {
+      field: "nombre",
+      headerName: "Nombre",
+      width: 150,
+      editable: false,
+    },
+
+    {
+      field: "categoryId",
+      headerName: "Categoria",
+      width: 250,
+      editable: false,
+    },
+  ];
+
+  const handleChangeCategory = (e) => {
+    const { name, value } = e.target;
+    setCategoryAdd((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleChangeCategoryEdit = (e) => {
+    const { name, value } = e.target;
+    setCategoryAdd((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const openCloseModalEditCategory = (idCategory) => {
+    setModalEditCategory(!modalEditCategory);
+    setSelectedCategory(idCategory);
+    setIdCategory(idCategory);
+    if (idCategory) {
+      const selectedCategoryData = usuario.find(
+        (category) => category.id === idCategory
+      );
       // console.log(usuario)
 
       // console.log(selectedusuarioData)
-      if (selectedUsuarioData) {
-        setUsuarioEdit({
-          role: selectedUsuarioData.role,
-
-        });
-      }
-    }
-  };
-  const abrirCerrarModalEditProduct = (productId) => {
-
-    setModalEditProduct(!modalEditProduct);
-    setSelectedProduct(productId);
-    setIdProducto(productId)
-    // Si hay un elemento seleccionado, establece modalEditProduct en función de sus valores
-    if (productId) {
-      const selectedProductData = products.find((product) => product.id === productId);
-
-      // console.log(selectedProductData)
-      if (selectedProductData) {
-        setProductEdit({
-          nombre: selectedProductData.nombre,
-          precio: selectedProductData.precio,
-          descripcion: selectedProductData.descripcion,
-          stock: selectedProductData.stock,
-          imagenes: selectedProductData.imagenes
+      if (selectedCategoryData) {
+        setCategoryEdit({
+          nombre: selectedCategoryData.nombre,
+          descripcion: selectedCategoryData.category,
         });
       }
     }
   };
 
-  const abrirCerrarModalImgProduct = (productId) => {
-    setModalEditImgProduct(!modalEditImgProduct);
+  const [modalInsertCategory, setModalInsertCategory] = useState(false);
 
-    const selectedProductDataImg = products.find((product) => product.id === productId);
-
-    // console.log(selectedProductData)
-    if (selectedProductDataImg) {
-      setProductEditImg({
-        imagenes: selectedProductDataImg.imagenes,
-
-      });
-    }
-  }
-
-
-  const Auth = useContext(AuthContext);
-
-  useEffect(() => {
-    if (Auth.auth.role !== 'Admin' && Auth.auth?.role !== "Editor") {
-      navigate('/');
-    }
-
-
-    obtenerUsuarios();
-    obtenerProductos();
-    obtenerCategoria();
-    obtenerSubCategoria();
-    obtenerCompras({
-      setCompras, // Asegúrate de que setCompras sea la función apropiada
-      processData,
-      setChartData
-    });
-
-    obtenerOrdenCompras({
-      setOrdenCompras, // Asegúrate de que setCompras sea la función apropiada
-      processOrdenData,
-      setChartOrdenData
-    });
-
-  }, [Auth]);
-
-  // console.log(usuario)
-
-
-  //CRUD USER
-  const obtenerUsuarios = async () => {
+  const subCategoryPut = async () => {
     try {
-      const response = await axios.get('https://tpibarbershop20231015224614.azurewebsites.net/api/Usuarios/Admin', config);
-
-      setUsuarios(response.data)
-
-    } catch (error) {
-
-      if (Auth.auth.role !== 'Admin' && Auth.auth?.role !== "Editor") {
-
-        navigate('/');
+      const response = await axios.put(
+        `https://tpibarbershop20231015224614.azurewebsites.net/api/SubCategory/${idsubCategory}/Admin`,
+        {
+          nombre: categoryEdit.nombre,
+          categoryId: categoryEdit.id,
+        },
+        config // Agrega el encabezado con el token JWT
+      );
+      if (response.status === 204) {
+        toast.success("subCategory editado correctamente", {
+          position: "top-right", // Puedes personalizar la posición
+          autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
+        });
       }
-
-      console.error(error);
-    }
-  };
-  //CRUD CATEGORY
-  const obtenerCategoria = async () => {
-    try {
-      const response = await axios.get('https://tpibarbershop20231015224614.azurewebsites.net/api/Category', config);
-      const CategoryData = response.data
-      setCategory(CategoryData);
-
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  //CRUD SUBCATEGORY
-  const obtenerSubCategoria = async () => {
-    try {
-      const response = await axios.get('https://tpibarbershop20231015224614.azurewebsites.net/api/SubCategory', config);
-      const SubCategoryData = response.data.map((user, index) => ({
-        ...user,
-
-      }));
-      setSubCategory(SubCategoryData);
-
+      // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
+      obtenerSubCategoria(); // Reutiliza la función que ya tienes para obtener productos
+      abrirCerrarModalEditsubCategory(); // Reutiliza el product
     } catch (error) {
       console.error(error);
     }
   };
 
-
-  //CRUD PRODUCT
-  const obtenerProductos = async () => {
-
-    // Realiza la solicitud GET con el token JWT
+  const subCategoryDelete = async () => {
     try {
-      const response = await axios.get('https://tpibarbershop20231015224614.azurewebsites.net/api/productos', config);
-      // console.log(response)
-
-      setProducts(response.data);
+      const response = await axios.delete(
+        `https://tpibarbershop20231015224614.azurewebsites.net/api/SubCategory/${idsubCategory}/Admin`,
+        config // Agrega el encabezado con el token JWT
+      );
+      if (response.status === 204) {
+        toast.success("subCategory eliminado correctamente", {
+          position: "top-right", // Puedes personalizar la posición
+          autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
+        });
+      }
+      // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
+      obtenerSubCategoria(); // Reutiliza la función que ya tienes para obtener productos
+      abrirCerrarModalDeletesubCategory(); // Reutiliza el product
     } catch (error) {
       console.error(error);
     }
   };
-  const productPost = async () => {
+
+  ////////////////////////-----------------------------------------------------CATEGORIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS----------------------------------------///////////////////////////
+
+  const categoriaPut = async () => {
+    try {
+      const response = await axios.put(
+        `https://tpibarbershop20231015224614.azurewebsites.net/api/Productos/${idProducto}/Admin`,
+        {
+          nombre: productEdit.nombre,
+          precio: productEdit.precio,
+          stock: productEdit.stock,
+          descripcion: productEdit.descripcion,
+        },
+        config // Agrega el encabezado con el token JWT
+      );
+      if (response.status === 204) {
+        toast.success("Producto editado correctamente", {
+          position: "top-right", // Puedes personalizar la posición
+          autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
+        });
+      }
+      // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
+      obtenerProductos(); // Reutiliza la función que ya tienes para obtener productos
+      abrirCerrarModalEditProduct(); // Reutiliza el product
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const categoryPost = async () => {
     try {
       const response = await axios.post(
-        'https://tpibarbershop20231015224614.azurewebsites.net/api/Productos',
+        "https://tpibarbershop20231015224614.azurewebsites.net/api/Category/Admin",
+        {
+          nombre: categoryAdd.nombre,
+          descripcion: categoryAdd.descripcion,
+          fechaPublicado: categoryAdd.fechaPublicado,
+          subcategory: categoryAdd.subcategory,
+          subcategoryId: categoryAdd.subcategoryId,
+        },
+        config // Agrega el encabezado con el token JWT
+      );
+
+      // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
+      obtenerCategoria(); // Reutiliza la función que ya tienes para obtener productos
+      openCloseModalInsertCategory();
+      console.log(response); // Reutiliza el product
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const openCloseModalInsertCategory = () => {
+    setModalInsertCategory(!modalInsertCategory);
+  };
+
+  const categoryPut = async () => {
+    try {
+      const response = await axios.put(
+        `https://tpibarbershop20231015224614.azurewebsites.net/api/Category/${idCategory}`,
+        {
+          nombre: categoryAdd.nombre,
+          descripcion: categoryAdd.descripcion,
+          fechaPublicado: categoryAdd.fechaPublicado,
+          subcategory: categoryAdd.subcategory,
+          subcategoryId: categoryAdd.subcategoryId,
+        },
+        config // Agrega el encabezado con el token JWT
+      );
+      if (response.status === 204) {
+        toast.success("Categoria editado correctamente", {
+          position: "top-right", // Puedes personalizar la posición
+          autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
+        });
+      }
+      // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
+      obtenerCategoria(); // Reutiliza la función que ya tienes para obtener productos
+      openCloseModalEditCategory(); // Reutiliza el product
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const subcategoryPost = async () => {
+    try {
+      const response = await axios.post(
+        "https://tpibarbershop20231015224614.azurewebsites.net/api/SubCategory/Admin",
         {
           nombre: productAdd.nombre,
           categoryId: productAdd.categoryId,
@@ -326,57 +475,253 @@ const AdminComponent = () => {
     }
   };
 
+  const handleChangeUsuarioEdit = (e) => {
+    const { name, value } = e.target;
+    // console.log(name, value);
+    setUsuarioEdit((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+  const handleChangeProductEdit = (e) => {
+    const { name, value } = e.target;
+    setProductEdit((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+  const handleChangeProduct = (e) => {
+    const { name, value } = e.target;
+    setproductAdd((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+  const abrirCerrarModalInsertarProduct = () => {
+    setModalInsertarProduct(!modalInsertarProduct);
+  };
 
-  const usuarioPutAdmin = async () => {
+  const abrirCerrarModalDeleteProduct = (productId) => {
+    setModalDeleteProduct(!modalDeleteProduct);
 
+    setIdProducto(productId);
+    // Si hay un elemento seleccionado, establece modalEditProduct en función de sus valores
+  };
+  const abrirCerrarModalDeleteUsuario = (usuarioId) => {
+    setModalDeleteUsuario(!modalDeleteUsuario);
+
+    setIdUsuario(usuarioId);
+    // Si hay un elemento seleccionado, establece modalEditProduct en función de sus valores
+  };
+
+  const abrirCerrarModalEditUsuario = (usuarioId) => {
+    setModalEditUsuario(!modalEditUsuario);
+    setSelectedUsuario(usuarioId);
+    setIdUsuario(usuarioId);
+    // Si hay un elemento seleccionado, establece modalEditusuario en función de sus valores
+    if (usuarioId) {
+      const selectedUsuarioData = usuario.find(
+        (usuario) => usuario.id === usuarioId
+      );
+      // console.log(usuario)
+
+      // console.log(selectedusuarioData)
+      if (selectedUsuarioData) {
+        setUsuarioEdit({
+          role: selectedUsuarioData.role,
+        });
+      }
+    }
+  };
+  const abrirCerrarModalEditProduct = (productId) => {
+    setModalEditProduct(!modalEditProduct);
+    setSelectedProduct(productId);
+    setIdProducto(productId);
+    // Si hay un elemento seleccionado, establece modalEditProduct en función de sus valores
+    if (productId) {
+      const selectedProductData = products.find(
+        (product) => product.id === productId
+      );
+
+      // console.log(selectedProductData)
+      if (selectedProductData) {
+        setProductEdit({
+          nombre: selectedProductData.nombre,
+          precio: selectedProductData.precio,
+          descripcion: selectedProductData.descripcion,
+          stock: selectedProductData.stock,
+          imagenes: selectedProductData.imagenes,
+        });
+      }
+    }
+  };
+
+  const abrirCerrarModalImgProduct = (productId) => {
+    setModalEditImgProduct(!modalEditImgProduct);
+
+    const selectedProductDataImg = products.find(
+      (product) => product.id === productId
+    );
+
+    // console.log(selectedProductData)
+    if (selectedProductDataImg) {
+      setProductEditImg({
+        imagenes: selectedProductDataImg.imagenes,
+      });
+    }
+  };
+
+  const Auth = useContext(AuthContext);
+
+  useEffect(() => {
+    if (Auth.auth.role !== "Admin" && Auth.auth?.role !== "Editor") {
+      navigate("/");
+    }
+
+    obtenerUsuarios();
+    obtenerProductos();
+    obtenerCategoria();
+    obtenerSubCategoria();
+    obtenerCompras({
+      setCompras, // Asegúrate de que setCompras sea la función apropiada
+      processData,
+      setChartData,
+    });
+
+    obtenerOrdenCompras({
+      setOrdenCompras, // Asegúrate de que setCompras sea la función apropiada
+      processOrdenData,
+      setChartOrdenData,
+    });
+  }, [Auth]);
+
+  // console.log(usuario)
+
+  //CRUD USER
+  const obtenerUsuarios = async () => {
     try {
-      const response = await axios.put(
-        `https://tpibarbershop20231015224614.azurewebsites.net/api/Usuarios/CrearAdmin/${idUsuario}`,
-        {
+      const response = await axios.get(
+        "https://tpibarbershop20231015224614.azurewebsites.net/api/Usuarios/Admin",
+        config
+      );
 
+      setUsuarios(response.data);
+    } catch (error) {
+      if (Auth.auth.role !== "Admin" && Auth.auth?.role !== "Editor") {
+        navigate("/");
+      }
+
+      console.error(error);
+    }
+  };
+  //CRUD CATEGORY
+  const obtenerCategoria = async () => {
+    try {
+      const response = await axios.get(
+        "https://tpibarbershop20231015224614.azurewebsites.net/api/Category",
+        config
+      );
+      const CategoryData = response.data;
+      setCategory(CategoryData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  //CRUD SUBCATEGORY
+  const obtenerSubCategoria = async () => {
+    try {
+      const response = await axios.get(
+        "https://tpibarbershop20231015224614.azurewebsites.net/api/SubCategory",
+        config
+      );
+      const SubCategoryData = response.data.map((user, index) => ({
+        ...user,
+      }));
+      setSubCategory(SubCategoryData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  //CRUD PRODUCT
+  const obtenerProductos = async () => {
+    // Realiza la solicitud GET con el token JWT
+    try {
+      const response = await axios.get(
+        "https://tpibarbershop20231015224614.azurewebsites.net/api/productos",
+        config
+      );
+      // console.log(response)
+
+      setProducts(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const productPost = async () => {
+    try {
+      const response = await axios.post(
+        "https://tpibarbershop20231015224614.azurewebsites.net/api/Productos",
+        {
+          nombre: productAdd.nombre,
+          categoryId: productAdd.categoryId,
+          subcategoryId: productAdd.subcategoryId,
+          precio: productAdd.precio,
+          descripcion: productAdd.descripcion,
+          stock: productAdd.stock,
         },
         config // Agrega el encabezado con el token JWT
       );
+
+      // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
+      obtenerProductos(); // Reutiliza la función que ya tienes para obtener productos
+      abrirCerrarModalInsertarProduct(); // Reutiliza el product
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const usuarioPutAdmin = async () => {
+    try {
+      const response = await axios.put(
+        `https://tpibarbershop20231015224614.azurewebsites.net/api/Usuarios/CrearAdmin/${idUsuario}`,
+        {},
+        config // Agrega el encabezado con el token JWT
+      );
       if (response.status === 204) {
-        toast.success('Usuario Modificado Con Rol Admin!', {
-          position: 'top-right', // Puedes personalizar la posición
+        toast.success("Usuario Modificado Con Rol Admin!", {
+          position: "top-right", // Puedes personalizar la posición
           autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
         });
       }
       // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
       obtenerUsuarios(); // Reutiliza la función que ya tienes para obtener productos
       abrirCerrarModalEditUsuario(); // Reutiliza el product
-
     } catch (error) {
       console.error(error);
     }
   };
   const usuarioPutEditor = async () => {
-
     try {
       const response = await axios.put(
         `https://tpibarbershop20231015224614.azurewebsites.net/api/Usuarios/CrearEditor/${idUsuario}`,
-        {
-
-        },
+        {},
         config // Agrega el encabezado con el token JWT
       );
       if (response.status === 204) {
-        toast.success('Usuario Modificado Con Rol Editor!', {
-          position: 'top-right', // Puedes personalizar la posición
+        toast.success("Usuario Modificado Con Rol Editor!", {
+          position: "top-right", // Puedes personalizar la posición
           autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
         });
       }
       // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
       obtenerUsuarios(); // Reutiliza la función que ya tienes para obtener productos
       abrirCerrarModalEditUsuario(); // Reutiliza el product
-
     } catch (error) {
       console.error(error);
     }
   };
   const productPut = async () => {
-
     try {
       const response = await axios.put(
         `https://tpibarbershop20231015224614.azurewebsites.net/api/Productos/${idProducto}/Admin`,
@@ -389,21 +734,18 @@ const AdminComponent = () => {
         config // Agrega el encabezado con el token JWT
       );
       if (response.status === 204) {
-        toast.success('Producto editado correctamente', {
-          position: 'top-right', // Puedes personalizar la posición
+        toast.success("Producto editado correctamente", {
+          position: "top-right", // Puedes personalizar la posición
           autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
         });
       }
       // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
       obtenerProductos(); // Reutiliza la función que ya tienes para obtener productos
       abrirCerrarModalEditProduct(); // Reutiliza el product
-
     } catch (error) {
       console.error(error);
     }
   };
-
-
 
   const usuarioDelete = async () => {
     try {
@@ -412,15 +754,14 @@ const AdminComponent = () => {
         config // Agrega el encabezado con el token JWT
       );
       if (response.status === 204) {
-        toast.success('Usuario eliminado correctamente', {
-          position: 'top-right', // Puedes personalizar la posición
+        toast.success("Usuario eliminado correctamente", {
+          position: "top-right", // Puedes personalizar la posición
           autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
         });
       }
       // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
       obtenerUsuarios(); // Reutiliza la función que ya tienes para obtener productos
       abrirCerrarModalDeleteUsuario(); // Reutiliza el product
-
     } catch (error) {
       console.error(error);
     }
@@ -432,20 +773,18 @@ const AdminComponent = () => {
         config // Agrega el encabezado con el token JWT
       );
       if (response.status === 204) {
-        toast.success('Producto eliminado correctamente', {
-          position: 'top-right', // Puedes personalizar la posición
+        toast.success("Producto eliminado correctamente", {
+          position: "top-right", // Puedes personalizar la posición
           autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
         });
       }
       // Luego de realizar la solicitud POST, puedes actualizar la lista de productos
       obtenerProductos(); // Reutiliza la función que ya tienes para obtener productos
       abrirCerrarModalDeleteProduct(); // Reutiliza el product
-
     } catch (error) {
       console.error(error);
     }
   };
-
 
   const DeleteImgProduct = async (idProductoImagen) => {
     try {
@@ -454,8 +793,8 @@ const AdminComponent = () => {
         config // Agrega el encabezado con el token JWT
       );
       if (response.status === 204) {
-        toast.success('Producto eliminado correctamente', {
-          position: 'top-right', // Puedes personalizar la posición
+        toast.success("Producto eliminado correctamente", {
+          position: "top-right", // Puedes personalizar la posición
           autoClose: 3000, // El tiempo en milisegundos que el toast permanecerá visible
         });
       }
@@ -474,11 +813,11 @@ const AdminComponent = () => {
       reader.readAsDataURL(archivo);
 
       reader.onload = async () => {
-        const base64 = reader.result.split(',')[1]; // Remove the prefix
+        const base64 = reader.result.split(",")[1]; // Remove the prefix
         // console.log(base64);
         try {
           const response = await axios.post(
-            'https://tpibarbershop20231015224614.azurewebsites.net/api/Imagenes/Producto/Admin',
+            "https://tpibarbershop20231015224614.azurewebsites.net/api/Imagenes/Producto/Admin",
             {
               productoId: idProducto, // Asegúrate de que idProducto sea correcto
               base64: base64,
@@ -487,8 +826,8 @@ const AdminComponent = () => {
           );
 
           if (response.status === 200) {
-            toast.success('Imagen Añadida correctamente', {
-              position: 'top-right',
+            toast.success("Imagen Añadida correctamente", {
+              position: "top-right",
               autoClose: 3000,
             });
 
@@ -496,38 +835,44 @@ const AdminComponent = () => {
             obtenerProductos(); // Asegúrate de que esta función sea válida y funcional
           }
         } catch (error) {
-
-          toast.error("El tamaño del archivo Base64 excede el límite de 1 MB.", {
-            position: 'top-right',
-            autoClose: 3000,
-          });
-
+          toast.error(
+            "El tamaño del archivo Base64 excede el límite de 1 MB.",
+            {
+              position: "top-right",
+              autoClose: 3000,
+            }
+          );
         }
       };
     } catch (error) {
       console.error(error);
       toast.error("ERROR", {
-        position: 'top-right',
+        position: "top-right",
         autoClose: 3000,
       });
     }
   };
 
-
   return (
-    <div className={style.main + (!modoOscuro ? ' ' + style.mainDark : '')}>
-      <div className={style.AdminContainer + (!modoOscuro ? ' ' + style.AdminContainerDark : '')}>
+    <div className={style.main + (!modoOscuro ? " " + style.mainDark : "")}>
+      <div
+        className={
+          style.AdminContainer +
+          (!modoOscuro ? " " + style.AdminContainerDark : "")
+        }
+      >
         {Auth.auth?.role !== "Editor" ? (
           <>
-
             <div className={style.Container}>
-
               <h1 className={style.title}>USUARIOS</h1>
               {/* <createChart style={{ height: 400, width: '100%' }} /> */}
-              <Box sx={{ height: 400, width: '100%' }}>
+              <Box sx={{ height: 400, width: "100%" }}>
                 <DataGrid
                   rows={usuario}
-                  columns={usuariosColumns(abrirCerrarModalDeleteUsuario, abrirCerrarModalEditUsuario)}
+                  columns={usuariosColumns(
+                    abrirCerrarModalDeleteUsuario,
+                    abrirCerrarModalEditUsuario
+                  )}
                   autoPageSize
                   // checkboxSelection
                   disableColumnSelector
@@ -536,35 +881,36 @@ const AdminComponent = () => {
               </Box>
             </div>
           </>
-        ) : (null)}
-
+        ) : null}
 
         <div className={style.Container}>
           <h1 className={style.title}>PRODUCTOS</h1>
           <Button onClick={abrirCerrarModalInsertarProduct}>Insertar</Button>
-          <Box sx={{ height: 400, width: '100%' }}>
+          <Box sx={{ height: 400, width: "100%" }}>
             <DataGrid
               rows={products}
-              columns={productosColumns(abrirCerrarModalDeleteProduct, abrirCerrarModalEditProduct)}
+              columns={productosColumns(
+                abrirCerrarModalDeleteProduct,
+                abrirCerrarModalEditProduct
+              )}
               autoPageSize
               // checkboxSelection
               disableColumnSelector
               disableColumnMenu
-            // editable={{
-            //   onRowAdd: (newRow) => new Promise((resolve, reject) => {
-            //     console.log(newRow);
-            //   })
-            // }}
-
+              // editable={{
+              //   onRowAdd: (newRow) => new Promise((resolve, reject) => {
+              //     console.log(newRow);
+              //   })
+              // }}
             />
           </Box>
-
-
         </div>
 
         <div className={style.Container}>
           <h1 className={style.title}>CATEGORIAS</h1>
-          <Box sx={{ height: 400, width: '100%' }}>
+
+          <Button onClick={openCloseModalInsertCategory}>Insertar</Button>
+          <Box sx={{ height: 400, width: "100%" }}>
             <DataGrid
               rows={category}
               columns={categoryColumns}
@@ -572,35 +918,36 @@ const AdminComponent = () => {
               checkboxSelection
               disableColumnSelector
               disableColumnMenu
-
             />
           </Box>
         </div>
 
         <div className={style.Container}>
           <h1 className={style.title}>SUBCATEGORIAS</h1>
-          <Box sx={{ height: 400, width: '100%' }}>
+          <Button onClick={abrirCerrarModalInsertarsubCategory}>
+            Insertar
+          </Button>
+          <Box sx={{ height: 400, width: "100%" }}>
             <DataGrid
               rows={subcategory}
-              columns={subcategoryColumns}
+              columns={subCategoryColumns}
               autoPageSize
               checkboxSelection
               disableColumnSelector
               disableColumnMenu
-
             />
           </Box>
         </div>
         <div className={style.Container}>
           <h1 className={style.title}>COMPRAS</h1>
           {chartData.length ? (
-
-            <ChartComponent style={{ height: 400, width: '100%' }} data={chartData}></ChartComponent>
-          ) : null
-
-          }
+            <ChartComponent
+              style={{ height: 400, width: "100%" }}
+              data={chartData}
+            ></ChartComponent>
+          ) : null}
           {/* <ChartComponent style={{ height: 400, width: '100%' }} data={initialData}></ChartComponent> */}
-          <Box sx={{ height: 400, width: '100%' }}>
+          <Box sx={{ height: 400, width: "100%" }}>
             <DataGrid
               rows={compras}
               columns={comprasColumns}
@@ -614,13 +961,13 @@ const AdminComponent = () => {
         <div className={style.Container}>
           <h1 className={style.title}>ORDEN DE COMPRAS</h1>
           {chartData.length ? (
-
-            <ChartOrdenComponent style={{ height: 400, width: '100%' }} data={chartOrdenData}></ChartOrdenComponent>
-          ) : null
-
-          }
+            <ChartOrdenComponent
+              style={{ height: 400, width: "100%" }}
+              data={chartOrdenData}
+            ></ChartOrdenComponent>
+          ) : null}
           {/* <ChartComponent style={{ height: 400, width: '100%' }} data={initialData}></ChartComponent> */}
-          <Box sx={{ height: 400, width: '100%' }}>
+          <Box sx={{ height: 400, width: "100%" }}>
             <DataGrid
               rows={ordenCompras}
               columns={ordenComprasColumns}
@@ -631,13 +978,7 @@ const AdminComponent = () => {
             />
           </Box>
         </div>
-
-
       </div>
-
-
-
-
 
       <Modal
         open={modalInsertarProduct}
@@ -649,15 +990,11 @@ const AdminComponent = () => {
           abrirCerrarModalInsertarProduct={abrirCerrarModalInsertarProduct}
         />
       </Modal>
-      <Modal
-        open={modalEditProduct}
-        OnClose={abrirCerrarModalEditProduct}
-      >
+      <Modal open={modalEditProduct} OnClose={abrirCerrarModalEditProduct}>
         <BodyProductEdit
           handleChangeProduct={handleChangeProductEdit}
           abrirCerrarModalProduct={abrirCerrarModalEditProduct}
           abrirCerrarModalImgProduct={abrirCerrarModalImgProduct}
-
           productPost={productPut}
           productEdit={productEdit}
           idProducto={idProducto}
@@ -665,12 +1002,8 @@ const AdminComponent = () => {
         />
       </Modal>
 
-      <Modal
-        open={modalEditImgProduct}
-        OnClose={abrirCerrarModalImgProduct}
-      >
+      <Modal open={modalEditImgProduct} OnClose={abrirCerrarModalImgProduct}>
         <BodyProductImg
-
           handleChangeProduct={handleChangeProductEdit}
           abrirCerrarModalImgProduct={abrirCerrarModalImgProduct}
           // productPost={productPut}
@@ -678,53 +1011,94 @@ const AdminComponent = () => {
           productEdit={productEdit}
           idProducto={idProducto}
           productImgPost={productImgPost}
-
         />
       </Modal>
 
-      <Modal
-        open={modalDeleteProduct}
-        OnClose={abrirCerrarModalDeleteProduct}
-      >
+      <Modal open={modalDeleteProduct} OnClose={abrirCerrarModalDeleteProduct}>
         <BodyDeleteProduct
           productDelete={productDelete}
           productId={idProducto}
           abrirCerrarModalDeleteProduct={abrirCerrarModalDeleteProduct}
-
         />
       </Modal>
 
-      <Modal
-        open={modalDeleteUsuario}
-        OnClose={abrirCerrarModalDeleteUsuario}
-      >
+      <Modal open={modalDeleteUsuario} OnClose={abrirCerrarModalDeleteUsuario}>
         <BodyDeleteUser
           usuarioDelete={usuarioDelete}
           usuarioId={idUsuario}
           abrirCerrarModalDeleteUsuario={abrirCerrarModalDeleteUsuario}
-
         />
       </Modal>
 
-      <Modal
-        open={modalEditUsuario}
-        OnClose={abrirCerrarModalEditUsuario}
-      >
+      <Modal open={modalEditUsuario} OnClose={abrirCerrarModalEditUsuario}>
         <BodyUsuarioEdit
           handleChangeUsuario={handleChangeUsuarioEdit}
           abrirCerrarModalUsuario={abrirCerrarModalEditUsuario}
           usuarioEdit={usuarioEdit}
           usuarioPutEditor={usuarioPutEditor}
           usuarioPutAdmin={usuarioPutAdmin}
-
           idUsuario={idUsuario}
           abrirCerrarModalEditUsuario={abrirCerrarModalEditUsuario}
         />
       </Modal>
 
-      <ToastContainer />
-    </div >
+      <Modal open={modalInsertCategory} onClose={openCloseModalInsertCategory}>
+        <BodyCategory
+          handleChangeCategory={handleChangeCategory}
+          categoryPost={categoryPost}
+          openCloseModalInsertCategory={openCloseModalInsertCategory}
+        />
+      </Modal>
 
+      <Modal open={modalEditCategory} onClose={openCloseModalEditCategory}>
+        <BodyCategoryEdit
+          handleChangeCategoryEdit={handleChangeCategoryEdit}
+          openCloseModalEditCategory={openCloseModalEditCategory}
+          categoryPut={categoryPut}
+          categoryPost={categoryPost}
+          idCategory={idCategory}
+          openCloseModalCategory={openCloseModalEditCategory}
+        />
+      </Modal>
+
+      <Modal
+        open={modalInsertarsubCategory}
+        OnClose={abrirCerrarModalInsertarsubCategory}
+      >
+        <BodySubCategory
+          handleChangesubCategory={handleChangesubCategory}
+          subCategoryPost={subcategoryPost}
+          abrirCerrarModalInsertarsubCategory={
+            abrirCerrarModalInsertarsubCategory
+          }
+        />
+      </Modal>
+      <Modal
+        open={modalEditsubCategory}
+        OnClose={abrirCerrarModalEditsubCategory}
+      >
+        <BodySubCategoryEdit
+          handleChangesubCategory={handleChangesubCategoryEdit}
+          abrirCerrarModalEditsubCategory={abrirCerrarModalEditsubCategory}
+          subcategoryPost={subCategoryPut}
+          subCategoryEdit={subCategoryEdit}
+          idsubCategory={idsubCategory}
+        />
+      </Modal>
+
+      <Modal
+        open={modalDeletesubCategory}
+        OnClose={abrirCerrarModalDeletesubCategory}
+      >
+        <BodyDeleteSubcategory
+          subCategoryDelete={subCategoryDelete}
+          subCategoryId={idsubCategory}
+          abrirCerrarModalDeletesubCategory={abrirCerrarModalDeletesubCategory}
+        />
+      </Modal>
+
+      <ToastContainer />
+    </div>
   );
 };
 
