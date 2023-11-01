@@ -1,6 +1,4 @@
 
-
-
   
 <p align="center">
   <img src="https://github.com/Valenti-Franco/NavajaFina/assets/94399375/b67628ed-7864-4406-8bb5-ae5bdbd40b30" />
@@ -39,10 +37,23 @@ Para los administradores, "NavajaFina" proporciona una sección especial que les
 En conjunto, "NavajaFina" es un ejemplo de un sistema de comercio electrónico que pone en primer lugar la experiencia del usuario. Ofrece a los clientes una manera segura y cómoda de explorar y comprar productos de barbería, y a los administradores les proporciona las herramientas necesarias para gestionar eficazmente el negocio en línea. 
 
 
-<h2>Franco Valenti , Maxi Shea , Giuliano Pairone. Matias Malamud, Pablo Alvarez </h2> 
 <p align="center">
   <img src="https://media.tenor.com/-oLLBz4z_BYAAAAj/barbershop-haircut.gif" align="center"  width="20%"/>
   <img src="https://media.tenor.com/pyJYzf8463QAAAAj/navaja-beardburys.gif" align="center"  width="50%"/>
   <img src="https://media.tenor.com/-oLLBz4z_BYAAAAj/barbershop-haircut.gif" align="center"  width="20%"/>
   
 </p>
+
+
+
+
+<h1>Guia de Despliegue</h1>
+
+```js
+npm install
+```
+```js
+npm start
+```
+<h1>Grupo: </h1>
+<h2>Franco Valenti , Maxi Shea , Giuliano Pairone, Matias Malamud, Pablo Alvarez </h2> 
